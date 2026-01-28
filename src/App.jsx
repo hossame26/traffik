@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/layout/Navbar';
 import Hero from './components/sections/Hero';
 import Solutions from './components/sections/Solutions';
+import Projects from './components/sections/Projects';
 import Growth from './components/sections/Growth';
 import Ads from './components/sections/Ads';
 import Process from './components/sections/Process';
@@ -15,6 +16,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <Solutions />
+      <Projects />
       <Growth />
       <Ads />
       <Process />
