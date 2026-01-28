@@ -10,8 +10,8 @@ import Footer from './components/layout/Footer';
 
 export default function App() {
   return (
-    // Le fond noir profond global
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#0066FF] selection:text-white">
+    // Le fond s'adapte au thème (Blanc en Light, Noir en Dark)
+    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#050505] text-black dark:text-white font-sans selection:bg-[#0066FF] selection:text-white transition-colors duration-500">
       <Navbar />
       <Hero />
       <Solutions />
