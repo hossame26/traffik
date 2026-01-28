@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { motion as Motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, ExternalLink, X } from 'lucide-react';
 
 const projects = [
   {
@@ -8,7 +8,7 @@ const projects = [
     category: "Service Local • SEO",
     url: "https://plombier-urgent-marseille.fr",
     description: "Système de génération de leads ultra-rapide. Dominance locale instantanée.",
-    gradient: "from-blue-500 to-cyan-400",
+    details: "Nous avons positionné ce client en #1 sur Google Maps en moins de 30 jours. Le site convertit 15% des visiteurs en appels téléphoniques grâce à une UX optimisée pour l'urgence.",
     year: "2025"
   },
   {
@@ -16,7 +16,7 @@ const projects = [
     category: "E-commerce • Branding",
     url: "https://shonensports.com",
     description: "Fusion entre culture anime et performance sportive. Expérience d'achat immersive.",
-    gradient: "from-red-600 to-orange-500",
+    details: "Refonte complète de l'identité visuelle et migration vers Shopify Plus. Intégration de vidéos 3D et augmentation du panier moyen de 25%.",
     year: "2024"
   },
   {
@@ -24,7 +24,7 @@ const projects = [
     category: "Mode • High End",
     url: "https://nocta.com",
     description: "Minimalisme radical. Une interface sombre qui laisse parler le produit.",
-    gradient: "from-yellow-400 to-amber-600",
+    details: "Développement d'une interface 'Dark Mode' native pour correspondre à l'image de marque de Drake. Animations fluides et chargement instantané.",
     year: "2024"
   },
   {
@@ -32,22 +32,20 @@ const projects = [
     category: "SaaS • Tech",
     url: "https://nuvix.fr",
     description: "L'avenir du digital. Architecture complexe rendue simple et fluide.",
-    gradient: "from-violet-600 to-indigo-500",
+    details: "Plateforme SaaS B2B complexe simplifiée par une UI intuitive. Dashboard interactif et gestion de données en temps réel.",
     year: "2025"
   }
 ];
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, onClick }) => {
   return (
-    <Motion.a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Motion.div
+      onClick={() => onClick(project)}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-3xl overflow-hidden cursor-none sm:cursor-pointer"
+      className="group relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-3xl overflow-hidden cursor-pointer"
     >
       {/* Fond : Screenshot du site via Microlink API */}
       <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
@@ -62,7 +60,7 @@ const ProjectCard = ({ project, index }) => {
       </div>
 
       {/* Contenu */}
-      <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-between">
+      <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-between pointer-events-none">
         
         {/* En-tête Carte */}
         <div className="flex justify-between items-start">
@@ -82,16 +80,18 @@ const ProjectCard = ({ project, index }) => {
           <p className="text-gray-200 text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 max-w-md">
             {project.description}
           </p>
+          <div className="mt-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#0066FF] opacity-0 group-hover:opacity-100 transition-opacity delay-200">
+            Voir les détails <ArrowUpRight className="w-4 h-4" />
+          </div>
         </div>
       </div>
-
-      {/* Effet Glare/Reflet */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transform duration-1000" />
-    </Motion.a>
+    </Motion.div>
   );
 };
 
 export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   return (
     <section id="projets" className="relative py-32 px-4 bg-gray-50 dark:bg-[#080808] overflow-hidden">
       
@@ -124,17 +124,99 @@ export default function Projects() {
         {/* Grille Projets */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
+            <ProjectCard key={index} project={project} index={index} onClick={setSelectedProject} />
           ))}
         </div>
-
-        {/* Bouton "Voir plus" (Optionnel) */}
-        <div className="mt-20 text-center">
-          <a href="#contact" className="inline-flex items-center gap-3 text-sm font-bold tracking-[0.2em] uppercase text-black dark:text-white border-b border-black dark:border-white pb-1 hover:text-[#0066FF] hover:border-[#0066FF] dark:hover:text-[#0066FF] dark:hover:border-[#0066FF] transition-all">
-            Démarrer un projet similaire <ExternalLink className="w-4 h-4" />
-          </a>
-        </div>
       </div>
+
+      {/* --- MODAL SYSTEM --- */}
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+            {/* Backdrop Flou */}
+            <Motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-xl"
+            />
+
+            {/* Fenêtre Modale */}
+            <Motion.div 
+              layoutId={`project-${selectedProject.title}`}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-4xl bg-white dark:bg-[#111] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 max-h-[90vh] flex flex-col"
+            >
+              {/* Bouton Fermer */}
+              <button 
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-black transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              {/* Image Hero du Modal */}
+              <div className="relative h-64 md:h-80 shrink-0">
+                <img 
+                   src={`https://api.microlink.io?url=${encodeURIComponent(selectedProject.url)}&screenshot=true&meta=false&embed=screenshot.url`} 
+                   alt={selectedProject.title}
+                   className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent" />
+                
+                <div className="absolute bottom-6 left-6 md:left-10">
+                   <span className="inline-block px-3 py-1 mb-3 rounded-full bg-[#0066FF] text-white text-[10px] font-bold tracking-widest uppercase shadow-lg">
+                      {selectedProject.category}
+                   </span>
+                   <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">{selectedProject.title}</h3>
+                </div>
+              </div>
+
+              {/* Contenu Scrollable */}
+              <div className="p-6 md:p-10 overflow-y-auto">
+                 <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+                    <div className="flex-1">
+                       <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Le Challenge</h4>
+                       <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
+                         {selectedProject.details || selectedProject.description}
+                       </p>
+                       
+                       <div className="grid grid-cols-2 gap-4 mt-8">
+                          <div className="p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
+                             <div className="text-2xl font-bold text-black dark:text-white">2025</div>
+                             <div className="text-xs text-gray-500 uppercase tracking-wider">Année</div>
+                          </div>
+                          <div className="p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5">
+                             <div className="text-2xl font-bold text-black dark:text-white">100%</div>
+                             <div className="text-xs text-gray-500 uppercase tracking-wider">Satisfaction</div>
+                          </div>
+                       </div>
+                    </div>
+
+                    {/* Sidebar Action */}
+                    <div className="w-full md:w-1/3 shrink-0 flex flex-col justify-end">
+                       <a 
+                         href={selectedProject.url} 
+                         target="_blank" 
+                         rel="noopener noreferrer"
+                         className="w-full py-4 rounded-xl bg-[#0066FF] hover:bg-[#0055D4] text-white font-bold tracking-widest uppercase text-center transition-all shadow-lg hover:shadow-[#0066FF]/25 flex items-center justify-center gap-3"
+                       >
+                         Visiter le site <ExternalLink className="w-4 h-4" />
+                       </a>
+                       <p className="text-center text-xs text-gray-400 mt-4">
+                         Lien externe sécurisé
+                       </p>
+                    </div>
+                 </div>
+              </div>
+
+            </Motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
