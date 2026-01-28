@@ -49,11 +49,17 @@ const ProjectCard = ({ project, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group relative w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] rounded-3xl overflow-hidden cursor-none sm:cursor-pointer"
     >
-      {/* Fond Dégradé (Simulation Image) */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80 transition-transform duration-700 group-hover:scale-110`} />
-      
-      {/* Overlay Sombre */}
-      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+      {/* Fond : Screenshot du site via Microlink API */}
+      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+        <img 
+          src={`https://api.microlink.io?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false&embed=screenshot.url`} 
+          alt={project.title}
+          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+          loading="lazy"
+        />
+        {/* Overlay pour garder le texte lisible */}
+        <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 mix-blend-multiply`} />
+      </div>
 
       {/* Contenu */}
       <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-between">
