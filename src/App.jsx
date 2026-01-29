@@ -8,6 +8,7 @@ import Ads from './components/sections/Ads';
 import Process from './components/sections/Process';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
+import WhatsAppButton from './components/layout/WhatsAppButton';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
       <Process />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }

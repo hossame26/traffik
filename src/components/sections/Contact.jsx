@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion as Motion } from 'framer-motion';
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail, ArrowRight, MessageCircle } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -61,6 +61,25 @@ export default function Contact() {
             Envoyer <ArrowRight className="w-4 h-4" />
           </button>
         </Motion.form>
+
+        <Motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 text-center"
+        >
+          <p className="text-gray-500 dark:text-gray-400 mb-4">Ou contactez-nous directement :</p>
+          <a 
+            href="https://wa.me/33635505374" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#25D366] font-bold hover:underline"
+          >
+            <MessageCircle className="w-5 h-5" />
+            Écrivez-nous sur WhatsApp
+          </a>
+        </Motion.div>
 
       </div>
     </section>
