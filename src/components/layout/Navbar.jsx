@@ -52,10 +52,15 @@ export default function Navbar() {
         </span>
         
         {/* Liens Desktop */}
-        <div className="hidden md:flex gap-8 text-[11px] font-bold tracking-[0.15em] text-gray-600 dark:text-gray-400">
-          {['SOLUTIONS', 'GROWTH', 'PROJETS'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-primary dark:hover:text-white transition-colors duration-300">
-              {item}
+        <div className="hidden md:flex gap-6 text-[10px] font-bold tracking-[0.15em] text-gray-600 dark:text-gray-400">
+          {[
+            { label: 'SOLUTIONS', href: '#solutions' },
+            { label: 'PROJETS', href: '#projets' },
+            { label: 'SERVICES', href: '#growth' },
+            { label: 'FAQ', href: '#faq' }
+          ].map((item) => (
+            <a key={item.label} href={item.href} className="hover:text-[#0066FF] dark:hover:text-white transition-colors duration-300">
+              {item.label}
             </a>
           ))}
         </div>

@@ -45,7 +45,7 @@ export default function Hero() {
         </Motion.div>
 
         {/* TITRE PRINCIPAL */}
-        <h1 className="text-5xl md:text-[7rem] lg:text-[8rem] font-black leading-[0.9] tracking-tighter mb-8">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight mb-6">
           <Motion.span
              initial={{ opacity: 0, y: 30 }}
              animate={{ opacity: 1, y: 0 }}
@@ -69,7 +69,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed mb-12"
+          className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-base md:text-lg font-medium leading-relaxed mb-10"
         >
           Sites web sur-mesure qui convertissent. Campagnes publicitaires qui performent.
           <br className="hidden md:block"/>
@@ -81,14 +81,14 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col md:flex-row gap-4 w-full md:w-auto px-6"
+          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
         >
-           <a href="#contact" className="group relative bg-[#0066FF] hover:bg-[#0052CC] text-white px-10 py-5 rounded-full text-sm font-bold tracking-widest transition-all duration-300 flex justify-center items-center gap-3 shadow-lg hover:shadow-[#0066FF]/30 hover:scale-[1.02]">
+           <a href="#contact" className="group relative bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-4 rounded-full text-xs font-bold tracking-widest transition-all duration-300 flex justify-center items-center gap-2 shadow-lg hover:shadow-[#0066FF]/30 hover:scale-[1.02]">
               DÉMARRER MON PROJET
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
            </a>
 
-           <a href="#solutions" className="group bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 backdrop-blur-md px-10 py-5 rounded-full text-sm font-bold tracking-widest hover:border-[#0066FF] transition-all duration-300 flex items-center gap-3 justify-center text-black dark:text-white">
+           <a href="#solutions" className="group bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 backdrop-blur-md px-8 py-4 rounded-full text-xs font-bold tracking-widest hover:border-[#0066FF] transition-all duration-300 flex items-center gap-2 justify-center text-black dark:text-white">
               VOIR NOS OFFRES
            </a>
         </Motion.div>
@@ -98,7 +98,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="flex flex-wrap justify-center gap-8 md:gap-12 mt-16 pt-8 border-t border-gray-200 dark:border-white/10"
+          className="flex flex-wrap justify-center gap-6 md:gap-10 mt-12 pt-6 border-t border-gray-200 dark:border-white/10"
         >
           {[
             { value: '50+', label: 'Projets livrés' },
@@ -106,8 +106,8 @@ export default function Hero() {
             { value: '24h', label: 'Réponse garantie' }
           ].map((stat, i) => (
             <div key={i} className="text-center">
-              <div className="text-2xl md:text-3xl font-black text-black dark:text-white">{stat.value}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-1">{stat.label}</div>
+              <div className="text-xl md:text-2xl font-black text-black dark:text-white">{stat.value}</div>
+              <div className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-1">{stat.label}</div>
             </div>
           ))}
         </Motion.div>

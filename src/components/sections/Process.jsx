@@ -52,15 +52,15 @@ export default function Process() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
+          <span className="inline-block px-3 py-1 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[9px] font-bold tracking-[0.2em] uppercase mb-4">
             Processus
           </span>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-black dark:text-white mb-3">
             5 Étapes. 0 Surprise.
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-lg mx-auto">
             Une méthodologie éprouvée pour des projets livrés dans les temps.
           </p>
         </Motion.div>

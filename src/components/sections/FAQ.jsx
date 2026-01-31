@@ -39,13 +39,13 @@ const FAQItem = ({ faq, isOpen, onClick }) => {
     >
       <button
         onClick={onClick}
-        className="w-full py-6 flex items-center justify-between text-left group"
+        className="w-full py-5 flex items-center justify-between text-left group"
       >
-        <span className="text-lg md:text-xl font-semibold text-black dark:text-white pr-8 group-hover:text-[#0066FF] transition-colors">
+        <span className="text-base font-semibold text-black dark:text-white pr-6 group-hover:text-[#0066FF] transition-colors">
           {faq.question}
         </span>
-        <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-[#0066FF] text-white' : 'bg-gray-100 dark:bg-white/10 text-black dark:text-white'}`}>
-          {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+        <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-[#0066FF] text-white' : 'bg-gray-100 dark:bg-white/10 text-black dark:text-white'}`}>
+          {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
         </div>
       </button>
 
@@ -76,12 +76,12 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto">
 
         {/* En-tête */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <Motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
+            className="inline-block px-3 py-1 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[9px] font-bold tracking-[0.2em] uppercase mb-4"
           >
             FAQ
           </Motion.span>
@@ -89,7 +89,7 @@ export default function FAQ() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-6"
+            className="text-3xl md:text-4xl font-black tracking-tight text-black dark:text-white mb-4"
           >
             Vos questions,
             <br />
@@ -101,7 +101,7 @@ export default function FAQ() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto"
+            className="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-lg mx-auto"
           >
             Tarifs, délais, processus - tout ce qu'il faut savoir avant de se lancer.
           </Motion.p>

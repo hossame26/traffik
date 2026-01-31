@@ -60,12 +60,12 @@ export default function Solutions() {
       <div className="relative max-w-7xl mx-auto">
         
         {/* En-tête */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <Motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
+            className="inline-block px-3 py-1 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[9px] font-bold tracking-[0.2em] uppercase mb-4"
           >
             Nos Solutions
           </Motion.span>
@@ -73,7 +73,7 @@ export default function Solutions() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-6"
+            className="text-3xl md:text-4xl font-black tracking-tight text-black dark:text-white mb-4"
           >
             Choisissez votre
             <br />
@@ -85,9 +85,9 @@ export default function Solutions() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto"
+            className="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-lg mx-auto"
           >
-            E-commerce, vitrine ou sur mesure. Chaque solution est optimisée pour convertir vos visiteurs en clients.
+            E-commerce, vitrine ou sur mesure. Chaque solution est optimisée pour convertir.
           </Motion.p>
         </div>
 
@@ -128,8 +128,8 @@ export default function Solutions() {
               </div>
 
               {/* Titre & Description */}
-              <h3 className="text-3xl font-bold mb-4 tracking-tight text-black dark:text-white">{offer.title}</h3>
-              <p className="text-sm font-medium leading-relaxed mb-10 text-gray-500 dark:text-gray-400">
+              <h3 className="text-xl font-bold mb-3 tracking-tight text-black dark:text-white">{offer.title}</h3>
+              <p className="text-xs font-medium leading-relaxed mb-8 text-gray-500 dark:text-gray-400">
                 {offer.description}
               </p>
 

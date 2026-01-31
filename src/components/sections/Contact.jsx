@@ -19,7 +19,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
+              className="inline-block px-3 py-1 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[9px] font-bold tracking-[0.2em] uppercase mb-4"
             >
               Contact
             </Motion.span>
@@ -28,7 +28,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-black tracking-tighter text-black dark:text-white mb-6"
+              className="text-3xl md:text-4xl font-black tracking-tight text-black dark:text-white mb-4"
             >
               Prêt à lancer
               <br />
@@ -41,9 +41,9 @@ export default function Contact() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-10"
+              className="text-gray-600 dark:text-gray-400 text-sm md:text-base leading-relaxed mb-8"
             >
-              Discutons de votre vision. Premier échange gratuit et sans engagement pour évaluer vos besoins.
+              Premier échange gratuit et sans engagement pour évaluer vos besoins.
             </Motion.p>
 
             {/* Benefits */}

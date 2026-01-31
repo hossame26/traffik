@@ -11,16 +11,16 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto">
 
         {/* Top CTA Section */}
-        <div className="text-center mb-16 pb-16 border-b border-gray-200 dark:border-white/10">
-          <h3 className="text-3xl md:text-4xl font-black text-black dark:text-white mb-4">
+        <div className="text-center mb-12 pb-12 border-b border-gray-200 dark:border-white/10">
+          <h3 className="text-2xl md:text-3xl font-black text-black dark:text-white mb-3">
             Prêt à <span className="text-[#0066FF]">booster</span> votre business ?
           </h3>
-          <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 mb-6 text-sm max-w-md mx-auto">
             Discutons de votre projet. Premier appel découverte gratuit.
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-4 rounded-full font-bold tracking-wide transition-all hover:scale-[1.02] shadow-lg"
+            className="inline-flex items-center gap-2 bg-[#0066FF] hover:bg-[#0052CC] text-white px-6 py-3 rounded-full text-sm font-bold tracking-wide transition-all hover:scale-[1.02] shadow-lg"
           >
             Commencer maintenant <ArrowUpRight className="w-4 h-4" />
           </a>

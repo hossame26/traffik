@@ -27,10 +27,10 @@ const Counter = ({ value, label, suffix = "" }) => {
 
   return (
     <div className="text-center md:text-left">
-      <div className="text-3xl md:text-4xl font-black text-black dark:text-white mb-1">
+      <div className="text-2xl md:text-3xl font-black text-black dark:text-white mb-1">
         +{count.toLocaleString()}{suffix}
       </div>
-      <div className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-500">
+      <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-gray-500">
         {label}
       </div>
     </div>
@@ -83,7 +83,7 @@ export default function Growth() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-8 leading-[0.95]"
+            className="text-3xl md:text-4xl font-black tracking-tight text-black dark:text-white mb-6 leading-[0.95]"
           >
             Attirez des clients
             <br />
@@ -96,13 +96,13 @@ export default function Growth() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-lg text-gray-600 dark:text-gray-400 mb-12 leading-relaxed"
+            className="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-10 leading-relaxed"
           >
             SEO, publicités ciblées et automatisation. Votre site devient un aimant à prospects qualifiés, 24h/24.
           </Motion.p>
 
           {/* Compteurs */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 py-8 border-t border-gray-200 dark:border-white/10">
+          <div className="grid grid-cols-3 gap-6 py-6 border-t border-gray-200 dark:border-white/10">
             <Counter value={350} label="Croissance Moy." suffix="%" />
             <Counter value={15000} label="Leads Générés" suffix="+" />
             <Counter value={42} label="Clients Actifs" />
