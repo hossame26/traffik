@@ -1,0 +1,21 @@
+# Robots.txt for Traffik Web
+# https://traffik-web.fr
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://traffik-web.fr/sitemap.xml
+
+# Crawl-delay for aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

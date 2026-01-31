@@ -96,9 +96,12 @@ export default function Solutions() {
               {/* Logo Animé */}
               <div className="mb-10 w-20 h-20 relative flex items-center justify-start">
                  {offer.image && (
-                   <Motion.img 
-                     src={offer.image} 
-                     alt={offer.title} 
+                   <Motion.img
+                     src={offer.image}
+                     alt={offer.title}
+                     width={80}
+                     height={80}
+                     loading="lazy"
                      className="w-full h-full object-contain filter drop-shadow-xl"
                      animate={{ y: [0, -10, 0] }}
                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }}
@@ -162,7 +165,7 @@ export default function Solutions() {
                 {/* Header Modal */}
                 <div className="flex items-center gap-6 mb-8">
                    <div className="w-20 h-20 p-4 bg-gray-50 dark:bg-white/5 rounded-2xl flex items-center justify-center">
-                      <img src={selectedOffer.image} alt={selectedOffer.title} className="w-full h-full object-contain" />
+                      <img src={selectedOffer.image} alt={selectedOffer.title} width={48} height={48} className="w-full h-full object-contain" />
                    </div>
                    <div>
                       <h3 className="text-3xl md:text-4xl font-black text-black dark:text-white mb-2">{selectedOffer.title}</h3>
