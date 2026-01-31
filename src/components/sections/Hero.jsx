@@ -2,6 +2,13 @@ import React, { useRef } from 'react';
 import { motion as Motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, TrendingUp, Users, ShoppingBag, Search, MousePointer, Star } from 'lucide-react';
 
+// TikTok Icon
+const TikTokIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+  </svg>
+);
+
 // Floating cards data
 const floatingCards = [
   {
@@ -12,7 +19,7 @@ const floatingCards = [
     label: 'VENTES CE MOIS',
     color: 'from-green-500 to-green-600',
     borderColor: 'border-green-500/50',
-    position: 'top-[15%] left-[5%]',
+    position: 'top-[18%] left-[2%] xl:left-[5%]',
     delay: 0,
     icon: <ShoppingBag className="w-4 h-4" />,
   },
@@ -22,9 +29,9 @@ const floatingCards = [
     title: 'Meta Ads',
     value: 'ROAS 4.2x',
     label: 'CAMPAGNE ACTIVE',
-    color: 'from-blue-500 to-blue-600',
+    color: 'from-blue-500 to-indigo-600',
     borderColor: 'border-blue-500/50',
-    position: 'top-[20%] right-[5%]',
+    position: 'top-[15%] right-[2%] xl:right-[8%]',
     delay: 0.5,
     icon: <MousePointer className="w-4 h-4" />,
   },
@@ -36,21 +43,21 @@ const floatingCards = [
     label: 'POSITION MOT-CLÉ',
     color: 'from-orange-500 to-red-500',
     borderColor: 'border-orange-500/50',
-    position: 'bottom-[25%] left-[3%]',
+    position: 'bottom-[20%] left-[2%] xl:left-[8%]',
     delay: 1,
     icon: <Search className="w-4 h-4" />,
   },
   {
     id: 4,
-    type: 'conversion',
-    title: 'Taux Conversion',
-    value: '+340%',
-    label: 'VS ANCIEN SITE',
-    color: 'from-purple-500 to-purple-600',
-    borderColor: 'border-purple-500/50',
-    position: 'bottom-[30%] right-[3%]',
+    type: 'tiktok',
+    title: 'TikTok',
+    value: '1.2M',
+    label: 'VUES CETTE SEMAINE',
+    color: 'from-pink-500 to-rose-500',
+    borderColor: 'border-pink-500/50',
+    position: 'bottom-[15%] right-[2%] xl:right-[10%]',
     delay: 1.5,
-    icon: <TrendingUp className="w-4 h-4" />,
+    icon: <TikTokIcon />,
   },
   {
     id: 5,
@@ -60,7 +67,7 @@ const floatingCards = [
     label: 'CE MOIS',
     color: 'from-cyan-500 to-cyan-600',
     borderColor: 'border-cyan-500/50',
-    position: 'top-[45%] left-[8%]',
+    position: 'top-[45%] left-[1%] xl:left-[3%]',
     delay: 2,
     icon: <Users className="w-4 h-4" />,
   },
@@ -72,10 +79,52 @@ const floatingCards = [
     label: '50+ AVIS',
     color: 'from-yellow-500 to-orange-500',
     borderColor: 'border-yellow-500/50',
-    position: 'top-[50%] right-[6%]',
+    position: 'top-[48%] right-[1%] xl:right-[5%]',
     delay: 2.5,
     icon: <Star className="w-4 h-4 fill-current" />,
   },
+];
+
+// Sparkle particles
+const Sparkle = ({ delay, x, y, size }) => (
+  <Motion.div
+    className="absolute pointer-events-none"
+    style={{ left: x, top: y }}
+    initial={{ opacity: 0, scale: 0 }}
+    animate={{
+      opacity: [0, 1, 0],
+      scale: [0, 1, 0],
+      rotate: [0, 180],
+    }}
+    transition={{
+      duration: 2,
+      delay: delay,
+      repeat: Infinity,
+      repeatDelay: Math.random() * 3,
+    }}
+  >
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" fill="url(#sparkle-gradient)"/>
+      <defs>
+        <linearGradient id="sparkle-gradient" x1="0" y1="0" x2="24" y2="24">
+          <stop stopColor="#0066FF"/>
+          <stop offset="1" stopColor="#A855F7"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </Motion.div>
+);
+
+const sparkles = [
+  { x: '15%', y: '20%', delay: 0, size: 16 },
+  { x: '85%', y: '25%', delay: 0.5, size: 12 },
+  { x: '10%', y: '60%', delay: 1, size: 14 },
+  { x: '90%', y: '55%', delay: 1.5, size: 10 },
+  { x: '25%', y: '80%', delay: 2, size: 12 },
+  { x: '75%', y: '75%', delay: 2.5, size: 16 },
+  { x: '50%', y: '15%', delay: 3, size: 10 },
+  { x: '30%', y: '35%', delay: 0.8, size: 8 },
+  { x: '70%', y: '40%', delay: 1.3, size: 8 },
 ];
 
 const FloatingCard = ({ card }) => {
@@ -88,7 +137,7 @@ const FloatingCard = ({ card }) => {
     >
       <Motion.div
         animate={{
-          y: [0, -15, 0],
+          y: [0, -12, 0],
           rotate: [0, 1, -1, 0],
         }}
         transition={{
@@ -96,9 +145,12 @@ const FloatingCard = ({ card }) => {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        whileHover={{ scale: 1.05, y: -20 }}
-        className={`relative p-4 rounded-2xl bg-black/80 backdrop-blur-xl border ${card.borderColor} shadow-2xl cursor-pointer min-w-[160px]`}
+        whileHover={{ scale: 1.08, y: -15 }}
+        className={`relative p-4 rounded-2xl bg-black/90 backdrop-blur-xl border ${card.borderColor} shadow-2xl cursor-pointer min-w-[150px]`}
       >
+        {/* Glow effect */}
+        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${card.color} opacity-10 blur-xl`} />
+
         {/* Live indicator */}
         <div className="absolute top-3 right-3 flex items-center gap-1">
           <span className="relative flex h-2 w-2">
@@ -109,7 +161,7 @@ const FloatingCard = ({ card }) => {
         </div>
 
         {/* Header */}
-        <div className="flex items-center gap-2 mb-3">
+        <div className="relative flex items-center gap-2 mb-3">
           <div className={`p-1.5 rounded-lg bg-gradient-to-r ${card.color} text-white`}>
             {card.icon}
           </div>
@@ -117,12 +169,12 @@ const FloatingCard = ({ card }) => {
         </div>
 
         {/* Value */}
-        <div className={`text-2xl font-black bg-gradient-to-r ${card.color} bg-clip-text text-transparent`}>
+        <div className={`relative text-2xl font-black bg-gradient-to-r ${card.color} bg-clip-text text-transparent`}>
           {card.value}
         </div>
 
         {/* Label */}
-        <div className="text-[9px] text-gray-400 font-bold tracking-wider mt-1">
+        <div className="relative text-[9px] text-gray-400 font-bold tracking-wider mt-1">
           {card.label}
         </div>
       </Motion.div>
@@ -155,6 +207,11 @@ export default function Hero() {
       {/* Grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"
            style={{ transform: 'perspective(500px) rotateX(20deg) scale(1.5)' }} />
+
+      {/* Sparkles */}
+      {sparkles.map((sparkle, i) => (
+        <Sparkle key={i} {...sparkle} />
+      ))}
 
       {/* Floating Cards */}
       {floatingCards.map((card) => (
