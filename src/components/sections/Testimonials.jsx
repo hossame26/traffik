@@ -33,12 +33,12 @@ const testimonials = [
   }
 ];
 
-const clients = [
-  { name: "Shopify Partner", logo: "https://cdn.worldvectorlogo.com/logos/shopify.svg" },
-  { name: "WordPress", logo: "https://cdn.worldvectorlogo.com/logos/wordpress-blue.svg" },
-  { name: "Google Partner", logo: "https://cdn.worldvectorlogo.com/logos/google-g-2015.svg" },
-  { name: "Meta Business", logo: "https://cdn.worldvectorlogo.com/logos/meta-1.svg" },
-  { name: "Vercel", logo: "https://cdn.worldvectorlogo.com/logos/vercel.svg" },
+const technologies = [
+  { name: "Shopify", color: "#96BF48" },
+  { name: "WordPress", color: "#21759B" },
+  { name: "React", color: "#61DAFB" },
+  { name: "Next.js", color: "#000000" },
+  { name: "Vercel", color: "#000000" },
 ];
 
 const TestimonialCard = ({ testimonial, index }) => (
@@ -142,27 +142,24 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Client Logos */}
+        {/* Technologies */}
         <Motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="pt-16 border-t border-gray-200 dark:border-white/10"
+          className="pt-12 border-t border-gray-200 dark:border-white/10"
         >
-          <p className="text-center text-sm text-gray-400 uppercase tracking-widest mb-10">
-            Technologies & Partenaires
+          <p className="text-center text-[10px] text-gray-400 uppercase tracking-[0.2em] mb-8">
+            Technologies utilisées
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 opacity-60 hover:opacity-100 transition-opacity">
-            {clients.map((client, i) => (
-              <img
+          <div className="flex flex-wrap justify-center items-center gap-4">
+            {technologies.map((tech, i) => (
+              <span
                 key={i}
-                src={client.logo}
-                alt={client.name}
-                width={40}
-                height={40}
-                className="h-10 w-auto grayscale hover:grayscale-0 transition-all"
-                loading="lazy"
-              />
+                className="px-4 py-2 rounded-full text-xs font-bold bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/10 hover:border-[#0066FF] hover:text-[#0066FF] transition-all cursor-default"
+              >
+                {tech.name}
+              </span>
             ))}
           </div>
         </Motion.div>
