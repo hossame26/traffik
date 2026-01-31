@@ -6,6 +6,7 @@ import Projects from './components/sections/Projects';
 import Growth from './components/sections/Growth';
 import Ads from './components/sections/Ads';
 import Process from './components/sections/Process';
+import FAQ from './components/sections/FAQ';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
 import WhatsAppButton from './components/layout/WhatsAppButton';
@@ -21,6 +22,7 @@ export default function App() {
       <Growth />
       <Ads />
       <Process />
+      <FAQ />
       <Contact />
       <Footer />
       <WhatsAppButton />
