@@ -50,7 +50,7 @@ const ProjectCard = ({ project, index, onClick }) => {
       {/* Fond : Screenshot du site via Microlink API */}
       <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
         <img
-          src={`https://api.microlink.io?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false&embed=screenshot.url`}
+          src={`https://api.microlink.io?url=${encodeURIComponent(project.url)}&screenshot=true&meta=false&embed=screenshot.url&screenshot.width=800&screenshot.height=450&screenshot.type=jpeg&screenshot.quality=70`}
           alt={project.title}
           width={1200}
           height={675}
@@ -163,7 +163,7 @@ export default function Projects() {
               {/* Image Hero du Modal */}
               <div className="relative h-64 md:h-80 shrink-0">
                 <img
-                   src={`https://api.microlink.io?url=${encodeURIComponent(selectedProject.url)}&screenshot=true&meta=false&embed=screenshot.url`}
+                   src={`https://api.microlink.io?url=${encodeURIComponent(selectedProject.url)}&screenshot=true&meta=false&embed=screenshot.url&screenshot.width=1200&screenshot.height=675&screenshot.type=jpeg&screenshot.quality=75`}
                    alt={selectedProject.title}
                    width={1200}
                    height={675}
