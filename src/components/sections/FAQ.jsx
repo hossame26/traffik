@@ -5,36 +5,83 @@ import { Plus, Minus } from 'lucide-react';
 const faqs = [
   {
     question: "Quels types de sites web proposez-vous ?",
-    answer: "Nous créons trois types de sites : des boutiques Shopify pour le e-commerce, des sites WordPress pour la flexibilité éditoriale, et des sites sur mesure en React/Next.js pour une performance maximale."
+    answer: "Nous créons trois types de sites : des boutiques Shopify pour le e-commerce avec paiements intégrés et gestion des stocks, des sites WordPress pour les entreprises qui ont besoin de flexibilité éditoriale et de SEO natif, et des sites sur mesure en React/Next.js pour une performance maximale et une expérience utilisateur unique."
   },
   {
     question: "Combien coûte la création d'un site web ?",
-    answer: "Nos sites web démarrent à partir de 150€. Le prix final dépend des fonctionnalités souhaitées, du design et de la complexité. Contactez-nous sur WhatsApp pour un devis personnalisé gratuit."
+    answer: "Nos sites web démarrent à partir de 150€. Le prix final dépend des fonctionnalités souhaitées, du design et de la complexité de votre projet. Chaque site est unique : contactez-nous directement sur WhatsApp pour discuter de votre projet et obtenir un devis personnalisé gratuit."
   },
   {
     question: "Quel est le délai de livraison ?",
-    answer: "Un site Shopify ou WordPress est livré en 2 à 3 semaines. Un site sur mesure nécessite 4 à 6 semaines selon sa complexité. Nous proposons aussi des options express."
+    answer: "En moyenne, un site Shopify ou WordPress est livré en 2 à 3 semaines. Un site sur mesure nécessite 4 à 6 semaines selon sa complexité. Nous proposons également des options express pour les projets urgents. Chaque étape est validée avec vous pour garantir votre satisfaction."
   },
   {
     question: "Proposez-vous un accompagnement après la mise en ligne ?",
-    answer: "Oui, nous offrons 30 jours de garantie avec support inclus et modifications illimitées. Des forfaits de maintenance mensuelle sont aussi disponibles."
+    answer: "Oui, nous offrons une formation de prise en main incluse avec chaque projet. Nous proposons également des forfaits de maintenance mensuelle pour les mises à jour, la sécurité et le support technique. Votre succès sur le long terme est notre priorité."
   },
+  {
+    question: "Comment se déroule la collaboration ?",
+    answer: "Tout commence par un appel découverte gratuit pour comprendre vos besoins. Ensuite, nous créons une maquette pour validation, puis nous développons votre site. Vous recevez des points d'avancement réguliers et pouvez demander des modifications à chaque étape avant la mise en ligne finale."
+  },
+  {
+    question: "Mes données sont-elles sécurisées ?",
+    answer: "Absolument. Tous nos sites sont hébergés sur des serveurs sécurisés avec certificat SSL inclus. Nous appliquons les meilleures pratiques de sécurité : sauvegardes automatiques, protection anti-hack, et conformité RGPD pour protéger vos données et celles de vos clients."
+  }
 ];
+
+const FAQItem = ({ faq, isOpen, onClick }) => {
+  return (
+    <Motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="border-b border-gray-200 dark:border-white/10"
+    >
+      <button
+        onClick={onClick}
+        className="w-full py-6 flex items-center justify-between text-left group"
+      >
+        <span className="text-lg md:text-xl font-semibold text-black dark:text-white pr-8 group-hover:text-[#0066FF] transition-colors">
+          {faq.question}
+        </span>
+        <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-[#0066FF] text-white' : 'bg-gray-100 dark:bg-white/10 text-black dark:text-white'}`}>
+          {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <Motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <p className="pb-6 text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+              {faq.answer}
+            </p>
+          </Motion.div>
+        )}
+      </AnimatePresence>
+    </Motion.div>
+  );
+};
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="relative py-32 px-4 bg-dark-950">
-      <div className="max-w-3xl mx-auto">
+    <section id="faq" className="relative py-32 px-4 bg-white dark:bg-black transition-colors duration-500">
+      <div className="max-w-4xl mx-auto">
 
-        {/* Header */}
+        {/* En-tête */}
         <div className="text-center mb-16">
           <Motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-accent text-sm font-medium uppercase tracking-wider mb-4 block"
+            className="inline-block px-4 py-2 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-xs font-bold tracking-widest uppercase mb-6"
           >
             FAQ
           </Motion.span>
@@ -42,51 +89,29 @@ export default function FAQ() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display text-4xl md:text-5xl font-bold text-white"
+            className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-6"
           >
-            Questions fréquentes
+            Questions Fréquentes
           </Motion.h2>
+          <Motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto"
+          >
+            Tout ce que vous devez savoir avant de démarrer votre projet avec nous.
+          </Motion.p>
         </div>
 
-        {/* FAQ List */}
-        <div className="space-y-4">
+        {/* Liste FAQ */}
+        <div className="divide-y divide-gray-200 dark:divide-white/10 border-t border-gray-200 dark:border-white/10">
           {faqs.map((faq, index) => (
-            <Motion.div
+            <FAQItem
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="rounded-2xl border border-white/5 overflow-hidden"
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
-              >
-                <span className="font-medium text-white pr-8">{faq.question}</span>
-                <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                  openIndex === index ? 'bg-accent text-dark-950' : 'bg-white/5 text-white'
-                }`}>
-                  {openIndex === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                </div>
-              </button>
-
-              <AnimatePresence>
-                {openIndex === index && (
-                  <Motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="px-6 pb-5 text-white/60 leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </Motion.div>
-                )}
-              </AnimatePresence>
-            </Motion.div>
+              faq={faq}
+              isOpen={openIndex === index}
+              onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+            />
           ))}
         </div>
 
@@ -95,19 +120,16 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 text-center"
+          className="mt-16 text-center"
         >
-          <p className="text-white/40 mb-4">D'autres questions ?</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-6">
+            Vous avez d'autres questions ?
+          </p>
           <a
-            href="https://wa.me/33635505374"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-white hover:bg-white/10 transition-colors"
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full font-bold tracking-widest text-sm hover:scale-105 transition-transform"
           >
-            <svg className="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Discuter sur WhatsApp
+            CONTACTEZ-NOUS
           </a>
         </Motion.div>
       </div>
