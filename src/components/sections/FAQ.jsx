@@ -9,7 +9,7 @@ const faqs = [
   },
   {
     question: "Combien coûte la création d'un site web ?",
-    answer: "Le prix varie selon vos besoins. Un site Shopify démarre à partir de 1500€, un site WordPress à partir de 1200€, et un site sur mesure à partir de 3000€. Chaque projet est unique : contactez-nous pour un devis personnalisé gratuit adapté à votre budget et vos objectifs."
+    answer: "Nos sites web démarrent à partir de 150€. Le prix final dépend des fonctionnalités souhaitées, du design et de la complexité de votre projet. Chaque site est unique : contactez-nous directement sur WhatsApp pour discuter de votre projet et obtenir un devis personnalisé gratuit."
   },
   {
     question: "Quel est le délai de livraison ?",
