@@ -81,7 +81,7 @@ export default function FAQ() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-xs font-bold tracking-widest uppercase mb-6"
+            className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
           >
             FAQ
           </Motion.span>
@@ -91,7 +91,11 @@ export default function FAQ() {
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-6"
           >
-            Questions Fréquentes
+            Vos questions,
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#4D94FF]">
+              nos réponses.
+            </span>
           </Motion.h2>
           <Motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -99,7 +103,7 @@ export default function FAQ() {
             viewport={{ once: true }}
             className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto"
           >
-            Tout ce que vous devez savoir avant de démarrer votre projet avec nous.
+            Tarifs, délais, processus - tout ce qu'il faut savoir avant de se lancer.
           </Motion.p>
         </div>
 

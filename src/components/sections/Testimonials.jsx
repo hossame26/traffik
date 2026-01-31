@@ -109,7 +109,7 @@ export default function Testimonials() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-xs font-bold tracking-widest uppercase mb-6"
+            className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
           >
             Témoignages
           </Motion.span>
@@ -119,7 +119,11 @@ export default function Testimonials() {
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-6"
           >
-            Ils Nous Font Confiance
+            Des résultats concrets,
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#4D94FF]">
+              des clients satisfaits.
+            </span>
           </Motion.h2>
           <Motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -127,7 +131,7 @@ export default function Testimonials() {
             viewport={{ once: true }}
             className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto"
           >
-            Découvrez les retours de nos clients et pourquoi ils nous recommandent.
+            Entrepreneurs, artisans, startups - ils ont tous boosté leur activité avec nous.
           </Motion.p>
         </div>
 

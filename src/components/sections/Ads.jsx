@@ -33,28 +33,33 @@ export default function Ads() {
         
         {/* Header */}
         <div className="text-center mb-16">
-          <Motion.div 
+          <Motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
+            className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-white animate-pulse" />
-            Configurateur
-          </Motion.div>
-          <Motion.h2 
+            Publicité Multi-Plateforme
+          </Motion.span>
+          <Motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-7xl font-black tracking-tighter text-black dark:text-white mb-6"
+            className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-6"
           >
-            Construisez votre <br />
-            <span className="text-gray-400 dark:text-gray-500">Machine d'Acquisition.</span>
+            Touchez votre audience
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#4D94FF]">partout où elle se trouve.</span>
           </Motion.h2>
-          <p className="text-gray-500 dark:text-gray-400 text-lg max-w-2xl mx-auto">
-            Sélectionnez vos canaux. Nous synchronisons votre message partout où se trouve votre audience.
-          </p>
+          <Motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto"
+          >
+            Configurez vos canaux publicitaires. Facebook, Google, TikTok - on gère tout pour maximiser votre ROI.
+          </Motion.p>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8 items-start">

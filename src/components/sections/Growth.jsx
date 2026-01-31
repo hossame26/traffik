@@ -79,25 +79,26 @@ export default function Growth() {
             Performance Marketing
           </Motion.div>
 
-          <Motion.h2 
+          <Motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-black tracking-tighter text-black dark:text-white mb-8 leading-[0.9]"
+            className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-8 leading-[0.95]"
           >
-            Ne cherchez plus vos clients. <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-blue-400">
-              Ils vous cherchent.
+            Attirez des clients
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#4D94FF]">
+              qui veulent acheter.
             </span>
           </Motion.h2>
 
-          <Motion.p 
+          <Motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-lg text-gray-600 dark:text-gray-400 mb-12 leading-relaxed"
           >
-            Nous déployons des systèmes d'acquisition omnicanal qui transforment votre site en une machine à générer des opportunités 24/7.
+            SEO, publicités ciblées et automatisation. Votre site devient un aimant à prospects qualifiés, 24h/24.
           </Motion.p>
 
           {/* Compteurs */}

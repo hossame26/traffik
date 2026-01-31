@@ -60,18 +60,35 @@ export default function Solutions() {
       <div className="relative max-w-7xl mx-auto">
         
         {/* En-tête */}
-        <div className="text-center mb-24">
-          <Motion.h2 
+        <div className="text-center mb-20">
+          <Motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-8xl font-black tracking-tighter text-black dark:text-white mb-6"
+            className="inline-block px-4 py-1.5 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
           >
-            L'Infrastructure.
+            Nos Solutions
+          </Motion.span>
+          <Motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-black tracking-tighter text-black dark:text-white mb-6"
+          >
+            Choisissez votre
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#4D94FF]">
+              plateforme idéale.
+            </span>
           </Motion.h2>
-          <p className="text-gray-500 dark:text-gray-400 text-xl max-w-2xl mx-auto font-medium">
-            Trois voies. Une seule destination : <span className="text-black dark:text-white underline decoration-1 underline-offset-4">La croissance.</span>
-          </p>
+          <Motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-gray-500 dark:text-gray-400 text-lg max-w-xl mx-auto"
+          >
+            E-commerce, vitrine ou sur mesure. Chaque solution est optimisée pour convertir vos visiteurs en clients.
+          </Motion.p>
         </div>
 
         {/* Grille des offres */}

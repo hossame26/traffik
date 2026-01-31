@@ -4,6 +4,10 @@
 
 :root {
   --color-primary: #0066FF;
+  --color-primary-light: #4D94FF;
+  --color-primary-dark: #0052CC;
+  --glow-primary: 0 0 60px rgba(0, 102, 255, 0.3);
+  --glow-primary-subtle: 0 0 40px rgba(0, 102, 255, 0.15);
 }
 
 body {
@@ -33,13 +37,11 @@ body {
 /* --- GRILLE FUTURISTE ADAPTATIVE --- */
 .bg-grid-pattern {
   background-size: 50px 50px;
-  /* Default (Light Mode): Dark lines */
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
 }
 
-/* Dark Mode override for grid */
 .dark .bg-grid-pattern {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -70,4 +72,109 @@ body {
   background: linear-gradient(135deg, #0066FF 0%, #4D94FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* --- GLOW EFFECTS --- */
+.glow-blue {
+  box-shadow: var(--glow-primary);
+}
+
+.glow-blue-subtle {
+  box-shadow: var(--glow-primary-subtle);
+}
+
+.text-glow {
+  text-shadow: 0 0 40px rgba(0, 102, 255, 0.5);
+}
+
+/* --- ANIMATED GRADIENT BORDER --- */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(var(--tw-gradient-stops));
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-primary), transparent, var(--color-primary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* --- SECTION DIVIDER --- */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.3), transparent);
+}
+
+.dark .section-divider {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* --- FLOATING ANIMATION --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* --- PULSE GLOW --- */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 102, 255, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(0, 102, 255, 0.4); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* --- SHIMMER EFFECT --- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* --- CARD HOVER LIFT --- */
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark .card-lift:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* --- SMOOTH SCROLL --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- SELECTION COLOR --- */
+::selection {
+  background: var(--color-primary);
+  color: white;
 }
