@@ -12,11 +12,11 @@ export default function WhatsAppButton() {
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center"
+      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-[0_0_30px_rgba(37,211,102,0.4)] transition-shadow flex items-center justify-center"
       aria-label="Contactez-nous sur WhatsApp"
       title="Contactez-nous sur WhatsApp"
     >
-      <MessageCircle className="w-8 h-8 fill-current" />
+      <MessageCircle className="w-6 h-6 fill-current" />
       <span className="sr-only">Contactez-nous sur WhatsApp</span>
     </motion.a>
   );
