@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -127,6 +127,57 @@ Réponds UNIQUEMENT avec le JSON valide (pas de markdown, pas de backticks) :
   return article;
 }
 
+function updateRSSFeed() {
+  const FEED_PATH = join(ROOT, 'public', 'feed.xml');
+
+  if (!existsSync(INDEX_PATH)) {
+    console.log('[SPIDER] No blog index found, skipping RSS update');
+    return;
+  }
+
+  const articles = JSON.parse(readFileSync(INDEX_PATH, 'utf-8'));
+  const latest = articles.slice(0, 20);
+
+  const escapeXml = (str) =>
+    str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+
+  const items = latest
+    .map((article) => {
+      const link = `https://traffik-web.fr/blog/${article.slug}`;
+      const pubDate = new Date(article.date).toUTCString();
+      return `    <item>
+      <title>${escapeXml(article.title)}</title>
+      <link>${link}</link>
+      <description>${escapeXml(article.excerpt)}</description>
+      <pubDate>${pubDate}</pubDate>
+      <guid isPermaLink="true">${link}</guid>
+    </item>`;
+    })
+    .join('\n');
+
+  const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog Traffik Web</title>
+    <link>https://traffik-web.fr/blog</link>
+    <description>Guides, conseils et actualités sur la création de sites web, le SEO et le marketing digital.</description>
+    <language>fr</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="https://traffik-web.fr/feed.xml" rel="self" type="application/rss+xml"/>
+${items}
+  </channel>
+</rss>
+`;
+
+  writeFileSync(FEED_PATH, feed, 'utf-8');
+  console.log(`[SPIDER] RSS feed updated with ${latest.length} articles`);
+}
+
 async function main() {
   const { queue, keyword } = getNextKeyword();
 
@@ -140,6 +191,9 @@ async function main() {
   // Update blog index
   updateBlogIndex(article);
   console.log('[SPIDER] Updated blog index');
+
+  // Update RSS feed
+  updateRSSFeed();
 
   // Mark keyword as done
   markKeywordDone(queue, keyword);

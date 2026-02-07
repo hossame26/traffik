@@ -27,6 +27,21 @@ const STATIC_ROUTES = [
   { path: '/cgv', priority: '0.3', changefreq: 'yearly' },
 ];
 
+// 30 cities for programmatic SEO
+const CITIES = [
+  'paris', 'marseille', 'lyon', 'toulouse', 'nice', 'nantes', 'strasbourg',
+  'montpellier', 'bordeaux', 'lille', 'rennes', 'reims', 'le-havre',
+  'saint-etienne', 'toulon', 'grenoble', 'dijon', 'angers', 'nimes',
+  'villeurbanne', 'clermont-ferrand', 'le-mans', 'aix-en-provence', 'brest',
+  'tours', 'amiens', 'limoges', 'perpignan', 'metz', 'besancon',
+];
+
+// 5 services for city pages
+const SERVICES = [
+  'creation-site-web', 'creation-site-shopify', 'creation-site-wordpress',
+  'developpement-react', 'referencement-seo',
+];
+
 function generateSitemap() {
   console.log('[sitemap] Generating sitemap.xml...');
 
@@ -58,6 +73,21 @@ function generateSitemap() {
     }
   }
 
+  // Add programmatic city+service pages (150+ pages)
+  let cityCount = 0;
+  for (const service of SERVICES) {
+    for (const city of CITIES) {
+      urls.push(`  <url>
+    <loc>${BASE_URL}/${service}-${city}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`);
+      cityCount++;
+    }
+  }
+  console.log(`[sitemap] Added ${cityCount} city+service pages`);
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.join('\n')}
@@ -65,7 +95,7 @@ ${urls.join('\n')}
 `;
 
   writeFileSync(join(PUBLIC, 'sitemap.xml'), sitemap, 'utf-8');
-  console.log(`[sitemap] Generated with ${urls.length} URLs`);
+  console.log(`[sitemap] Generated with ${urls.length} URLs total`);
 }
 
 generateSitemap();

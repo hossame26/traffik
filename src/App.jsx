@@ -46,6 +46,9 @@ const SEOPage = lazy(() => import('./pages/services/SEO'));
 const BlogList = lazy(() => import('./pages/blog/BlogList'));
 const BlogArticle = lazy(() => import('./pages/blog/BlogArticle'));
 
+// Lazy load Programmatic SEO Pages
+const CityService = lazy(() => import('./pages/CityService'));
+
 // Loading fallback
 const SectionLoader = () => (
   <div className="min-h-[200px] flex items-center justify-center">
@@ -101,6 +104,7 @@ export default function App() {
             <Route path="/referencement-seo" element={<SEOPage />} />
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
+            <Route path="/:slug" element={<CityService />} />
           </Routes>
         </Suspense>
 

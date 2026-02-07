@@ -23,13 +23,25 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
-      - name: Update sitemap
+      - name: Update sitemap & RSS
         run: node scripts/generate-sitemap.mjs
 
       - name: Commit and push
         run: |
           git config user.name "SPIDER Bot"
           git config user.email "bot@traffik-web.fr"
-          git add public/blog/ public/sitemap.xml scripts/keywords-queue.json
+          git add public/blog/ public/sitemap.xml public/feed.xml scripts/keywords-queue.json
           git diff --staged --quiet || git commit -m "blog: nouvel article quotidien $(date +%Y-%m-%d)"
           git push
+
+      - name: Ping Google Sitemap
+        run: curl -s "https://www.google.com/ping?sitemap=https://traffik-web.fr/sitemap.xml"
+
+      - name: Ping Bing Sitemap
+        run: curl -s "https://www.bing.com/ping?sitemap=https://traffik-web.fr/sitemap.xml"
+
+      - name: Ping Google via Indexing API
+        run: |
+          LATEST_SLUG=$(node -e "const d=require('./public/blog/index.json');console.log(d[0].slug)")
+          curl -s "https://www.google.com/ping?sitemap=https://traffik-web.fr/blog/${LATEST_SLUG}"
+        continue-on-error: true
