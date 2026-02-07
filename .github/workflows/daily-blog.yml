@@ -1,0 +1,35 @@
+name: Daily Blog Post
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # 8h UTC = 9h Paris
+  workflow_dispatch: {}     # Déclenchement manuel possible
+
+permissions:
+  contents: write
+
+jobs:
+  generate-article:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate daily article
+        run: node scripts/generate-article.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Update sitemap
+        run: node scripts/generate-sitemap.mjs
+
+      - name: Commit and push
+        run: |
+          git config user.name "SPIDER Bot"
+          git config user.email "bot@traffik-web.fr"
+          git add public/blog/ public/sitemap.xml scripts/keywords-queue.json
+          git diff --staged --quiet || git commit -m "blog: nouvel article quotidien $(date +%Y-%m-%d)"
+          git push

@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "react-nextjs-avantages-entreprise",
+    "title": "React et Next.js : Pourquoi choisir ces technologies en 2026 ?",
+    "date": "2026-02-10",
+    "excerpt": "Découvrez les avantages de React et Next.js pour votre entreprise. Performance, SEO, expérience utilisateur : guide complet des technologies web modernes.",
+    "keywords": ["react", "next.js", "développement web"],
+    "readingTime": 8
+  },
+  {
+    "slug": "optimiser-vitesse-site-web",
+    "title": "Comment optimiser la vitesse de votre site web : 10 techniques",
+    "date": "2026-02-09",
+    "excerpt": "Améliorez les performances de votre site avec ces 10 techniques éprouvées. Core Web Vitals, compression, lazy loading et plus.",
+    "keywords": ["vitesse site web", "performance web", "core web vitals"],
+    "readingTime": 7
+  },
+  {
+    "slug": "google-ads-vs-facebook-ads",
+    "title": "Google Ads vs Facebook Ads : Quelle plateforme choisir ?",
+    "date": "2026-02-08",
+    "excerpt": "Comparatif détaillé entre Google Ads et Facebook Ads. Budget, ciblage, ROI : trouvez la meilleure plateforme publicitaire pour votre business.",
+    "keywords": ["google ads", "facebook ads", "publicité digitale"],
+    "readingTime": 9
+  },
+  {
+    "slug": "prix-creation-site-internet-france",
+    "title": "Prix création site internet en France : Tarifs 2026 détaillés",
+    "date": "2026-02-07",
+    "excerpt": "Combien coûte réellement un site internet en 2026 ? Freelance, agence, no-code : tous les prix détaillés par type de projet.",
+    "keywords": ["prix site internet", "tarif création site web", "coût site web"],
+    "readingTime": 10
+  },
+  {
+    "slug": "site-vitrine-wordpress-avantages",
+    "title": "Pourquoi créer un site vitrine WordPress en 2026 ?",
+    "date": "2026-02-06",
+    "excerpt": "Les avantages d'un site vitrine WordPress pour votre activité. Flexibilité, SEO, coût réduit et facilité de gestion au quotidien.",
+    "keywords": ["site vitrine wordpress", "wordpress", "site vitrine"],
+    "readingTime": 7
+  },
+  {
+    "slug": "facebook-ads-ecommerce-guide",
+    "title": "Facebook Ads pour e-commerce : Guide complet pour vendre plus",
+    "date": "2026-02-05",
+    "excerpt": "Guide pratique pour lancer des campagnes Facebook Ads rentables pour votre boutique en ligne. Stratégies, ciblage et optimisation.",
+    "keywords": ["facebook ads", "e-commerce", "publicité facebook"],
+    "readingTime": 9
+  },
+  {
+    "slug": "referencement-seo-debutant",
+    "title": "SEO pour débutants : Guide complet du référencement naturel en 2026",
+    "date": "2026-02-04",
+    "excerpt": "Apprenez les bases du référencement naturel. On-page, off-page, technique : tout pour apparaître en première page Google.",
+    "keywords": ["seo débutant", "référencement naturel", "google"],
+    "readingTime": 11
+  },
+  {
+    "slug": "creer-boutique-en-ligne-guide",
+    "title": "Comment créer une boutique en ligne en 2026 : Guide étape par étape",
+    "date": "2026-02-03",
+    "excerpt": "Guide complet pour créer votre boutique en ligne. Du choix de la plateforme au premier produit vendu, toutes les étapes détaillées.",
+    "keywords": ["boutique en ligne", "e-commerce", "créer boutique"],
+    "readingTime": 10
+  },
+  {
+    "slug": "shopify-vs-wordpress-comparatif",
+    "title": "Shopify vs WordPress : Quel CMS choisir en 2026 ?",
+    "date": "2026-02-02",
+    "excerpt": "Comparatif complet Shopify vs WordPress. Prix, fonctionnalités, SEO, facilité d'utilisation : quel CMS est fait pour vous ?",
+    "keywords": ["shopify vs wordpress", "cms", "comparatif"],
+    "readingTime": 9
+  },
+  {
+    "slug": "combien-coute-site-shopify-2026",
+    "title": "Combien coûte un site Shopify en 2026 ? Guide complet des prix",
+    "date": "2026-02-01",
+    "excerpt": "Découvrez tous les coûts d'un site Shopify en 2026. Abonnement, thème, apps, développement : budget complet détaillé.",
+    "keywords": ["prix shopify", "coût site shopify", "shopify tarif"],
+    "readingTime": 8
+  }
+]

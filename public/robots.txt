@@ -1,0 +1,11 @@
+# Robots.txt for Traffik Web
+# https://traffik-web.fr
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://traffik-web.fr/sitemap.xml
+
+User-agent: DotBot
+Disallow: /
