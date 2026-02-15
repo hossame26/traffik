@@ -90,13 +90,8 @@ function DesktopCard({ service, index, isInView }) {
 function MobileCard({ service, index }) {
   const Icon = service.icon;
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-      whileTap={{ scale: 0.94 }}
-      className="flex flex-col p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] shadow-sm dark:shadow-none active:border-amber-500/40 active:shadow-xl active:shadow-amber-500/10 transition-all duration-200"
+    <div
+      className="flex flex-col p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] shadow-sm dark:shadow-none transition-all duration-200"
     >
       {service.badge && (
         <motion.div
@@ -110,14 +105,12 @@ function MobileCard({ service, index }) {
         </motion.div>
       )}
 
-      <motion.div
+      <div
         className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.color} p-3 mb-5 flex items-center justify-center`}
         style={{ boxShadow: `0 8px 20px -6px ${service.accentColor}40` }}
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
         <Icon className="w-8 h-8 text-white" />
-      </motion.div>
+      </div>
 
       <h3 className="text-lg font-bold text-black dark:text-white mb-2">{service.title}</h3>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-5 leading-relaxed">{service.description}</p>
@@ -156,7 +149,7 @@ function MobileCard({ service, index }) {
           <ArrowRight className="w-4 h-4" />
         </motion.button>
       </Link>
-    </motion.div>
+    </div>
   );
 }
 

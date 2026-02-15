@@ -74,26 +74,12 @@ function DesktopCard({ offer, onClick, index, isInView }) {
         </div>
       )}
 
-      {/* Logo flottant avec animation */}
-      <motion.div
+      {/* Logo */}
+      <div
         className="w-20 h-20 rounded-2xl bg-gray-100 dark:bg-white/5 p-4 mb-6"
-        whileHover={{
-          y: -8,
-          rotate: [0, -5, 5, 0],
-          transition: { duration: 0.5 }
-        }}
-        animate={{
-          y: [0, -6, 0],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: index * 0.3
-        }}
       >
         <img src={offer.image} alt={offer.title} className="w-full h-full object-contain" loading="lazy" decoding="async" />
-      </motion.div>
+      </div>
 
       <h3 className="text-xl lg:text-2xl font-bold text-black dark:text-white mb-3">{offer.title}</h3>
       <p className="text-base text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">{offer.description}</p>
@@ -132,14 +118,9 @@ function DesktopCard({ offer, onClick, index, isInView }) {
 // Carte pour mobile (slider)
 function MobileCard({ offer, onClick, index }) {
   return (
-    <motion.div
+    <div
       onClick={onClick}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-      whileTap={{ scale: 0.94, boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
-      className="flex flex-col p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] w-[85vw] max-w-[320px] shadow-sm dark:shadow-none cursor-pointer active:border-primary/40 active:shadow-xl active:shadow-primary/10 transition-all duration-200"
+      className="flex flex-col p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] w-[85vw] max-w-[320px] shadow-sm dark:shadow-none cursor-pointer transition-all duration-200"
     >
       {offer.badge && (
         <motion.div
@@ -153,13 +134,11 @@ function MobileCard({ offer, onClick, index }) {
         </motion.div>
       )}
 
-      <motion.div
+      <div
         className="w-16 h-16 rounded-xl bg-gray-100 dark:bg-white/5 p-3 mb-5"
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
         <img src={offer.image} alt={offer.title} className="w-full h-full object-contain" loading="lazy" decoding="async" />
-      </motion.div>
+      </div>
 
       <h3 className="text-lg font-bold text-black dark:text-white mb-2">{offer.title}</h3>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-5 leading-relaxed">{offer.description}</p>
@@ -197,7 +176,7 @@ function MobileCard({ offer, onClick, index }) {
         En savoir plus
         <ArrowRight className="w-4 h-4" />
       </motion.button>
-    </motion.div>
+    </div>
   );
 }
 

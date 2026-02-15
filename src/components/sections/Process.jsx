@@ -95,39 +95,26 @@ function MobileStepCard({ step, index }) {
   const Icon = step.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-      whileTap={{ scale: 0.92, borderColor: 'rgba(0,102,255,0.4)' }}
-      className="flex flex-col items-center text-center p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] w-[160px] h-[200px] active:border-primary/40 active:shadow-lg active:shadow-primary/10 transition-all duration-200"
+    <div
+      className="flex flex-col items-center text-center p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] w-[160px] h-[200px] transition-all duration-200"
     >
-      <motion.div
+      <div
         className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent-purple flex items-center justify-center mb-3 shadow-lg shadow-primary/20"
-        initial={{ scale: 0, rotate: -180 }}
-        whileInView={{ scale: 1, rotate: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 250, damping: 12 }}
       >
         <Icon className="w-5 h-5 text-white" />
-      </motion.div>
-      <motion.span
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.1 + 0.35 }}
+      </div>
+      <span
         className="text-[9px] font-bold text-primary tracking-widest uppercase mb-1"
       >
         Étape {step.id}
-      </motion.span>
+      </span>
       <h3 className="text-sm font-bold text-black dark:text-white mb-1">
         {step.title}
       </h3>
       <p className="text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3">
         {step.desc}
       </p>
-    </motion.div>
+    </div>
   );
 }
 

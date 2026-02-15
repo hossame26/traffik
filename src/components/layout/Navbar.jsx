@@ -51,15 +51,32 @@ export default function Navbar() {
 
   const lineColors = ['#0066FF', '#A855F7', '#06B6D4', '#ffffff'];
 
+  const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
+
   // ─── Warp navigation handler ───
   const triggerWarp = useCallback((e, item) => {
     e.preventDefault();
     e.stopPropagation();
     if (warpTarget) return;
 
+    setIsMobileMenuOpen(false);
+
+    // Skip warp animation on mobile — navigate instantly
+    if (isMobileDevice) {
+      if (item.isRoute) {
+        navigate(item.href);
+      } else {
+        const hash = item.href.replace(/^\//, '');
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      return;
+    }
+
     setWarpTarget(item);
     setWarpPhase('enter');
-    setIsMobileMenuOpen(false);
 
     // Phase 2: flash + navigate (at 650ms)
     setTimeout(() => {
@@ -82,7 +99,7 @@ export default function Navbar() {
       setWarpPhase(null);
       setWarpTarget(null);
     }, 1300);
-  }, [warpTarget, navigate]);
+  }, [warpTarget, navigate, isMobileDevice]);
 
   const navItems = [
     { label: 'SERVICES', href: '/tarifs', isRoute: true },

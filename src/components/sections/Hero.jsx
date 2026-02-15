@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
@@ -11,8 +11,10 @@ function EclipseRing() {
   const canvasRef = useRef(null);
   const animRef = useRef(null);
   const isDarkRef = useRef(true);
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
   useEffect(() => {
+    if (isMobile) return; // Skip canvas on mobile
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
@@ -248,6 +250,9 @@ function EclipseRing() {
     };
   }, []);
 
+  if (isMobile) {
+    return <div className="w-full h-full bg-[#030308] dark:bg-[#030308]" />;
+  }
   return <canvas ref={canvasRef} className="w-full h-full" />;
 }
 
@@ -258,15 +263,16 @@ function EclipseRing() {
 
 export default function Hero() {
   const containerRef = useRef(null);
+  const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Ring zooms in as user scrolls
-  const ringScale = useTransform(scrollYProgress, [0, 1], [1, 3.2]);
-  const ringOpacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0.6]);
+  // Ring zooms in as user scrolls (desktop only)
+  const ringScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 3.2]);
+  const ringOpacity = useTransform(scrollYProgress, [0, 0.85, 1], isMobile ? [1, 1, 1] : [1, 1, 0.6]);
 
   // Phase opacities
   const phase0 = useTransform(scrollYProgress, [0, 0.08, 0.16], [1, 1, 0]);

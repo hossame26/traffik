@@ -54,8 +54,8 @@ function AnimatedCounter({ value, label, suffix = "", prefix = "" }) {
   useEffect(() => {
     if (!isInView) return;
 
-    const duration = 2500;
-    const steps = 80;
+    const duration = 1500;
+    const steps = 20;
     const increment = numericValue / steps;
     let current = 0;
     let step = 0;
