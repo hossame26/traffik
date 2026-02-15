@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Mail, TrendingUp, BarChart3, Target, ArrowUpRight, Zap, Sparkles, X, Check } from 'lucide-react';
-
 // Service details for modals
 const serviceDetails = {
   acquisition: {
@@ -183,9 +182,9 @@ function GrowthCard({ icon: Icon, title, desc, gradient, serviceKey, onOpenModal
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       onClick={() => onOpenModal(serviceKey)}
-      className={`relative p-6 rounded-2xl bg-gradient-to-br ${gradient} shadow-lg cursor-pointer group overflow-hidden`}
+      className={`relative p-6 rounded-2xl bg-gradient-to-br ${gradient} shadow-lg cursor-pointer group overflow-hidden active:brightness-110 transition-all duration-150`}
       whileHover={{ y: -5, scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileTap={{ scale: 0.93 }}
     >
       {/* Shimmer */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
@@ -286,9 +285,9 @@ export default function Growth() {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.2 }}
               onClick={() => setActiveModal('acquisition')}
-              className="relative p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-gray-900 to-black text-white shadow-2xl overflow-hidden group cursor-pointer"
+              className="relative p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-gray-900 to-black text-white shadow-2xl overflow-hidden group cursor-pointer active:shadow-primary/20 transition-shadow duration-200"
               whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.94 }}
             >
               {/* Shimmer */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />

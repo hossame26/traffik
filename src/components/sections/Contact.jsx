@@ -1,8 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowRight, MessageCircle, Clock, Shield, Zap, Check, Send } from 'lucide-react';
 import { Input, Textarea, Select, SelectItem, addToast } from "@heroui/react";
-
 const projectTypes = [
   { key: "shopify", label: "Site E-commerce (Shopify)" },
   { key: "wordpress", label: "Site Vitrine (WordPress)" },
@@ -25,6 +24,17 @@ export default function Contact() {
 
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  // Auto-select project type when navigating from another section
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.detail) {
+        setFormData(prev => ({ ...prev, projectType: e.detail }));
+      }
+    };
+    window.addEventListener('selectProject', handler);
+    return () => window.removeEventListener('selectProject', handler);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -142,9 +152,9 @@ export default function Contact() {
               href="https://wa.me/33635505374"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white px-8 py-4 rounded-full font-bold tracking-wide transition-all shadow-[0_8px_30px_-4px_rgba(37,211,102,0.5)] hover:shadow-[0_12px_40px_-4px_rgba(37,211,102,0.6)]"
+              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white px-8 py-4 rounded-full font-bold tracking-wide transition-all shadow-[0_8px_30px_-4px_rgba(37,211,102,0.5)] hover:shadow-[0_12px_40px_-4px_rgba(37,211,102,0.6)] active:brightness-110"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.9 }}
             >
               <MessageCircle className="w-5 h-5" />
               Discuter sur WhatsApp
@@ -199,7 +209,13 @@ export default function Contact() {
               <div className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-4">
                   {/* Name Input */}
-                  <div className="space-y-2">
+                  <motion.div
+                    className="space-y-2"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                  >
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
                       Nom
                     </label>
@@ -207,13 +223,19 @@ export default function Contact() {
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                      className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-[0_0_20px_-4px_rgba(0,102,255,0.15)] transition-all duration-300"
                       placeholder="Votre nom"
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Email Input */}
-                  <div className="space-y-2">
+                  <motion.div
+                    className="space-y-2"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15 }}
+                  >
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
                       Email <span className="text-red-500">*</span>
                     </label>
@@ -221,15 +243,21 @@ export default function Contact() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                      className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-[0_0_20px_-4px_rgba(0,102,255,0.15)] transition-all duration-300"
                       placeholder="votre@email.com"
                       required
                     />
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Phone Input */}
-                <div className="space-y-2">
+                <motion.div
+                  className="space-y-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
                     Téléphone <span className="text-red-500">*</span>
                   </label>
@@ -237,21 +265,27 @@ export default function Contact() {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                    className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-[0_0_20px_-4px_rgba(0,102,255,0.15)] transition-all duration-300"
                     placeholder="06 12 34 56 78"
                     required
                   />
-                </div>
+                </motion.div>
 
                 {/* Project Type Select */}
-                <div className="space-y-2">
+                <motion.div
+                  className="space-y-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.25 }}
+                >
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
                     Type de projet
                   </label>
                   <select
                     value={formData.projectType}
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                    className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
+                    className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-[0_0_20px_-4px_rgba(0,102,255,0.15)] transition-all duration-300 appearance-none cursor-pointer"
                   >
                     <option value="">Sélectionner un type</option>
                     {projectTypes.map((type) => (
@@ -260,10 +294,16 @@ export default function Contact() {
                       </option>
                     ))}
                   </select>
-                </div>
+                </motion.div>
 
                 {/* Message Textarea */}
-                <div className="space-y-2">
+                <motion.div
+                  className="space-y-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                >
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">
                     Votre message
                   </label>
@@ -271,10 +311,10 @@ export default function Contact() {
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
+                    className="w-full bg-white dark:bg-dark-800 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-[0_0_20px_-4px_rgba(0,102,255,0.15)] transition-all duration-300 resize-none"
                     placeholder="Décrivez brièvement votre projet et vos objectifs..."
                   />
-                </div>
+                </motion.div>
 
                 {/* Submit Button */}
                 <motion.button

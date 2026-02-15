@@ -56,26 +56,32 @@ export default function CookieBanner() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                <button
+                <Motion.button
                   onClick={acceptEssential}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
                 >
                   Essentiel uniquement
-                </button>
-                <button
+                </Motion.button>
+                <Motion.button
                   onClick={acceptAll}
+                  whileHover={{ scale: 1.05, boxShadow: '0 12px 30px -8px rgba(0,102,255,0.4)' }}
+                  whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 rounded-xl bg-[#0066FF] text-white text-sm font-semibold hover:bg-[#0055DD] transition-colors"
                 >
                   Tout accepter
-                </button>
+                </Motion.button>
               </div>
 
-              <button
+              <Motion.button
                 onClick={acceptEssential}
+                whileHover={{ scale: 1.15, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
                 className="absolute top-4 right-4 md:static p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
-              </button>
+              </Motion.button>
             </div>
           </div>
         </Motion.div>

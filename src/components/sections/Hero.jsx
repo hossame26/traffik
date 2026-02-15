@@ -1,349 +1,492 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion as Motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, TrendingUp, Users, ShoppingBag, Search, MousePointer, Star } from 'lucide-react';
+import { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
-// Hook to detect mobile for performance optimization
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(true);
+// ═══════════════════════════════════════════════════════════
+// ECLIPSE RING — Optimized Canvas 2D (ZERO shadowBlur)
+// Supports dark + light mode
+// ═══════════════════════════════════════════════════════════
+
+function EclipseRing() {
+  const canvasRef = useRef(null);
+  const animRef = useRef(null);
+  const isDarkRef = useRef(true);
+
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: false });
+    let w, h;
+
+    // Dark mode detection
+    const updateDark = () => {
+      isDarkRef.current = document.documentElement.classList.contains('dark');
+    };
+    updateDark();
+    const obs = new MutationObserver(updateDark);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio, 1.5);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    // ── Pre-bake glow sprites ──
+    function bakeGlow(size, r, g, b) {
+      const s = size * 4;
+      const off = document.createElement('canvas');
+      off.width = s;
+      off.height = s;
+      const c = off.getContext('2d');
+      const grad = c.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+      grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, 1)`);
+      grad.addColorStop(0.15, `rgba(${r}, ${g}, ${b}, 0.6)`);
+      grad.addColorStop(0.4, `rgba(${r}, ${g}, ${b}, 0.15)`);
+      grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+      c.fillStyle = grad;
+      c.fillRect(0, 0, s, s);
+      return off;
+    }
+
+    const glowBlue = bakeGlow(16, 0, 102, 255);
+    const glowPurple = bakeGlow(16, 140, 80, 255);
+    const glowWhite = bakeGlow(8, 210, 225, 255);
+    const glowCluster = bakeGlow(40, 60, 130, 255);
+
+    // Light mode sprites (darker, more opaque)
+    const glowBlueLt = bakeGlow(16, 0, 80, 220);
+    const glowPurpleLt = bakeGlow(16, 120, 60, 220);
+    const glowCoreLt = bakeGlow(8, 0, 60, 180);
+    const glowClusterLt = bakeGlow(40, 0, 70, 200);
+
+    // ── Pre-bake ring glow ──
+    let ringGlowDark = null;
+    let ringGlowLight = null;
+    let ringGlowRadius = 0;
+
+    function bakeRingGlow(radius) {
+      ringGlowRadius = radius;
+      const margin = 80;
+      const size = (radius + margin) * 2;
+
+      // Dark version
+      const offD = document.createElement('canvas');
+      offD.width = size;
+      offD.height = size;
+      const cD = offD.getContext('2d');
+      const cxD = size / 2, cyD = size / 2;
+      const g1 = cD.createRadialGradient(cxD, cyD, radius - 20, cxD, cyD, radius + 60);
+      g1.addColorStop(0, 'rgba(0, 60, 200, 0)');
+      g1.addColorStop(0.3, 'rgba(0, 80, 220, 0.06)');
+      g1.addColorStop(0.6, 'rgba(0, 60, 200, 0.03)');
+      g1.addColorStop(1, 'rgba(0, 40, 160, 0)');
+      cD.fillStyle = g1;
+      cD.fillRect(0, 0, size, size);
+      cD.strokeStyle = 'rgba(0, 102, 255, 0.12)';
+      cD.lineWidth = 2.5;
+      cD.beginPath();
+      cD.arc(cxD, cyD, radius, 0, Math.PI * 2);
+      cD.stroke();
+      cD.strokeStyle = 'rgba(120, 160, 255, 0.06)';
+      cD.lineWidth = 1;
+      cD.beginPath();
+      cD.arc(cxD, cyD, radius, 0, Math.PI * 2);
+      cD.stroke();
+      ringGlowDark = offD;
+
+      // Light version (more visible ring)
+      const offL = document.createElement('canvas');
+      offL.width = size;
+      offL.height = size;
+      const cL = offL.getContext('2d');
+      const g2 = cL.createRadialGradient(cxD, cyD, radius - 30, cxD, cyD, radius + 50);
+      g2.addColorStop(0, 'rgba(0, 80, 220, 0)');
+      g2.addColorStop(0.3, 'rgba(0, 80, 220, 0.06)');
+      g2.addColorStop(0.6, 'rgba(0, 60, 200, 0.03)');
+      g2.addColorStop(1, 'rgba(0, 40, 160, 0)');
+      cL.fillStyle = g2;
+      cL.fillRect(0, 0, size, size);
+      cL.strokeStyle = 'rgba(0, 80, 200, 0.25)';
+      cL.lineWidth = 2.5;
+      cL.beginPath();
+      cL.arc(cxD, cyD, radius, 0, Math.PI * 2);
+      cL.stroke();
+      cL.strokeStyle = 'rgba(0, 60, 180, 0.1)';
+      cL.lineWidth = 1;
+      cL.beginPath();
+      cL.arc(cxD, cyD, radius, 0, Math.PI * 2);
+      cL.stroke();
+      ringGlowLight = offL;
+    }
+
+    // Stars
+    const stars = Array.from({ length: 50 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      size: Math.random() * 1.2 + 0.2,
+      alpha: Math.random() * 0.15 + 0.02,
+      speed: Math.random() * 0.012 + 0.004,
+      phase: Math.random() * Math.PI * 2,
+    }));
+
+    // Ring particles
+    const particles = Array.from({ length: 180 }, (_, i) => ({
+      angle: (i / 180) * Math.PI * 2 + (Math.random() - 0.5) * 0.2,
+      speed: 0.0001 + Math.random() * 0.0005,
+      size: 0.8 + Math.random() * 2.5,
+      brightness: 0.15 + Math.random() * 0.85,
+      offset: (Math.random() - 0.5) * 8,
+      phase: Math.random() * Math.PI * 2,
+      isPurple: Math.random() > 0.75,
+    }));
+
+    // Hot clusters
+    const clusters = Array.from({ length: 8 }, (_, i) => ({
+      angle: (i / 8) * Math.PI * 2 + Math.random() * 0.5,
+      speed: 0.00005 + Math.random() * 0.00012,
+      intensity: 0.3 + Math.random() * 0.7,
+      size: 30 + Math.random() * 40,
+      phase: Math.random() * Math.PI * 2,
+    }));
+
+    let time = 0;
+    let lastRadius = 0;
+
+    const animate = () => {
+      time++;
+      const dark = isDarkRef.current;
+
+      // Background
+      ctx.fillStyle = dark ? '#030308' : '#f0f2f8';
+      ctx.fillRect(0, 0, w, h);
+
+      const cx = w / 2;
+      const cy = h / 2;
+      const radius = Math.min(w, h) * 0.36;
+
+      if (Math.abs(radius - lastRadius) > 2) {
+        bakeRingGlow(radius);
+        lastRadius = radius;
+      }
+
+      // ── Stars (dark mode only) ──
+      if (dark) {
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          const twinkle = s.alpha * (0.4 + 0.6 * Math.sin(time * s.speed + s.phase));
+          ctx.globalAlpha = twinkle;
+          ctx.fillStyle = '#8eaaff';
+          ctx.fillRect(s.x * w - s.size / 2, s.y * h - s.size / 2, s.size, s.size);
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      // ── Ring glow ──
+      const ringImg = dark ? ringGlowDark : ringGlowLight;
+      if (ringImg) {
+        const margin = 80;
+        ctx.drawImage(ringImg, cx - ringGlowRadius - margin, cy - ringGlowRadius - margin);
+      }
+
+      // ── Particles ──
+      ctx.globalCompositeOperation = dark ? 'lighter' : 'source-over';
+
+      // Clusters
+      for (let i = 0; i < clusters.length; i++) {
+        const c = clusters[i];
+        c.angle += c.speed;
+        const hx = cx + radius * Math.cos(c.angle);
+        const hy = cy + radius * Math.sin(c.angle);
+        const pulse = c.intensity * (0.4 + 0.6 * Math.sin(time * 0.007 + c.phase));
+        ctx.globalAlpha = pulse * (dark ? 0.4 : 0.25);
+        ctx.drawImage(dark ? glowCluster : glowClusterLt, hx - c.size, hy - c.size, c.size * 2, c.size * 2);
+      }
+
+      // Ring particles
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.angle += p.speed;
+        const x = cx + (radius + p.offset) * Math.cos(p.angle);
+        const y = cy + (radius + p.offset) * Math.sin(p.angle);
+
+        const flicker = 0.3 + 0.7 * Math.sin(time * 0.01 + p.phase);
+        const alpha = p.brightness * flicker;
+
+        const sz = p.size * 4;
+
+        // Color glow
+        const sprite = dark
+          ? (p.isPurple ? glowPurple : glowBlue)
+          : (p.isPurple ? glowPurpleLt : glowBlueLt);
+        ctx.globalAlpha = alpha * (dark ? 0.35 : 0.5);
+        ctx.drawImage(sprite, x - sz, y - sz, sz * 2, sz * 2);
+
+        // Bright core
+        const coreSize = p.size * 1.5;
+        ctx.globalAlpha = alpha * (dark ? 0.7 : 0.8);
+        ctx.drawImage(dark ? glowWhite : glowCoreLt, x - coreSize, y - coreSize, coreSize * 2, coreSize * 2);
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+
+      animRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      obs.disconnect();
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
   }, []);
-  return isMobile;
-};
 
-// TikTok Icon
-const TikTokIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
-  </svg>
-);
+  return <canvas ref={canvasRef} className="w-full h-full" />;
+}
 
-// Floating cards data - responsive positions
-const floatingCards = [
-  {
-    id: 1,
-    type: 'revenue',
-    title: 'Shopify',
-    value: '+12 847 €',
-    label: 'VENTES CE MOIS',
-    color: 'from-green-500 to-green-600',
-    borderColor: 'border-green-500/50',
-    mobilePos: 'top-[8%] left-[3%]',
-    desktopPos: 'md:top-[18%] md:left-[2%] xl:left-[5%]',
-    delay: 0,
-    icon: <ShoppingBag className="w-4 h-4" />,
-  },
-  {
-    id: 2,
-    type: 'ads',
-    title: 'Meta Ads',
-    value: 'ROAS 4.2x',
-    label: 'CAMPAGNE ACTIVE',
-    color: 'from-blue-500 to-indigo-600',
-    borderColor: 'border-blue-500/50',
-    mobilePos: 'top-[8%] right-[3%]',
-    desktopPos: 'md:top-[15%] md:right-[2%] xl:right-[8%]',
-    delay: 0.5,
-    icon: <MousePointer className="w-4 h-4" />,
-  },
-  {
-    id: 3,
-    type: 'seo',
-    title: 'Google',
-    value: '#1',
-    label: 'POSITION MOT-CLÉ',
-    color: 'from-orange-500 to-red-500',
-    borderColor: 'border-orange-500/50',
-    mobilePos: 'top-[32%] left-[3%]',
-    desktopPos: 'md:bottom-[20%] md:left-[2%] xl:left-[8%]',
-    delay: 1,
-    icon: <Search className="w-4 h-4" />,
-  },
-  {
-    id: 4,
-    type: 'tiktok',
-    title: 'TikTok',
-    value: '1.2M',
-    label: 'VUES CETTE SEMAINE',
-    color: 'from-pink-500 to-rose-500',
-    borderColor: 'border-pink-500/50',
-    mobilePos: 'top-[32%] right-[3%]',
-    desktopPos: 'md:bottom-[15%] md:right-[2%] xl:right-[10%]',
-    delay: 1.5,
-    icon: <TikTokIcon />,
-  },
-  {
-    id: 5,
-    type: 'visitors',
-    title: 'Visiteurs',
-    value: '24.8K',
-    label: 'CE MOIS',
-    color: 'from-cyan-500 to-cyan-600',
-    borderColor: 'border-cyan-500/50',
-    mobilePos: 'bottom-[18%] left-[3%]',
-    desktopPos: 'md:top-[45%] md:left-[1%] xl:left-[3%]',
-    delay: 2,
-    icon: <Users className="w-4 h-4" />,
-  },
-  {
-    id: 6,
-    type: 'reviews',
-    title: 'Avis Clients',
-    value: '5.0',
-    label: '50+ AVIS',
-    color: 'from-yellow-500 to-orange-500',
-    borderColor: 'border-yellow-500/50',
-    mobilePos: 'bottom-[18%] right-[3%]',
-    desktopPos: 'md:top-[48%] md:right-[1%] xl:right-[5%]',
-    delay: 2.5,
-    icon: <Star className="w-4 h-4 fill-current" />,
-  },
-];
 
-// Sparkle particles
-const Sparkle = ({ delay, x, y, size }) => (
-  <Motion.div
-    className="absolute pointer-events-none"
-    style={{ left: x, top: y }}
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{
-      opacity: [0, 1, 0],
-      scale: [0, 1, 0],
-      rotate: [0, 180],
-    }}
-    transition={{
-      duration: 2,
-      delay: delay,
-      repeat: Infinity,
-      repeatDelay: Math.random() * 3,
-    }}
-  >
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" fill="url(#sparkle-gradient)"/>
-      <defs>
-        <linearGradient id="sparkle-gradient" x1="0" y1="0" x2="24" y2="24">
-          <stop stopColor="#0066FF"/>
-          <stop offset="1" stopColor="#A855F7"/>
-        </linearGradient>
-      </defs>
-    </svg>
-  </Motion.div>
-);
-
-const sparkles = [
-  { x: '15%', y: '20%', delay: 0, size: 16 },
-  { x: '85%', y: '25%', delay: 0.5, size: 12 },
-  { x: '10%', y: '60%', delay: 1, size: 14 },
-  { x: '90%', y: '55%', delay: 1.5, size: 10 },
-  { x: '25%', y: '80%', delay: 2, size: 12 },
-  { x: '75%', y: '75%', delay: 2.5, size: 16 },
-  { x: '50%', y: '15%', delay: 3, size: 10 },
-  { x: '30%', y: '35%', delay: 0.8, size: 8 },
-  { x: '70%', y: '40%', delay: 1.3, size: 8 },
-];
-
-const FloatingCard = ({ card, isMobile }) => {
-  return (
-    <Motion.div
-      initial={{ opacity: 0, scale: 0.9, y: 10 }}
-      animate={{ opacity: isMobile ? 0.25 : 1, scale: 1, y: 0 }}
-      transition={{ delay: isMobile ? card.delay * 0.1 : card.delay * 0.3, duration: 0.4 }}
-      className={`absolute ${card.mobilePos} ${card.desktopPos} ${isMobile ? 'z-0' : 'z-20'} ${card.hideOnMobile ? 'hidden md:block' : ''}`}
-    >
-      <Motion.div
-        // Simpler animation on mobile - just a subtle float
-        animate={isMobile ? { y: [0, -4, 0] } : {
-          y: [0, -8, 0],
-          rotate: [0, 1, -1, 0],
-        }}
-        transition={{
-          duration: isMobile ? 6 : 4 + card.delay, // Slower on mobile = less CPU
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        whileHover={isMobile ? undefined : { scale: 1.08, y: -15 }}
-        className={`relative p-2 md:p-4 rounded-xl md:rounded-2xl bg-black/90 backdrop-blur-xl border-0 md:border ${card.borderColor} shadow-2xl cursor-pointer min-w-[85px] md:min-w-[150px]`}
-      >
-        {/* Glow effect */}
-        <div className={`absolute inset-0 rounded-xl md:rounded-2xl bg-gradient-to-r ${card.color} opacity-10 blur-xl`} />
-
-        {/* Live indicator */}
-        <div className="absolute top-2 right-2 md:top-3 md:right-3 flex items-center gap-1">
-          <span className="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
-            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-gradient-to-r ${card.color} opacity-75`}></span>
-            <span className={`relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 bg-gradient-to-r ${card.color}`}></span>
-          </span>
-          <span className="text-[6px] md:text-[8px] text-gray-400 font-bold hidden md:inline">LIVE</span>
-        </div>
-
-        {/* Header */}
-        <div className="relative flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-3">
-          <div className={`p-1 md:p-1.5 rounded-md md:rounded-lg bg-gradient-to-r ${card.color} text-white`}>
-            {React.cloneElement(card.icon, { className: 'w-3 h-3 md:w-4 md:h-4' })}
-          </div>
-          <span className="text-[10px] md:text-xs font-bold text-white">{card.title}</span>
-        </div>
-
-        {/* Value */}
-        <div className={`relative text-base md:text-2xl font-bold bg-gradient-to-r ${card.color} bg-clip-text text-transparent`}>
-          {card.value}
-        </div>
-
-        {/* Label */}
-        <div className="relative text-[7px] md:text-[9px] text-gray-400 font-bold tracking-wider mt-0.5 md:mt-1">
-          {card.label}
-        </div>
-      </Motion.div>
-    </Motion.div>
-  );
-};
+// ═══════════════════════════════════════════════════════════
+// MAIN HERO — Scroll-driven storytelling (dark + light)
+// ═══════════════════════════════════════════════════════════
 
 export default function Hero() {
-  const targetRef = useRef(null);
-  const isMobile = useIsMobile();
+  const containerRef = useRef(null);
+
   const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end start"]
+    target: containerRef,
+    offset: ['start start', 'end end'],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const yText = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+  // Ring zooms in as user scrolls
+  const ringScale = useTransform(scrollYProgress, [0, 1], [1, 3.2]);
+  const ringOpacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0.6]);
+
+  // Phase opacities
+  const phase0 = useTransform(scrollYProgress, [0, 0.08, 0.16], [1, 1, 0]);
+  const phase1 = useTransform(scrollYProgress, [0.14, 0.21, 0.34, 0.40], [0, 1, 1, 0]);
+  const phase2 = useTransform(scrollYProgress, [0.38, 0.44, 0.57, 0.63], [0, 1, 1, 0]);
+  const phase3 = useTransform(scrollYProgress, [0.61, 0.67, 0.79, 0.85], [0, 1, 1, 0]);
+  const phase4 = useTransform(scrollYProgress, [0.83, 0.94], [0, 1]);
+
+  const fogOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
   return (
-    <section ref={targetRef} className="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-[#F8F9FA] dark:bg-black">
+    <section ref={containerRef} className="relative" style={{ height: '400vh' }}>
+      <div className="sticky top-0 h-screen overflow-hidden bg-[#f0f2f8] dark:bg-[#030308] transition-colors duration-500">
 
-      {/* --- BACKGROUND EFFECTS --- */}
-      <div className="absolute inset-0 bg-noise opacity-[0.03]" />
-
-      {/* Gradient Orbs - simplified on mobile */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-[#0066FF] opacity-[0.07] blur-[100px] md:blur-[150px] rounded-full pointer-events-none" />
-      {!isMobile && (
-        <>
-          <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-purple-500 opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-green-500 opacity-[0.05] blur-[120px] rounded-full pointer-events-none" />
-        </>
-      )}
-
-      {/* Grid pattern background */}
-      <div
-        className={`absolute inset-0 bg-grid-pattern pointer-events-none ${isMobile ? 'opacity-15' : 'opacity-30'}`}
-        style={isMobile ? {} : { transform: 'perspective(500px) rotateX(20deg) scale(1.5)' }}
-      />
-
-      {/* Sparkles - desktop only for performance */}
-      {!isMobile && sparkles.map((sparkle, i) => (
-        <Sparkle key={i} {...sparkle} />
-      ))}
-
-      {/* Floating Cards - show all 6 cards, behind text on mobile */}
-      {floatingCards.map((card) => (
-        <FloatingCard key={card.id} card={card} isMobile={isMobile} />
-      ))}
-
-      <Motion.div
-        style={{ opacity, scale, y: yText }}
-        className="relative z-10 flex flex-col items-center max-w-4xl mx-auto"
-      >
-        {/* Badge */}
-        <Motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="inline-flex items-center gap-2 border border-[#0066FF]/30 bg-[#0066FF]/10 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] mb-6 uppercase text-[#0066FF]"
+        {/* ── Eclipse ring ── */}
+        <motion.div
+          style={{ scale: ringScale, opacity: ringOpacity }}
+          className="absolute inset-0 origin-center pointer-events-none"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0066FF] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0066FF]"></span>
-          </span>
-          Agence Web & Marketing
-        </Motion.div>
+          <EclipseRing />
+        </motion.div>
 
-        {/* TITRE PRINCIPAL */}
-        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6">
-          <Motion.span
-             initial={{ opacity: 0, y: 30 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, delay: 0.2 }}
-             className="block text-black dark:text-white"
-          >
-            SITES QUI
-          </Motion.span>
-          <Motion.span
-             initial={{ opacity: 0, y: 30 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, delay: 0.4 }}
-             className="block text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-purple-500 to-[#0066FF] bg-[length:200%_auto] animate-gradient"
-          >
-            CONVERTISSENT.
-          </Motion.span>
-        </h1>
-
-        {/* Sous-titre */}
-        <Motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="text-gray-600 dark:text-gray-400 max-w-xs sm:max-w-lg mx-auto text-xs sm:text-sm md:text-base font-medium leading-relaxed mb-8 px-2"
+        {/* ── Atmospheric fog ── */}
+        <motion.div
+          style={{ opacity: fogOpacity }}
+          className="absolute inset-0 pointer-events-none"
         >
-          On crée des sites web qui génèrent du <span className="text-black dark:text-white font-semibold">chiffre d'affaires</span>.
-          Pas juste des pixels.
-        </Motion.p>
+          <div className="absolute -left-[25%] top-[15%] w-[65%] h-[65%] bg-[#0044CC]/[0.03] dark:bg-[#0044CC]/[0.04] blur-[140px] rounded-full" />
+          <div className="absolute -right-[25%] top-[20%] w-[55%] h-[55%] bg-[#4020FF]/[0.02] dark:bg-[#4020FF]/[0.03] blur-[120px] rounded-full" />
+        </motion.div>
 
-        {/* Boutons d'action */}
-        <Motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
+        {/* ── Noise ── */}
+        <div className="absolute inset-0 bg-noise opacity-[0.02] dark:opacity-[0.03] pointer-events-none" />
+
+        {/* ━━ PHASE 0 — Initial Hero ━━ */}
+        <motion.div
+          style={{ opacity: phase0 }}
+          className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6"
         >
-           <a href="#contact" className="group relative bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-4 rounded-full text-xs font-bold tracking-widest transition-all duration-300 flex justify-center items-center gap-2 shadow-lg shadow-[#0066FF]/30 hover:shadow-[#0066FF]/50 hover:scale-[1.02]">
-              DÉMARRER MON PROJET
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-           </a>
-
-           <a href="#solutions" className="group bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 backdrop-blur-md px-8 py-4 rounded-full text-xs font-bold tracking-widest hover:border-[#0066FF] transition-all duration-300 flex items-center gap-2 justify-center text-black dark:text-white">
-              VOIR NOS OFFRES
-           </a>
-        </Motion.div>
-
-        {/* Mini stats */}
-        <Motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="flex flex-wrap justify-center gap-6 md:gap-10 mt-8 pt-6 border-t border-gray-200 dark:border-white/10"
-        >
-          {[
-            { value: '50+', label: 'Projets' },
-            { value: '350%', label: 'ROI moyen' },
-            { value: '24h', label: 'Réponse' }
-          ].map((stat, i) => (
-            <Motion.div
-              key={i}
-              className="text-center"
-              whileHover={{ scale: 1.1 }}
+          <div className="text-center max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="inline-flex items-center gap-2 border border-[#0066FF]/30 bg-[#0066FF]/10 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] mb-8 uppercase text-[#0066FF]"
             >
-              <div className="text-xl md:text-2xl font-bold text-black dark:text-white">{stat.value}</div>
-              <div className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-1">{stat.label}</div>
-            </Motion.div>
-          ))}
-        </Motion.div>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0066FF] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0066FF]" />
+              </span>
+              Agence Web & Marketing
+            </motion.div>
 
-      </Motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.4, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-[-0.05em] text-gray-900 dark:text-white mb-5"
+            >
+              Traffik
+            </motion.h1>
 
-      {/* Scroll Indicator */}
-      <Motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400 flex flex-col items-center gap-2"
-      >
-        <span className="text-[9px] uppercase tracking-widest">Scroll</span>
-        <div className="w-[1px] h-10 bg-gradient-to-b from-[#0066FF] to-transparent" />
-      </Motion.div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.1 }}
+              className="text-gray-500 dark:text-gray-400 text-sm md:text-base lg:text-lg max-w-lg mx-auto mb-4"
+            >
+              Sites web qui génèrent du{' '}
+              <span className="text-gray-900 dark:text-white font-semibold">chiffre d'affaires</span>.
+              Pas juste des pixels.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+              className="text-[11px] text-gray-400 dark:text-gray-600 uppercase tracking-[0.15em] mb-10"
+            >
+              Performance. Conversion. Résultats.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
+              className="flex flex-col sm:flex-row gap-3 justify-center"
+            >
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -8px rgba(0,102,255,0.5)' }}
+                whileTap={{ scale: 0.9 }}
+                className="group bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-4 rounded-full text-[11px] font-bold tracking-widest transition-all flex items-center gap-2 shadow-lg shadow-[#0066FF]/30 justify-center active:shadow-[#0066FF]/60 active:brightness-110"
+              >
+                DÉMARRER MON PROJET
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </motion.a>
+              <motion.a
+                href="#solutions"
+                whileHover={{ scale: 1.05, borderColor: 'rgba(0,102,255,0.5)' }}
+                whileTap={{ scale: 0.9 }}
+                className="bg-white/80 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 backdrop-blur-md px-8 py-4 rounded-full text-[11px] font-bold tracking-widest transition-all flex items-center gap-2 text-gray-900 dark:text-white justify-center active:border-[#0066FF]/50 active:bg-[#0066FF]/5"
+              >
+                VOIR NOS OFFRES
+              </motion.a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.5 }}
+              className="mt-14"
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
+                className="flex flex-col items-center"
+              >
+                <span className="text-[9px] uppercase tracking-[0.2em] text-gray-400 dark:text-gray-600">
+                  Scroll
+                </span>
+                <div className="w-[1px] h-8 mt-2 bg-gradient-to-b from-[#0066FF]/60 to-transparent" />
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* ━━ PHASE 1 ━━ */}
+        <motion.div
+          style={{ opacity: phase1 }}
+          className="absolute inset-0 flex items-center justify-center z-10 px-6"
+        >
+          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.2rem] font-semibold text-gray-900 dark:text-white text-center max-w-4xl leading-snug tracking-tight">
+            Votre site web est votre
+            <br />
+            meilleur commercial.{' '}
+            <span className="text-[#0066FF] font-bold">24/7.</span>
+          </p>
+        </motion.div>
+
+        {/* ━━ PHASE 2 ━━ */}
+        <motion.div
+          style={{ opacity: phase2 }}
+          className="absolute inset-0 flex items-center justify-center z-10 px-6"
+        >
+          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.2rem] font-semibold text-gray-900 dark:text-white text-center max-w-4xl leading-snug tracking-tight">
+            Dans le bruit digital, seule
+            <br />
+            la <span className="text-[#0066FF] font-bold">performance</span> convertit
+          </p>
+        </motion.div>
+
+        {/* ━━ PHASE 3 ━━ */}
+        <motion.div
+          style={{ opacity: phase3 }}
+          className="absolute inset-0 flex items-center justify-center z-10 px-6"
+        >
+          <div className="text-center">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-500 dark:text-gray-400 font-medium mb-3 tracking-wide">
+              Nous sommes
+            </p>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#6C5CE7] to-[#A855F7]">
+              Traffik
+            </h2>
+          </div>
+        </motion.div>
+
+        {/* ━━ PHASE 4 — Final CTA ━━ */}
+        <motion.div
+          style={{ opacity: phase4 }}
+          className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6"
+        >
+          <div className="text-center max-w-4xl">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-8 leading-tight tracking-tight">
+              Des sites web performants,
+              <br />
+              du design au ROI, livrés{' '}
+              <span className="text-[#0066FF]">en 2 semaines</span>
+            </h2>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -8px rgba(0,102,255,0.5)' }}
+                whileTap={{ scale: 0.9 }}
+                className="group bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-4 rounded-full text-[11px] font-bold tracking-widest transition-all flex items-center gap-2 shadow-lg shadow-[#0066FF]/30 justify-center active:shadow-[#0066FF]/60 active:brightness-110"
+              >
+                DÉMARRER MON PROJET
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </motion.a>
+              <motion.a
+                href="#solutions"
+                whileHover={{ scale: 1.05, borderColor: 'rgba(0,102,255,0.5)' }}
+                whileTap={{ scale: 0.9 }}
+                className="bg-white/80 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 backdrop-blur-md px-8 py-4 rounded-full text-[11px] font-bold tracking-widest transition-all flex items-center gap-2 text-gray-900 dark:text-white justify-center active:border-[#0066FF]/50 active:bg-[#0066FF]/5"
+              >
+                VOIR NOS OFFRES
+              </motion.a>
+            </div>
+
+            <div className="flex gap-8 sm:gap-12 justify-center pt-6 border-t border-gray-200 dark:border-white/10">
+              {[
+                { value: '50+', label: 'Projets livrés' },
+                { value: '350%', label: 'ROI moyen' },
+                { value: '24h', label: 'Réponse garantie' },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                    {stat.value}
+                  </div>
+                  <div className="text-[9px] sm:text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wider mt-1">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+      </div>
     </section>
   );
 }

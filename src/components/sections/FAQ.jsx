@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { Accordion, AccordionItem } from "@heroui/react";
-
 const faqs = [
   {
     question: "Quels types de sites web proposez-vous ?",
@@ -50,9 +49,10 @@ function FAQItem({ faq, index, isOpen, onClick }) {
         transition={{ duration: 0.3 }}
       />
 
-      <button
+      <motion.button
         onClick={onClick}
-        className="w-full py-6 px-4 flex items-center justify-between text-left group"
+        whileTap={{ scale: 0.98, x: 4 }}
+        className="w-full py-6 px-4 flex items-center justify-between text-left group active:bg-primary/[0.02] transition-colors duration-150"
       >
         <span className={`
           text-base font-semibold pr-8 transition-colors duration-300
@@ -76,7 +76,7 @@ function FAQItem({ faq, index, isOpen, onClick }) {
         >
           <ChevronDown className="w-5 h-5" />
         </motion.div>
-      </button>
+      </motion.button>
 
       <AnimatePresence>
         {isOpen && (
@@ -111,7 +111,7 @@ export default function FAQ() {
     <section
       id="faq"
       ref={sectionRef}
-      className="relative py-16 lg:py-20 px-4 bg-[#F8F9FA] dark:bg-black transition-colors duration-500"
+      className="relative py-16 lg:py-20 px-4 bg-[#F8F9FA] dark:bg-black transition-colors duration-500 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto">
         {/* Header */}

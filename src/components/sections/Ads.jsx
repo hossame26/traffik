@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Check, Users, Zap, ArrowRight, MousePointer2 } from 'lucide-react';
 import { CircularProgress } from "@heroui/react";
-
 // Platform Icons SVG
 const PlatformIcons = {
   meta: (
@@ -191,17 +190,17 @@ export default function Ads() {
                   <motion.button
                     key={platform.id}
                     onClick={() => togglePlatform(platform.id)}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.05, duration: 0.3 }}
+                    initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                    transition={{ delay: index * 0.08, duration: 0.4, type: "spring", stiffness: 300 }}
                     viewport={{ once: true }}
-                    whileTap={{ scale: 0.9 }}
+                    whileTap={{ scale: 0.82 }}
                     className={`
                       aspect-square rounded-2xl flex items-center justify-center
-                      transition-all duration-300 relative
+                      transition-all duration-200 relative
                       ${isSelected
-                        ? `bg-gradient-to-br ${platform.gradient} shadow-lg`
-                        : 'bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/10'
+                        ? `bg-gradient-to-br ${platform.gradient} shadow-lg active:shadow-xl`
+                        : 'bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/10 active:border-primary/40 active:bg-primary/5'
                       }
                     `}
                   >
@@ -309,6 +308,7 @@ export default function Ads() {
                 {/* CTA Button */}
                 <motion.a
                   href="#contact"
+                  onClick={() => window.dispatchEvent(new CustomEvent('selectProject', { detail: 'ads' }))}
                   className="
                     w-full py-4 rounded-2xl
                     bg-gradient-to-r from-primary to-primary-light

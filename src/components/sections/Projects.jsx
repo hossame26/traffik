@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion as Motion, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowUpRight, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef } from 'react';
-
 // Animated signature underline
 const SignatureUnderline = () => (
   <Motion.svg
@@ -65,9 +63,9 @@ const AnimatedTitle = ({ text, className }) => {
 };
 
 // Import static images
-import cremyaImg from '../../assets/projects/cremya.jpg';
-import shonensportsImg from '../../assets/projects/shonensports.jpg';
-import focusbusinessImg from '../../assets/projects/focusbusiness.jpg';
+import cremyaImg from '../../assets/projects/cremya.webp';
+import shonensportsImg from '../../assets/projects/shonensports.webp';
+import focusbusinessImg from '../../assets/projects/focusbusiness.webp';
 
 const projects = [
   {
@@ -144,6 +142,29 @@ export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  // Touch/swipe handlers for mobile
+  const handleTouchStart = useCallback((e) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsAutoPlaying(false);
+  }, []);
+
+  const handleTouchMove = useCallback((e) => {
+    touchEndX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50;
+    if (diff > threshold) {
+      setCurrentIndex((prev) => (prev + 1) % projects.length);
+    } else if (diff < -threshold) {
+      setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    }
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  }, []);
 
   // Auto-scroll every 4 seconds
   useEffect(() => {
@@ -178,7 +199,6 @@ export default function Projects() {
 
   return (
     <section id="projets" className="relative py-16 lg:py-20 px-4 bg-gray-50 dark:bg-black overflow-hidden">
-
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 md:mb-10">
@@ -220,13 +240,19 @@ export default function Projects() {
           className="relative"
         >
           <MacBookMockup>
+            <div
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              className="w-full h-full"
+            >
             <AnimatePresence mode="wait">
               <Motion.div
                 key={currentIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.4 }}
                 className="relative w-full h-full cursor-pointer group"
                 onClick={() => setSelectedProject(currentProject)}
               >
@@ -269,21 +295,26 @@ export default function Projects() {
                 </div>
               </Motion.div>
             </AnimatePresence>
+            </div>
           </MacBookMockup>
 
           {/* Navigation Arrows */}
-          <button
+          <Motion.button
             onClick={goToPrev}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             className="absolute left-0 md:-left-12 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 text-black dark:text-white hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] transition-all shadow-lg z-10"
           >
             <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
+          </Motion.button>
+          <Motion.button
             onClick={goToNext}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             className="absolute right-0 md:-right-12 top-1/2 -translate-y-1/2 p-2 md:p-3 rounded-full bg-white dark:bg-white/10 border border-gray-200 dark:border-white/10 text-black dark:text-white hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] transition-all shadow-lg z-10"
           >
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </Motion.button>
         </Motion.div>
 
         {/* Dots Navigation */}
@@ -318,18 +349,22 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4"
         >
-          <button
+          <Motion.button
             onClick={() => setSelectedProject(currentProject)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-bold tracking-wider hover:scale-105 transition-all shadow-[0_8px_30px_-8px_rgba(0,0,0,0.4)] dark:shadow-[0_8px_30px_-8px_rgba(255,255,255,0.2)]"
+            whileHover={{ scale: 1.08, boxShadow: '0 12px 40px -8px rgba(0,0,0,0.5)' }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-bold tracking-wider transition-all shadow-[0_8px_30px_-8px_rgba(0,0,0,0.4)] dark:shadow-[0_8px_30px_-8px_rgba(255,255,255,0.2)]"
           >
             VOIR LES DÉTAILS <ArrowUpRight className="w-4 h-4" />
-          </button>
-          <a
+          </Motion.button>
+          <Motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0066FF] hover:bg-[#0055D4] text-white text-xs font-bold tracking-wider hover:scale-105 transition-all shadow-[0_10px_40px_-8px_rgba(0,102,255,0.5)]"
+            whileHover={{ scale: 1.08, boxShadow: '0 16px 50px -8px rgba(0,102,255,0.6)' }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0066FF] hover:bg-[#0055D4] text-white text-xs font-bold tracking-wider transition-all shadow-[0_10px_40px_-8px_rgba(0,102,255,0.5)]"
           >
             LANCER MON PROJET <ArrowUpRight className="w-4 h-4" />
-          </a>
+          </Motion.a>
         </Motion.div>
       </div>
 
@@ -399,14 +434,16 @@ export default function Projects() {
                     </div>
 
                     <div className="w-full md:w-1/3 shrink-0 flex flex-col justify-end">
-                       <a
+                       <Motion.a
                          href={selectedProject.url}
                          target="_blank"
                          rel="noopener noreferrer"
-                         className="w-full py-4 rounded-xl bg-[#0066FF] hover:bg-[#0055D4] text-white font-bold tracking-widest uppercase text-center text-sm transition-all shadow-lg hover:shadow-[#0066FF]/25 flex items-center justify-center gap-2"
+                         whileHover={{ scale: 1.03, boxShadow: '0 16px 40px -8px rgba(0,102,255,0.4)' }}
+                         whileTap={{ scale: 0.97 }}
+                         className="w-full py-4 rounded-xl bg-[#0066FF] hover:bg-[#0055D4] text-white font-bold tracking-widest uppercase text-center text-sm transition-all shadow-lg flex items-center justify-center gap-2"
                        >
                          Visiter le site <ExternalLink className="w-4 h-4" />
-                       </a>
+                       </Motion.a>
                     </div>
                  </div>
               </div>

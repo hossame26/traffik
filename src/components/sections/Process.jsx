@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { MessageSquare, Palette, Code2, Gauge, Rocket } from 'lucide-react';
-
 const steps = [
   {
     id: '01',
@@ -92,24 +91,43 @@ function TimelineStep({ step, index, isInView }) {
 }
 
 // Carte pour le slider mobile
-function MobileStepCard({ step }) {
+function MobileStepCard({ step, index }) {
   const Icon = step.icon;
 
   return (
-    <div className="flex flex-col items-center text-center p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] w-[160px] h-[200px]">
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent-purple flex items-center justify-center mb-3">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+      whileTap={{ scale: 0.92, borderColor: 'rgba(0,102,255,0.4)' }}
+      className="flex flex-col items-center text-center p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] w-[160px] h-[200px] active:border-primary/40 active:shadow-lg active:shadow-primary/10 transition-all duration-200"
+    >
+      <motion.div
+        className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent-purple flex items-center justify-center mb-3 shadow-lg shadow-primary/20"
+        initial={{ scale: 0, rotate: -180 }}
+        whileInView={{ scale: 1, rotate: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 250, damping: 12 }}
+      >
         <Icon className="w-5 h-5 text-white" />
-      </div>
-      <span className="text-[9px] font-bold text-primary tracking-widest uppercase mb-1">
+      </motion.div>
+      <motion.span
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1 + 0.35 }}
+        className="text-[9px] font-bold text-primary tracking-widest uppercase mb-1"
+      >
         Étape {step.id}
-      </span>
+      </motion.span>
       <h3 className="text-sm font-bold text-black dark:text-white mb-1">
         {step.title}
       </h3>
       <p className="text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3">
         {step.desc}
       </p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -135,6 +153,7 @@ export default function Process() {
 
   return (
     <section
+      id="process"
       ref={sectionRef}
       className="relative py-16 lg:py-20 px-4 bg-[#F8F9FA] dark:bg-black transition-colors duration-500 overflow-hidden"
     >
@@ -190,9 +209,9 @@ export default function Process() {
             className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {steps.map((step) => (
+            {steps.map((step, index) => (
               <div key={step.id} className="snap-center shrink-0">
-                <MobileStepCard step={step} />
+                <MobileStepCard step={step} index={index} />
               </div>
             ))}
           </div>
@@ -216,13 +235,15 @@ export default function Process() {
           transition={{ delay: 0.6 }}
           className="mt-10 text-center"
         >
-          <a
+          <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent-purple text-white text-sm font-bold tracking-wider uppercase hover:shadow-lg hover:shadow-primary/30 hover:scale-105 transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent-purple text-white text-sm font-bold tracking-wider uppercase hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
           >
             Démarrer mon projet
             <Rocket className="w-4 h-4" />
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

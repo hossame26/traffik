@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Star, Quote, ChevronLeft, ChevronRight, Shield, Rocket, Users, Clock, Award } from 'lucide-react';
-
 // Animated counter component
 function AnimatedNumber({ value, suffix = "", isInView }) {
   const [count, setCount] = useState(0);
@@ -100,11 +99,12 @@ function TestimonialCard({ testimonial, index, isActive }) {
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1 }}
       onViewportEnter={() => setIsInView(true)}
+      whileTap={{ scale: 0.96 }}
       className={`
         relative flex-shrink-0 w-[350px] md:w-[400px] p-8 rounded-3xl
         bg-white dark:bg-white/[0.02] border
         ${isActive ? 'border-primary/30 shadow-xl shadow-primary/5' : 'border-gray-100 dark:border-white/5'}
-        transition-all duration-500
+        transition-all duration-500 active:border-primary/30 active:shadow-lg
       `}
     >
       {/* Quote Icon */}
@@ -332,13 +332,15 @@ export default function Testimonials() {
           transition={{ delay: 0.6 }}
           className="mt-6 text-center"
         >
-          <a
+          <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary-dark text-white text-sm font-bold tracking-wider uppercase hover:shadow-lg hover:shadow-primary/30 hover:scale-105 transition-all duration-300"
+            whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -8px rgba(0,102,255,0.4)' }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary hover:bg-primary-dark text-white text-sm font-bold tracking-wider uppercase transition-all duration-300"
           >
             Rejoindre nos clients satisfaits
             <ChevronRight className="w-4 h-4" />
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>
