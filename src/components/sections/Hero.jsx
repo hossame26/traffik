@@ -251,7 +251,7 @@ function EclipseRing() {
   }, []);
 
   if (isMobile) {
-    return <div className="w-full h-full bg-[#030308] dark:bg-[#030308]" />;
+    return <div className="w-full h-full bg-[#f0f2f8] dark:bg-[#030308]" />;
   }
   return <canvas ref={canvasRef} className="w-full h-full" />;
 }
