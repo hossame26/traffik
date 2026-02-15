@@ -9,6 +9,7 @@ const footerLinks = {
     { label: "Développement React", href: "/developpement-react-nextjs", isRoute: true },
     { label: "Publicité Digitale", href: "/publicite-digitale", isRoute: true },
     { label: "Référencement SEO", href: "/referencement-seo", isRoute: true },
+    { label: "Audit de Site", href: "/audit-site-web", isRoute: true },
   ],
   navigation: [
     { label: "Tarifs", href: "/tarifs", isRoute: true },

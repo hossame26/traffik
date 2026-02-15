@@ -22,6 +22,7 @@ const Projects = lazy(() => import('./components/sections/Projects'));
 const Growth = lazy(() => import('./components/sections/Growth'));
 const Ads = lazy(() => import('./components/sections/Ads'));
 const Testimonials = lazy(() => import('./components/sections/Testimonials'));
+const Audit = lazy(() => import('./components/sections/Audit'));
 const Process = lazy(() => import('./components/sections/Process'));
 const FAQ = lazy(() => import('./components/sections/FAQ'));
 const Contact = lazy(() => import('./components/sections/Contact'));
@@ -41,6 +42,7 @@ const WordPress = lazy(() => import('./pages/services/WordPress'));
 const ReactDev = lazy(() => import('./pages/services/ReactDev'));
 const Publicite = lazy(() => import('./pages/services/Publicite'));
 const SEOPage = lazy(() => import('./pages/services/SEO'));
+const AuditSite = lazy(() => import('./pages/services/AuditSite'));
 
 // Lazy load Blog
 const BlogList = lazy(() => import('./pages/blog/BlogList'));
@@ -63,6 +65,7 @@ function HomePage() {
       <Hero />
       <Suspense fallback={<SectionLoader />}>
         <Solutions />
+        <Audit />
         <Process />
         <Contact />
         <Ads />
@@ -102,6 +105,7 @@ export default function App() {
             <Route path="/developpement-react-nextjs" element={<ReactDev />} />
             <Route path="/publicite-digitale" element={<Publicite />} />
             <Route path="/referencement-seo" element={<SEOPage />} />
+            <Route path="/audit-site-web" element={<AuditSite />} />
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogArticle />} />
             <Route path="/:slug" element={<CityService />} />

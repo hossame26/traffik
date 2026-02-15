@@ -1,0 +1,16 @@
+date,nom,categorie,ville,adresse,telephone,site_web,score_site,problemes,google_maps,rating,nb_avis,place_id,statut,plateforme_dm,notes,site_demo
+2026-02-14 04:51,Chez Sauveur,pizzeria,Marseille,,04 91 54 33 96,,PAS DE SITE,Aucun site,,,,manual_f29793dd,A_CONTACTER,,,https://chez-sauveur-792210.vercel.app
+2026-02-14 04:51,Saga Pizza,pizzeria,Marseille,,04 91 85 11 12,,PAS DE SITE,Aucun site,,,,manual_4354c535,A_CONTACTER,,,https://saga-pizza-369155.vercel.app
+2026-02-14 04:51,La Famille,restaurant,Marseille,,04 91 58 26 11,,PAS DE SITE,Aucun site,,,,manual_f95fbfb0,A_CONTACTER,,,https://la-famille-600634.vercel.app
+2026-02-14 04:52,Le Chaud Pain de Vienne,boulangerie,Marseille,,06 19 75 70 35,,PAS DE SITE,Aucun site,,,,manual_ff1ea00f,A_CONTACTER,,,https://le-chaud-pain-de-vienne-555323.vercel.app
+2026-02-14 04:52,Boulangerie artisanale,boulangerie,Marseille,,04 91 27 09 55,,PAS DE SITE,Aucun site,,,,manual_205f8165,A_CONTACTER,,,https://boulangerie-artisanale-295860.vercel.app
+2026-02-14 04:52,L'art De L'auto,garage automobile,Marseille,,04 91 78 45 22,https://christianlartdelauto.wixsite.com/lartdelauto,CORRECT,RAS,,,,manual_a41aeefd,A_CONTACTER,,,https://l-art-de-l-auto-952114.vercel.app
+2026-02-14 04:52,Le Venitien,pizzeria,Marseille,,04 91 25 52 64,https://www.levenitien.fr,CORRECT,RAS,,,,manual_516b3ebc,A_CONTACTER,,,https://le-venitien-960427.vercel.app
+2026-02-14 04:52,3C Prestige,garage automobile,Marseille,,04 82 29 42 37,https://www.garage-3cprestige.fr,CORRECT,RAS,,,,manual_fe4fe354,A_CONTACTER,,,https://3c-prestige-811819.vercel.app
+2026-02-14 04:52,Garage Marossero,garage automobile,Marseille,,04 91 25 09 26,https://www.marossero.com,CORRECT,RAS,,,,manual_ef7699cf,A_CONTACTER,,,https://garage-marossero-732575.vercel.app
+2026-02-14 04:52,La Marina,pizzeria,Marseille,,04 91 94 24 94,https://www.lamarina-pizzamarseille.com,CORRECT,RAS,,,,manual_822da50b,A_CONTACTER,,,
+2026-02-14 04:52,Boulangerie Aixoise,boulangerie,Marseille,,,https://www.boulangerieaixoise.fr,CORRECT,RAS,,,,manual_e51cc11c,A_CONTACTER,,,
+2026-02-14 04:52,La Femme du Boucher,restaurant,Marseille,,04 91 48 79 65,https://www.lafemmeduboucher.fr,CORRECT,Pas de meta description,,,,manual_61ea854a,A_CONTACTER,,,
+2026-02-14 04:52,Aesthesis,spa,Marseille,,04 91 43 01 76,https://www.aesthesisinstitut.fr,CORRECT,RAS,,,,manual_91e8bb26,A_CONTACTER,,,
+2026-02-14 04:52,Black Lab Tattoo,tatoueur,Marseille,,07 77 25 05 66,https://www.blacklabtattoo.fr,ERREUR,"HTTPSConnectionPool(host='www.blacklabtattoo.fr', ",,,,manual_88256091,A_CONTACTER,,,
+2026-02-14 04:52,Sailin On Tattoo,tatoueur,Marseille,,04 88 04 31 59,https://sailinontattoos.com,ERREUR,"HTTPSConnectionPool(host='sailinontattoos.com', po",,,,manual_ed7efd4f,A_CONTACTER,,,

@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 .vercel
 .env*.local
+.env
+prospection/.env
+__pycache__/
+*.pyc

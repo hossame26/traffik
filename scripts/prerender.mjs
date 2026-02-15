@@ -89,10 +89,17 @@ async function prerender() {
 
   console.log(`[prerender] Found ${allRoutes.length} routes to pre-render`);
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+  let browser;
+  try {
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+  } catch (err) {
+    console.log(`[prerender] Puppeteer not available (CI/Vercel), skipping pre-render.`);
+    server.close();
+    return;
+  }
 
   for (const route of allRoutes) {
     try {

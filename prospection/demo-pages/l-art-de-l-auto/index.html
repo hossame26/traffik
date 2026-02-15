@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>L'art De L'auto | Garage Automobile à Marseille</title>
+<meta name="description" content="L'art De L'auto - Garage Automobile à Marseille. Entretien et réparation de tous véhicules. Expertise, transparence et professionnalisme garantis.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:title" content="L'art De L'auto | Garage Automobile à Marseille">
+<meta property="og:description" content="Entretien et réparation de tous véhicules. Expertise, transparence et professionnalisme garantis.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&q=80">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*{font-family:'Inter',system-ui,sans-serif}
+
+/* GSAP reveal base */
+.gs-reveal{opacity:0;transform:translateY(50px)}
+
+/* Glassmorphism */
+.glass{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.5)}
+.glass-strong{backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);background:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.6);box-shadow:0 8px 32px rgba(0,0,0,0.06)}
+
+/* Nav scroll */
+.nav-scrolled{background:rgba(255,255,255,0.92)!important;backdrop-filter:blur(20px)!important;box-shadow:0 1px 3px rgba(0,0,0,0.08)!important}
+
+/* Gradient mesh */
+.mesh-gradient{background:radial-gradient(at 20% 20%,#EF444415 0,transparent 50%),radial-gradient(at 80% 80%,#1e293b10 0,transparent 50%),radial-gradient(at 50% 50%,#EF444408 0,transparent 70%)}
+
+/* Hero text reveal */
+.hero-word{display:inline-block;opacity:0;transform:translateY(100%);will-change:transform,opacity}
+
+/* FAQ */
+.faq-item .faq-answer{max-height:0}
+.faq-item.open .faq-answer{max-height:200px}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+
+/* Before/After */
+.ba-container img{pointer-events:none;user-select:none}
+
+/* Marquee */
+.marquee-track{animation:marquee 30s linear infinite}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-33.33%)}}
+
+/* Magnetic button */
+.magnetic{transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94)}
+
+/* Custom scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#1e293b40;border-radius:3px}
+.scrollbar-hide::-webkit-scrollbar{display:none}
+
+/* Float animation */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* Nav link underline */
+.nav-link{position:relative}.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#1e293b;transition:width 0.3s}.nav-link:hover::after{width:100%}
+
+img{transition:opacity 0.3s}
+</style>
+</head>
+<body class="bg-white text-gray-900 antialiased overflow-x-hidden">
+
+
+
+<!-- ═══ NAV ═══ -->
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="nav">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4">
+    <div class="glass-strong rounded-2xl px-4 md:px-6 py-3 flex items-center justify-between" id="navInner">
+      <a href="#" class="text-xl font-extrabold text-gray-900">L'art De<span class="text-[#1e293b]">.</span></a>
+      <div class="hidden md:flex items-center gap-8"><a href="#services" class="nav-link text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Services</a>
+        <a href="#galerie" class="nav-link text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Galerie</a>
+        <a href="#avis" class="nav-link text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Avis</a>
+        <a href="#contact" class="nav-link text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium">Contact</a></div>
+      <div class="flex items-center gap-3">
+        <a href="tel:0491784522" class="hidden md:flex items-center gap-2 bg-[#1e293b] text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:shadow-lg transition-all duration-300">
+          <i class="fas fa-phone text-xs"></i>04 91 78 45 22
+        </a>
+        <button class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+          <i class="fas fa-bars text-gray-700"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden mt-2 glass-strong rounded-2xl p-4 flex flex-col gap-3">
+      <a href="#services" class="text-gray-700 font-medium py-2 px-3 rounded-xl hover:bg-gray-100" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Services</a>
+      
+      <a href='#galerie' class='text-gray-700 font-medium py-2 px-3 rounded-xl hover:bg-gray-100' onclick="document.getElementById('mobileMenu').classList.add('hidden')">Galerie</a>
+      <a href="#avis" class="text-gray-700 font-medium py-2 px-3 rounded-xl hover:bg-gray-100" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Avis</a>
+      <a href="#contact" class="text-gray-700 font-medium py-2 px-3 rounded-xl hover:bg-gray-100" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Contact</a>
+      <a href='tel:0491784522' class='bg-[#1e293b] text-white font-bold py-3 px-4 rounded-xl text-center'><i class='fas fa-phone mr-2'></i>04 91 78 45 22</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="min-h-screen relative flex items-center overflow-hidden">
+  <div class="absolute inset-0 mesh-gradient"></div>
+  <div class="absolute top-20 right-10 w-72 h-72 bg-[#EF4444]/10 rounded-full blur-3xl" style="animation:float 8s ease-in-out infinite"></div>
+  <div class="absolute bottom-20 left-10 w-96 h-96 bg-[#1e293b]/8 rounded-full blur-3xl" style="animation:float 10s ease-in-out infinite reverse"></div>
+
+  <div class="max-w-7xl mx-auto px-4 md:px-6 pt-28 md:pt-32 pb-16 md:pb-20 relative z-10 w-full">
+    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F8FAFC] text-[#1e293b] text-sm font-medium mb-6 gs-reveal">
+          <span class="w-2 h-2 bg-[#1e293b] rounded-full animate-pulse"></span>
+          Garage Automobile · Marseille
+        </div>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6" id="heroTitle">
+          <span class="hero-word">Votre</span> <span class="hero-word">garage de confiance</span><br>
+          <span class="hero-word bg-gradient-to-r from-[#1e293b] to-[#EF4444] bg-clip-text text-transparent">L'art De L'auto</span>
+        </h1>
+        <p class="text-base md:text-lg text-gray-500 max-w-lg mb-8 leading-relaxed gs-reveal" data-delay="0.4">Entretien et réparation de tous véhicules. Expertise, transparence et professionnalisme garantis.</p>
+        <div class="flex flex-wrap gap-4 gs-reveal" data-delay="0.5">
+          <a href="tel:0491784522" class="magnetic group inline-flex items-center gap-3 bg-[#1e293b] text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-[#1e293b]/25 hover:shadow-xl hover:shadow-[#1e293b]/30 hover:-translate-y-1 transition-all duration-300">
+          <i class="fas fa-phone group-hover:rotate-12 transition-transform duration-300"></i>Nous Appeler
+        </a>
+          <a href="#services" class="magnetic inline-flex items-center gap-3 bg-gray-100 text-gray-900 px-6 md:px-8 py-4 rounded-full font-bold text-base md:text-lg hover:bg-gray-200 hover:-translate-y-1 transition-all duration-300">
+            <i class="fas fa-arrow-down text-sm"></i>Découvrir
+          </a>
+        </div>
+        
+        <div class="flex items-center gap-3 backdrop-blur-xl bg-white/70 border border-white/50 rounded-2xl px-5 py-3 shadow-sm mt-6">
+          <i class="fas fa-clock text-[#1e293b]"></i>
+          <span class="text-sm text-gray-700 font-medium">Lun-Ven : 8h-12h / 14h-18h30 | Sam : 8h-12h</span>
+        </div>
+      </div>
+      <div class="relative gs-reveal" data-delay="0.3">
+        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-black/10 group">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1920&q=80" alt="L'art De L'auto" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+        </div>
+        <div class="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 backdrop-blur-xl bg-white/80 border border-white/50 rounded-2xl p-3 md:p-4 shadow-xl flex items-center gap-3">
+          <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#1e293b] to-[#EF4444] rounded-xl flex items-center justify-center text-white">
+            <i class="fas fa-car text-base md:text-lg"></i>
+          </div>
+          <div>
+            <div class="text-xl md:text-2xl font-extrabold text-gray-900">500+</div>
+            <div class="text-xs text-gray-500">Véhicules/an</div>
+          </div>
+        </div>
+        <div class="absolute -top-3 -right-3 md:-top-4 md:-right-4 backdrop-blur-xl bg-white/80 border border-white/50 rounded-2xl px-3 md:px-4 py-2 md:py-3 shadow-xl">
+          <div class="flex items-center gap-1">
+            <i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i>
+          </div>
+          <div class="text-xs text-gray-500 text-center mt-1">100% avis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="py-12 md:py-16 px-4 md:px-6 bg-gray-50/50">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <div class="text-center gs-reveal" data-delay="0.0">
+        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[#1e293b]/10 to-[#EF4444]/10 flex items-center justify-center">
+          <i class="fas fa-car text-[#1e293b] text-lg"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-gray-900"><span class="counter" data-target="500" data-suffix="+">500+</span></div>
+        <div class="text-sm text-gray-500 mt-1">Véhicules/an</div>
+      </div>
+      <div class="text-center gs-reveal" data-delay="0.1">
+        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[#1e293b]/10 to-[#EF4444]/10 flex items-center justify-center">
+          <i class="fas fa-shield-check text-[#1e293b] text-lg"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-gray-900"><span class="counter" data-target="100" data-suffix="%">100%</span></div>
+        <div class="text-sm text-gray-500 mt-1">Garantie pièces</div>
+      </div>
+      <div class="text-center gs-reveal" data-delay="0.2">
+        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[#1e293b]/10 to-[#EF4444]/10 flex items-center justify-center">
+          <i class="fas fa-award text-[#1e293b] text-lg"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-gray-900"><span class="counter" data-target="20" data-suffix=" ans">20 ans</span></div>
+        <div class="text-sm text-gray-500 mt-1">D'expérience</div>
+      </div>
+      <div class="text-center gs-reveal" data-delay="0.30000000000000004">
+        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[#1e293b]/10 to-[#EF4444]/10 flex items-center justify-center">
+          <i class="fas fa-star text-[#1e293b] text-lg"></i>
+        </div>
+        <div class="text-3xl font-extrabold text-gray-900"><span class="counter" data-target="4.7" data-suffix="">4.7</span></div>
+        <div class="text-sm text-gray-500 mt-1">Note Google</div>
+      </div></div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="py-16 md:py-24 px-4 md:px-6" id="services">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 md:mb-16 gs-reveal">
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F8FAFC] text-[#1e293b] text-sm font-medium mb-4">
+        <i class="fas fa-sparkles"></i> Nos Services
+      </span>
+      <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900">Ce que nous <span class="text-[#1e293b]">proposons</span></h2>
+      <p class="text-gray-500 mt-4 max-w-xl mx-auto text-sm md:text-base">Des prestations de qualité adaptées à vos besoins</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 gs-reveal" data-delay="0.0">
+        <div class="aspect-[16/10] overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400&q=80" alt="Entretien & Révision" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform group-hover:-translate-y-1 transition-transform duration-500">
+          <div class="w-12 h-12 backdrop-blur-xl bg-white/20 rounded-2xl flex items-center justify-center mb-3 border border-white/30 group-hover:scale-110 transition-transform duration-500">
+            <i class="fas fa-oil-can text-lg"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Entretien & Révision</h3>
+          <p class="text-white/80 text-sm">Vidange, filtres, freins, révision complète constructeur</p>
+        </div>
+      </div>
+      <div class="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 gs-reveal" data-delay="0.1">
+        <div class="aspect-[16/10] overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Mécanique Générale" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform group-hover:-translate-y-1 transition-transform duration-500">
+          <div class="w-12 h-12 backdrop-blur-xl bg-white/20 rounded-2xl flex items-center justify-center mb-3 border border-white/30 group-hover:scale-110 transition-transform duration-500">
+            <i class="fas fa-gear text-lg"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Mécanique Générale</h3>
+          <p class="text-white/80 text-sm">Réparations toutes marques, diagnostic électronique</p>
+        </div>
+      </div>
+      <div class="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 gs-reveal" data-delay="0.2">
+        <div class="aspect-[16/10] overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&q=80" alt="Carrosserie & Peinture" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform group-hover:-translate-y-1 transition-transform duration-500">
+          <div class="w-12 h-12 backdrop-blur-xl bg-white/20 rounded-2xl flex items-center justify-center mb-3 border border-white/30 group-hover:scale-110 transition-transform duration-500">
+            <i class="fas fa-car-burst text-lg"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-1">Carrosserie & Peinture</h3>
+          <p class="text-white/80 text-sm">Réparation, débosselage, peinture professionnelle</p>
+        </div>
+      </div></div>
+  </div>
+</section>
+
+
+
+
+
+
+  <section class="py-24 px-6 bg-gray-50/50" id="galerie">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12 gs-reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F8FAFC] text-[#1e293b] text-sm font-medium mb-4">
+          <i class="fas fa-images"></i> Galerie
+        </span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">Notre <span class="text-[#1e293b]">Savoir-Faire</span></h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+        <div class="group col-span-2 row-span-2 relative overflow-hidden rounded-3xl gs-reveal cursor-pointer" data-delay="0.0">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80" alt="Atelier" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 min-h-[200px]" loading="lazy">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+            <p class="text-white font-bold text-lg">Atelier</p>
+          </div>
+        </div>
+        <div class="group col-span-1 row-span-1 relative overflow-hidden rounded-3xl gs-reveal cursor-pointer" data-delay="0.08">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Diagnostic" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 min-h-[200px]" loading="lazy">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+            <p class="text-white font-bold text-lg">Diagnostic</p>
+          </div>
+        </div>
+        <div class="group col-span-1 row-span-1 relative overflow-hidden rounded-3xl gs-reveal cursor-pointer" data-delay="0.16">
+          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80" alt="Réparation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 min-h-[200px]" loading="lazy">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+            <p class="text-white font-bold text-lg">Réparation</p>
+          </div>
+        </div>
+        <div class="group col-span-1 row-span-1 relative overflow-hidden rounded-3xl gs-reveal cursor-pointer" data-delay="0.24">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80" alt="Résultat" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 min-h-[200px]" loading="lazy">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+            <p class="text-white font-bold text-lg">Résultat</p>
+          </div>
+        </div>
+        <div class="group col-span-1 row-span-1 relative overflow-hidden rounded-3xl gs-reveal cursor-pointer" data-delay="0.32">
+          <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&q=80" alt="Équipe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 min-h-[200px]" loading="lazy">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+            <p class="text-white font-bold text-lg">Équipe</p>
+          </div>
+        </div>
+        <div class="group col-span-2 row-span-1 relative overflow-hidden rounded-3xl gs-reveal cursor-pointer" data-delay="0.4">
+          <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=600&q=80" alt="Peinture" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 min-h-[200px]" loading="lazy">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+            <p class="text-white font-bold text-lg">Peinture</p>
+          </div>
+        </div></div>
+    </div>
+  </section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="avis">
+
+  <section class="py-24 px-6 bg-gray-50/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12 gs-reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F8FAFC] text-[#1e293b] text-sm font-medium mb-4">
+          <i class="fas fa-quote-left"></i> Témoignages
+        </span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">Ce que disent <span class="text-[#1e293b]">nos clients</span></h2>
+      </div>
+      <div class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide" style="-ms-overflow-style:none;scrollbar-width:none">
+        
+      <div class="min-w-[320px] max-w-[360px] flex-shrink-0 bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 gs-reveal" data-delay="0.0">
+        <div class="flex items-center gap-1 mb-3"><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">"Intervention rapide et soignée. L'art De L'auto a réglé mon problème en un rien de temps. Tarifs transparents."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1e293b] to-[#EF4444] flex items-center justify-center text-white font-bold text-sm">M</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">Marc D.</div>
+            <div class="text-xs text-gray-400">Client vérifié</div>
+          </div>
+        </div>
+      </div>
+      <div class="min-w-[320px] max-w-[360px] flex-shrink-0 bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 gs-reveal" data-delay="0.15">
+        <div class="flex items-center gap-1 mb-3"><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">"Professionnel et ponctuel. L'équipe a fait un travail impeccable. Des artisans sérieux, ça fait plaisir."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1e293b] to-[#EF4444] flex items-center justify-center text-white font-bold text-sm">P</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">Pierre F.</div>
+            <div class="text-xs text-gray-400">Client vérifié</div>
+          </div>
+        </div>
+      </div>
+      <div class="min-w-[320px] max-w-[360px] flex-shrink-0 bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 gs-reveal" data-delay="0.3">
+        <div class="flex items-center gap-1 mb-3"><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i><i class="fas fa-star text-yellow-400 text-xs"></i></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">"Excellent service ! Devis respecté, travail propre. Je fais confiance à L'art De L'auto les yeux fermés."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1e293b] to-[#EF4444] flex items-center justify-center text-white font-bold text-sm">N</div>
+          <div>
+            <div class="font-bold text-gray-900 text-sm">Nathalie C.</div>
+            <div class="text-xs text-gray-400">Client vérifié</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+
+  <section class="py-24 px-6" id="faq">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12 gs-reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F8FAFC] text-[#1e293b] text-sm font-medium mb-4">
+          <i class="fas fa-circle-question"></i> FAQ
+        </span>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900">Questions <span class="text-[#1e293b]">fréquentes</span></h2>
+      </div>
+      <div class="space-y-3">
+      <div class="faq-item border border-gray-100 rounded-2xl overflow-hidden gs-reveal" data-delay="0.0">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors" onclick="this.parentElement.classList.toggle('open')">
+          <span class="font-bold text-gray-900 pr-4">Travaillez-vous sur toutes les marques ?</span>
+          <i class="fas fa-plus text-[#1e293b] text-sm faq-icon transition-transform duration-300"></i>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500">
+          <p class="px-5 pb-5 text-gray-500 text-sm leading-relaxed">Oui, L'art De L'auto entretient et répare toutes les marques de véhicules, récents et anciens.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-100 rounded-2xl overflow-hidden gs-reveal" data-delay="0.08">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors" onclick="this.parentElement.classList.toggle('open')">
+          <span class="font-bold text-gray-900 pr-4">Proposez-vous un véhicule de prêt ?</span>
+          <i class="fas fa-plus text-[#1e293b] text-sm faq-icon transition-transform duration-300"></i>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500">
+          <p class="px-5 pb-5 text-gray-500 text-sm leading-relaxed">Un véhicule de courtoisie est disponible sur réservation pour les interventions longues.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-100 rounded-2xl overflow-hidden gs-reveal" data-delay="0.16">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors" onclick="this.parentElement.classList.toggle('open')">
+          <span class="font-bold text-gray-900 pr-4">Le devis est-il gratuit ?</span>
+          <i class="fas fa-plus text-[#1e293b] text-sm faq-icon transition-transform duration-300"></i>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500">
+          <p class="px-5 pb-5 text-gray-500 text-sm leading-relaxed">Oui, le devis est gratuit et sans engagement. Nous vous détaillons chaque intervention.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-gray-100 rounded-2xl overflow-hidden gs-reveal" data-delay="0.24">
+        <button class="faq-toggle w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors" onclick="this.parentElement.classList.toggle('open')">
+          <span class="font-bold text-gray-900 pr-4">Faites-vous le contrôle technique ?</span>
+          <i class="fas fa-plus text-[#1e293b] text-sm faq-icon transition-transform duration-300"></i>
+        </button>
+        <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500">
+          <p class="px-5 pb-5 text-gray-500 text-sm leading-relaxed">Nous préparons votre véhicule au contrôle technique et effectuons les réparations nécessaires.</p>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+
+  <div class="py-6 bg-gray-50 overflow-hidden">
+    <div class="marquee-track flex gap-8 whitespace-nowrap">
+      <span class="text-sm font-medium text-gray-400 flex items-center gap-2"><i class="fas fa-check-circle text-[#1e293b]/40"></i>Qualité garantie · Devis gratuit · Sans engagement · Satisfaction client · Professionnalisme · Réactivité</span><span class="text-sm font-medium text-gray-400 flex items-center gap-2"><i class="fas fa-check-circle text-[#1e293b]/40"></i>Qualité garantie · Devis gratuit · Sans engagement · Satisfaction client · Professionnalisme · Réactivité</span><span class="text-sm font-medium text-gray-400 flex items-center gap-2"><i class="fas fa-check-circle text-[#1e293b]/40"></i>Qualité garantie · Devis gratuit · Sans engagement · Satisfaction client · Professionnalisme · Réactivité</span>
+    </div>
+  </div>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="py-16 md:py-24 px-4 md:px-6" id="contact">
+  <div class="max-w-4xl mx-auto">
+    <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#1e293b] to-[#EF4444] p-8 md:p-16 text-white text-center gs-reveal">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+      <div class="relative z-10">
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-4">Parlons de votre projet</h2>
+        <p class="text-white/80 text-base md:text-lg mb-8 max-w-lg mx-auto">Contactez-nous pour discuter de vos besoins. Nous sommes à votre écoute.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <a href='tel:0491784522' class='magnetic inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300'><i class='fas fa-phone'></i>04 91 78 45 22</a>
+          <a href="#" class="inline-flex items-center gap-3 bg-white/20 backdrop-blur text-white border border-white/30 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/30 transition-all duration-300">
+            <i class="fas fa-map-marker-alt"></i>Marseille
+          </a>
+        </div>
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur rounded-full px-6 py-3">
+          <i class="fas fa-clock"></i><span class="text-sm">Lun-Ven : 8h-12h / 14h-18h30 | Sam : 8h-12h</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section class="h-[400px] relative overflow-hidden">
+    <iframe src="https://www.google.com/maps?q=L%27art%20De%20L%27auto%20Marseille&output=embed" class="w-full h-full" allowfullscreen loading="lazy" style="filter:saturate(0.8)"></iframe>
+  </section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="py-8 md:py-10 px-4 md:px-6 border-t border-gray-100">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="font-extrabold text-gray-900">L'art De<span class="text-[#1e293b]">.</span></span>
+      <span class="text-gray-400">|</span>
+      <span class="text-gray-500 text-sm">Garage Automobile à Marseille</span>
+    </div>
+    <p class="text-gray-400 text-sm">Site créé par <a href="https://traffik-web.fr" class="text-[#1e293b] hover:underline font-medium">Traffik Web</a></p>
+  </div>
+</footer>
+
+
+<div class="fixed bottom-6 right-6 z-50 md:hidden">
+  <a href="tel:0491784522" class="flex items-center justify-center w-16 h-16 bg-[#1e293b] text-white rounded-full shadow-2xl shadow-[#1e293b]/40 animate-[bounce_2s_ease-in-out_infinite]">
+    <i class="fas fa-phone text-xl"></i>
+  </a>
+</div>
+
+<!-- ═══ SCRIPTS V3 ═══ -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Hero text reveal ──
+gsap.to('.hero-word', {
+  opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.3
+});
+
+// ── GSAP scroll reveal ──
+document.querySelectorAll('.gs-reveal').forEach(el => {
+  const delay = parseFloat(el.dataset.delay || 0);
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+    opacity: 1, y: 0, duration: 0.7, delay: delay, ease: 'power2.out'
+  });
+});
+
+// ── Animated counters ──
+document.querySelectorAll('.counter').forEach(el => {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  if(!target && target !== 0) return;
+  ScrollTrigger.create({
+    trigger: el, start: 'top 90%',
+    onEnter: () => {
+      gsap.to({ val: 0 }, {
+        val: target, duration: 1.5, ease: 'power2.out',
+        onUpdate: function() {
+          const v = this.targets()[0].val;
+          el.textContent = (v % 1 === 0 ? Math.round(v) : v.toFixed(1)) + suffix;
+        }
+      });
+    }, once: true
+  });
+});
+
+// ── Nav scroll ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navInner');
+  if(window.scrollY > 80) nav.classList.add('nav-scrolled');
+  else nav.classList.remove('nav-scrolled');
+});
+
+// ── Magnetic buttons (desktop) ──
+if(window.innerWidth > 768) {
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width/2) * 0.15;
+      const y = (e.clientY - r.top - r.height/2) * 0.15;
+      btn.style.transform = `translate(${x}px,${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0,0)';
+    });
+  });
+}
+
+// ── Before/After slider ──
+const ba = document.querySelector('.ba-container');
+if(ba) {
+  let isDragging = false;
+  const move = (x) => {
+    const r = ba.getBoundingClientRect();
+    let pct = ((x - r.left) / r.width) * 100;
+    pct = Math.max(5, Math.min(95, pct));
+    ba.querySelector('.ba-before').style.width = pct + '%';
+    ba.querySelector('.ba-line').style.left = pct + '%';
+  };
+  ba.addEventListener('mousedown', () => isDragging = true);
+  ba.addEventListener('touchstart', () => isDragging = true);
+  window.addEventListener('mouseup', () => isDragging = false);
+  window.addEventListener('touchend', () => isDragging = false);
+  ba.addEventListener('mousemove', e => { if(isDragging) move(e.clientX); });
+  ba.addEventListener('touchmove', e => { if(isDragging) move(e.touches[0].clientX); });
+  ba.addEventListener('click', e => move(e.clientX));
+}
+
+// ── Smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+  });
+});
+</script>
+</body>
+</html>
