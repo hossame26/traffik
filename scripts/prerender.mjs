@@ -22,7 +22,6 @@ const STATIC_ROUTES = [
   '/portfolio',
   '/a-propos',
   '/blog',
-  '/devis',
   '/mentions-legales',
   '/politique-confidentialite',
   '/cgv',

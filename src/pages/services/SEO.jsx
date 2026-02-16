@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   Search,
@@ -10,28 +10,23 @@ import {
   BarChart3,
   TrendingUp,
   CheckCircle,
-  ChevronDown,
   MessageCircle,
   Zap,
   Target,
   Link2,
   Settings,
-  Users
+  Users,
+  Star,
+  Check,
+  ArrowRight,
 } from 'lucide-react';
 import SEOHead from '../../components/SEOHead';
+import FAQSection from '../../components/common/FAQSection';
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
-};
-
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
+  transition: { duration: 0.6, ease: 'easeOut' }
 };
 
 const faqData = [
@@ -58,12 +53,6 @@ const faqData = [
 ];
 
 export default function SEO() {
-  const [openFaq, setOpenFaq] = useState(null);
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
-
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
@@ -78,321 +67,238 @@ export default function SEO() {
         {/* Back Link */}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-8"
+          className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-10 text-sm"
         >
           <ArrowLeft className="w-4 h-4" /> Retour a l'accueil
         </Link>
 
         {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+        <motion.header
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-sm font-medium mb-6">
-            <Search className="w-4 h-4" />
-            Referencement Naturel
+          <div className="flex items-center gap-3 mb-5">
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0066FF] to-purple-600">
+              <Search className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-sm font-medium text-[#0066FF] bg-[#0066FF]/10 px-3 py-1 rounded-full">
+              Referencement Naturel
+            </span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             Referencement SEO :{' '}
-            <span className="text-[#0066FF]">Atteignez la Premiere Page Google</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">
+              Atteignez la Premiere Page Google
+            </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl">
-            Vous cherchez a ameliorer votre visibilite en ligne et a attirer plus de clients qualifies ? Le <strong>referencement naturel (SEO)</strong> est la strategie la plus rentable a long terme pour positionner votre site web en haut des resultats de recherche Google. Chez <strong>Traffik Web</strong>, nous mettons en place des strategies SEO sur mesure, adaptees a votre secteur d'activite et a vos objectifs de croissance en France et a l'international.
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mb-8">
+            Boostez votre visibilite Google avec une strategie SEO sur mesure. Audit, optimisation, contenu et netlinking pour des resultats concrets.
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
-            <motion.a
-              href="https://wa.me/33635505374"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-[#25D366]/25"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <MessageCircle className="w-5 h-5" />
-              Demander un Audit SEO Gratuit
-            </motion.a>
-            <Link
-              to="/devis"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-[#0066FF] text-[#0066FF] font-bold hover:bg-[#0066FF]/5 transition-colors"
-            >
-              <BarChart3 className="w-5 h-5" />
-              Calculer mon projet
-            </Link>
-          </div>
-        </motion.div>
+          <motion.a
+            href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20un%20audit%20SEO%20pour%20mon%20site."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#0066FF] text-white font-bold rounded-full hover:shadow-lg hover:shadow-[#0066FF]/25 transition-all"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <MessageCircle className="w-5 h-5" />
+            Demander un Audit SEO Gratuit
+          </motion.a>
+        </motion.header>
 
         {/* Stats Section */}
-        <motion.div
-          variants={stagger}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20"
-        >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
           {[
-            { value: '93%', label: 'des experiences en ligne commencent par un moteur de recherche' },
-            { value: '75%', label: 'des utilisateurs ne vont jamais au-dela de la premiere page' },
-            { value: '14.6%', label: 'taux de conversion moyen des leads SEO' },
-            { value: '5.66x', label: 'ROI moyen du referencement naturel' }
+            { value: '93%', label: 'des experiences commencent sur Google' },
+            { value: '75%', label: 'ne depassent pas la page 1' },
+            { value: '14.6%', label: 'taux de conversion leads SEO' },
+            { value: '5.66x', label: 'ROI moyen du SEO' }
           ].map((stat, index) => (
             <motion.div
               key={index}
-              variants={fadeUp}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
               className="p-5 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 text-center"
             >
               <div className="text-2xl md:text-3xl font-bold text-[#0066FF] mb-2">{stat.value}</div>
               <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Pourquoi le SEO est essentiel */}
+        {/* 4 Piliers SEO — Bento Grid */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Pourquoi le <span className="text-[#0066FF]">Referencement Naturel</span> est Essentiel pour Votre Business
-          </h2>
-
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              Dans un monde ou plus de <strong>8,5 milliards de recherches</strong> sont effectuees chaque jour sur Google, ne pas investir dans le referencement naturel revient a rendre votre entreprise invisible. Le SEO n'est pas une depense, c'est un investissement strategique qui genere un flux constant de visiteurs qualifies vers votre site web, 24 heures sur 24, 7 jours sur 7.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              Contrairement aux publicites payantes qui cessent de fonctionner des que vous arretez de payer, le <strong>referencement naturel SEO</strong> construit une presence durable. Un site bien optimise continue d'attirer du trafic organique pendant des mois, voire des annees, apres l'investissement initial. C'est la definition meme du marketing intelligent : travailler aujourd'hui pour recolter demain.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Que vous soyez une startup, une PME ou un independant en France, le SEO est le levier de croissance le plus puissant et le plus mesurable a votre disposition. Nos experts en referencement analysent votre marche, identifient les opportunites et mettent en oeuvre une strategie personnalisee pour vous positionner devant vos concurrents sur les mots-cles qui comptent.
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Nos 4 Piliers du{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">
+                Referencement SEO
+              </span>
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Approche complete pour dominer les resultats de recherche.
             </p>
           </div>
-        </motion.section>
 
-        {/* Nos 4 Piliers SEO */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Nos 4 Piliers du <span className="text-[#0066FF]">Referencement SEO</span>
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
-            Une approche complete et methodique pour dominer les resultats de recherche.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* SEO On-Page */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
+            {/* SEO On-Page — large gradient */}
             <motion.div
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
+              transition={{ duration: 0.4 }}
+              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0066FF]/[0.08] to-[#A855F7]/[0.06] dark:from-[#0066FF]/[0.12] dark:to-[#A855F7]/[0.08] border border-[#0066FF]/15 dark:border-[#0066FF]/20 hover:shadow-lg hover:shadow-[#0066FF]/5 transition-shadow duration-300"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#0066FF]/10 flex items-center justify-center mb-5">
-                <FileText className="w-7 h-7 text-[#0066FF]" />
+              <FileText className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">SEO On-Page</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Balises, mots-cles, contenu optimise pour Google.</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">SEO On-Page</h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                L'optimisation on-page est le fondement de tout bon referencement. Nous optimisons chaque element de vos pages pour les rendre irresistibles aux yeux de Google et de vos visiteurs.
-              </p>
-              <ul className="space-y-2">
-                {[
-                  'Recherche et strategie de mots-cles',
-                  'Optimisation des balises title et meta description',
-                  'Structure des titres (H1, H2, H3) et maillage interne',
-                  'Optimisation des images (alt, compression, WebP)',
-                  'Redaction et optimisation de contenu SEO',
-                  'Schema markup et donnees structurees'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <CheckCircle className="w-4 h-4 text-[#0066FF] mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
 
-            {/* SEO Technique */}
+            {/* SEO Technique — small */}
             <motion.div
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#0066FF]/10 flex items-center justify-center mb-5">
-                <Settings className="w-7 h-7 text-[#0066FF]" />
+              <Settings className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">SEO Technique</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Core Web Vitals, vitesse, crawl</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">SEO Technique</h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                Un site techniquement sain est la base indispensable. Nous auditons et corrigeons tous les problemes techniques qui empechent Google de bien indexer et comprendre votre site.
-              </p>
-              <ul className="space-y-2">
-                {[
-                  'Audit technique complet (Core Web Vitals)',
-                  'Optimisation de la vitesse de chargement',
-                  'Compatibilite mobile (responsive design)',
-                  'Architecture du site et crawlabilite',
-                  'Gestion du fichier robots.txt et sitemap XML',
-                  'Correction des erreurs 404 et redirections'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <CheckCircle className="w-4 h-4 text-[#0066FF] mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
 
-            {/* SEO Off-Page / Netlinking */}
+            {/* Netlinking — small */}
             <motion.div
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#0066FF]/10 flex items-center justify-center mb-5">
-                <Link2 className="w-7 h-7 text-[#0066FF]" />
+              <Link2 className="w-7 h-7 text-[#A855F7]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Netlinking</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Backlinks de qualite</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">SEO Off-Page & Netlinking</h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                La popularite de votre site aux yeux de Google depend largement de la qualite et de la quantite des liens qui pointent vers lui. Notre strategie de netlinking est 100% white hat.
-              </p>
-              <ul className="space-y-2">
-                {[
-                  'Strategie de link building ethique et durable',
-                  'Acquisition de backlinks de qualite (DA eleve)',
-                  'Guest blogging sur des sites d\'autorite',
-                  'Analyse et desaveu des liens toxiques',
-                  'Surveillance du profil de liens',
-                  'Relations presse digitale'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <CheckCircle className="w-4 h-4 text-[#0066FF] mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
 
-            {/* SEO Local */}
+            {/* SEO Local — small */}
             <motion.div
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#0066FF]/10 flex items-center justify-center mb-5">
-                <MapPin className="w-7 h-7 text-[#0066FF]" />
+              <MapPin className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">SEO Local</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Google Maps, avis, citations</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">SEO Local</h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                Pour les entreprises qui servent une zone geographique specifique, le SEO local est un levier de croissance incontournable. Apparaissez dans le pack local Google Maps et attirez des clients pres de chez vous.
-              </p>
-              <ul className="space-y-2">
-                {[
-                  'Optimisation Google Business Profile',
-                  'Gestion et reponse aux avis clients',
-                  'Citations locales (annuaires, Pages Jaunes)',
-                  'Optimisation pour les requetes "pres de moi"',
-                  'Contenu geolocal adapte a votre zone',
-                  'Suivi du positionnement local'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <CheckCircle className="w-4 h-4 text-[#0066FF] mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            </motion.div>
+
+            {/* Strategie complete — wide dark */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
+            >
+              <TrendingUp className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Strategie complete 360</h3>
+                <p className="text-sm text-gray-400">On-page + technique + netlinking + local = dominance totale sur vos mots-cles.</p>
+              </div>
             </motion.div>
           </div>
         </motion.section>
 
-        {/* Notre Processus SEO */}
+        {/* Processus SEO — Horizontal 5 columns */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Notre <span className="text-[#0066FF]">Processus SEO</span> en 5 Etapes
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
-            Une methodologie eprouvee pour des resultats concrets et mesurables.
-          </p>
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#0066FF] border border-[#0066FF]/20 bg-[#0066FF]/5 mb-4">
+              Processus
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              5 Etapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">0 Surprise.</span>
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              De l'audit initial au reporting mensuel.
+            </p>
+          </div>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 mb-10">
             {[
-              {
-                step: '01',
-                title: 'Audit SEO Complet',
-                description: 'Nous analysons en profondeur votre site web : performance technique, contenu, backlinks, positionnement actuel et concurrence. Cet audit detaille identifie toutes les opportunites d\'amelioration et sert de base a notre strategie.',
-                icon: Search
-              },
-              {
-                step: '02',
-                title: 'Strategie & Mots-cles',
-                description: 'A partir des donnees de l\'audit, nous definissons une strategie SEO personnalisee. Nous identifions les mots-cles a fort potentiel pour votre activite, analysons l\'intention de recherche et priorisons les actions a mener.',
-                icon: Target
-              },
-              {
-                step: '03',
-                title: 'Optimisation Technique & On-Page',
-                description: 'Nous mettons en oeuvre les corrections techniques, optimisons la structure de votre site, ameliorons la vitesse de chargement et optimisons chaque page pour les mots-cles cibles. Le maillage interne est renforce.',
-                icon: Zap
-              },
-              {
-                step: '04',
-                title: 'Contenu & Netlinking',
-                description: 'Nous creons du contenu optimise SEO (articles de blog, pages piliers, landing pages) et mettons en place une strategie de netlinking pour augmenter l\'autorite de votre domaine avec des backlinks de qualite.',
-                icon: Globe
-              },
-              {
-                step: '05',
-                title: 'Suivi, Reporting & Ajustements',
-                description: 'Chaque mois, vous recevez un rapport detaille avec l\'evolution de vos positions, du trafic organique, des conversions et des actions realisees. Nous ajustons la strategie en continu pour maximiser les resultats.',
-                icon: TrendingUp
-              }
+              { icon: Search, step: '01', title: 'Audit', desc: 'Analyse complete de votre site.' },
+              { icon: Target, step: '02', title: 'Strategie', desc: 'Mots-cles et plan d\'action.' },
+              { icon: Zap, step: '03', title: 'Optimisation', desc: 'Technique + on-page.' },
+              { icon: Globe, step: '04', title: 'Contenu', desc: 'Articles + netlinking.' },
+              { icon: TrendingUp, step: '05', title: 'Suivi', desc: 'Reporting mensuel detaille.' },
             ].map((item, index) => {
               const Icon = item.icon;
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex gap-6 p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="flex flex-col items-center text-center"
                 >
-                  <div className="flex-shrink-0">
-                    <div className="w-14 h-14 rounded-2xl bg-[#0066FF] flex items-center justify-center">
-                      <Icon className="w-7 h-7 text-white" />
+                  <div className="relative mb-4">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-100 dark:bg-white/[0.06] border border-gray-200 dark:border-white/10 flex items-center justify-center">
+                      <Icon className="w-6 h-6 md:w-7 md:h-7 text-gray-500 dark:text-gray-400" />
                     </div>
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#0066FF] text-white text-xs font-bold flex items-center justify-center shadow-lg shadow-[#0066FF]/30">
+                      {item.step}
+                    </span>
                   </div>
-                  <div>
-                    <div className="text-sm text-[#0066FF] font-bold mb-1">Etape {item.step}</div>
-                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{item.description}</p>
-                  </div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-[160px]">
+                    {item.desc}
+                  </p>
                 </motion.div>
               );
             })}
+          </div>
+
+          <div className="text-center">
+            <motion.a
+              href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20un%20audit%20SEO%20pour%20mon%20site."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#0066FF] to-[#A855F7] text-white font-bold shadow-lg shadow-[#0066FF]/20 hover:shadow-xl hover:shadow-[#0066FF]/30 transition-shadow"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Demarrer mon audit SEO
+              <Zap className="w-4 h-4" />
+            </motion.a>
           </div>
         </motion.section>
 
@@ -408,7 +314,7 @@ export default function SEO() {
             Nos <span className="text-[#0066FF]">Tarifs SEO</span> Transparents
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
-            Des formules adaptees a chaque budget et chaque objectif de croissance.
+            Des formules adaptees a chaque budget et chaque objectif.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -468,10 +374,10 @@ export default function SEO() {
               <div className="text-sm text-[#0066FF] font-bold uppercase tracking-wider mb-2">Mensuel</div>
               <h3 className="text-xl font-bold mb-2">SEO Performance</h3>
               <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-bold text-[#0066FF]">400</span>
+                <span className="text-4xl font-bold text-[#0066FF]">90</span>
                 <span className="text-xl text-gray-400">EUR/mois</span>
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Engagement 6 mois minimum</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Sans engagement</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'Audit initial offert',
@@ -545,178 +451,98 @@ export default function SEO() {
           </div>
         </motion.section>
 
-        {/* Pourquoi choisir Traffik Web */}
+        {/* Pourquoi Traffik Web — Bento Grid */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Pourquoi Choisir <span className="text-[#0066FF]">Traffik Web</span> pour Votre SEO
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: TrendingUp,
-                title: 'Resultats Mesurables',
-                description: 'Nous ne promettons pas, nous prouvons. Chaque action est mesuree et chaque resultat est documente dans des rapports clairs et transparents.'
-              },
-              {
-                icon: Users,
-                title: 'Approche Personnalisee',
-                description: 'Pas de solution generique. Chaque strategie SEO est concue sur mesure en fonction de votre secteur, votre concurrence et vos objectifs specifiques.'
-              },
-              {
-                icon: Globe,
-                title: 'Expertise France & International',
-                description: 'Que vous cibliez le marche francais, europeen ou mondial, nous adaptons notre strategie de referencement naturel a votre perimetre geographique.'
-              }
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-[#0066FF]/10 flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-[#0066FF]" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{item.description}</p>
-                </motion.div>
-              );
-            })}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Pourquoi Choisir <span className="text-[#0066FF]">Traffik Web</span>
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Votre partenaire SEO de confiance.
+            </p>
           </div>
-        </motion.section>
 
-        {/* Contenu SEO supplementaire */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Le SEO en France : <span className="text-[#0066FF]">Tendances et Bonnes Pratiques</span>
-          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
+            {/* Resultats mesurables — large gradient */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0066FF]/[0.08] to-[#A855F7]/[0.06] dark:from-[#0066FF]/[0.12] dark:to-[#A855F7]/[0.08] border border-[#0066FF]/15 dark:border-[#0066FF]/20 hover:shadow-lg hover:shadow-[#0066FF]/5 transition-shadow duration-300"
+            >
+              <TrendingUp className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Resultats mesurables</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Chaque action tracee, chaque progression documentee.</p>
+              </div>
+            </motion.div>
 
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              Le paysage du <strong>referencement naturel en France</strong> evolue constamment. Avec les mises a jour regulieres de l'algorithme Google (Helpful Content Update, Core Updates, etc.), il est crucial de rester a la pointe des meilleures pratiques. En 2026, les criteres E-E-A-T (Experience, Expertise, Autorite, Fiabilite) sont plus importants que jamais pour le positionnement de votre site.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              L'<strong>intelligence artificielle</strong> transforme egalement le paysage du SEO. Les Search Generative Experiences (SGE) de Google modifient la maniere dont les resultats sont affiches. Chez Traffik Web, nous anticipons ces evolutions et adaptons nos strategies pour que votre site reste visible, quel que soit le format de resultat affiche par Google.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              Le <strong>SEO mobile</strong> est desormais prioritaire : Google utilise le mobile-first indexing depuis plusieurs annees. Cela signifie que la version mobile de votre site est celle qui est analysee en premier par les robots de Google. Un site lent, non responsive ou offrant une mauvaise experience utilisateur sur mobile sera penalise dans les classements.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Enfin, le <strong>contenu de qualite</strong> reste roi. Les sites qui publient regulierement des articles de blog pertinents, des guides pratiques et des etudes de cas voient leur autorite de domaine augmenter progressivement. Notre equipe de redacteurs SEO cree du contenu optimise qui repond a l'intention de recherche de vos prospects tout en respectant les meilleures pratiques de referencement naturel.
-            </p>
+            {/* Sur mesure — small */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Users className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Sur mesure</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Strategie adaptee a votre secteur</p>
+              </div>
+            </motion.div>
+
+            {/* France & International — small */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Globe className="w-7 h-7 text-[#A855F7]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">France & International</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">SEO local ou mondial</p>
+              </div>
+            </motion.div>
+
+            {/* Expert SEO dedie — wide dark */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
+            >
+              <Search className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Expert SEO dedie</h3>
+                <p className="text-sm text-gray-400">Un seul interlocuteur, suivi quotidien de vos positions Google.</p>
+              </div>
+            </motion.div>
           </div>
         </motion.section>
 
         {/* FAQ Section */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">
             Questions <span className="text-[#0066FF]">Frequentes</span> sur le SEO
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
-            Les reponses aux questions que nos clients nous posent le plus souvent.
-          </p>
 
-          <div className="space-y-4">
-            {faqData.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="rounded-2xl border border-gray-200 dark:border-white/10 overflow-hidden"
-              >
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors"
-                >
-                  <h3 className="text-lg font-bold pr-4">{faq.question}</h3>
-                  <motion.div
-                    animate={{ rotate: openFaq === index ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex-shrink-0"
-                  >
-                    <ChevronDown className="w-5 h-5 text-[#0066FF]" />
-                  </motion.div>
-                </button>
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6">
-                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{faq.answer}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Internal Links */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
-        >
-          <h2 className="text-2xl font-bold mb-6">Decouvrez Nos Autres Services</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <Link
-              to="/services/creation-site-web"
-              className="p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-[#0066FF]/50 transition-colors group"
-            >
-              <Globe className="w-6 h-6 text-[#0066FF] mb-3" />
-              <h3 className="font-bold mb-1 group-hover:text-[#0066FF] transition-colors">Creation de Site Web</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Sites vitrines, e-commerce et sur mesure.</p>
-            </Link>
-            <Link
-              to="/services/publicite-en-ligne"
-              className="p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-[#0066FF]/50 transition-colors group"
-            >
-              <BarChart3 className="w-6 h-6 text-[#0066FF] mb-3" />
-              <h3 className="font-bold mb-1 group-hover:text-[#0066FF] transition-colors">Publicite en Ligne</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Google Ads, Meta Ads, campagnes performantes.</p>
-            </Link>
-            <Link
-              to="/blog"
-              className="p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-[#0066FF]/50 transition-colors group"
-            >
-              <FileText className="w-6 h-6 text-[#0066FF] mb-3" />
-              <h3 className="font-bold mb-1 group-hover:text-[#0066FF] transition-colors">Blog & Ressources</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Guides, conseils et actualites du web.</p>
-            </Link>
-          </div>
+          <FAQSection faqs={faqData} />
         </motion.section>
 
         {/* Final CTA */}
@@ -731,7 +557,7 @@ export default function SEO() {
             Pret a Dominer Google ?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Discutons de votre projet SEO et decouvrons ensemble comment propulser votre site en premiere page des resultats de recherche. Premier echange gratuit et sans engagement.
+            Premier echange gratuit et sans engagement. Devis sous 24h.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.a
@@ -746,10 +572,10 @@ export default function SEO() {
               Discuter sur WhatsApp
             </motion.a>
             <Link
-              to="/devis"
+              to="/tarifs"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#0066FF] text-white font-bold shadow-lg shadow-[#0066FF]/25 hover:bg-[#0055DD] transition-colors"
             >
-              Estimer mon projet
+              Voir les tarifs
             </Link>
           </div>
         </motion.section>

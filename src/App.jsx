@@ -31,7 +31,6 @@ const Contact = lazy(() => import('./components/sections/Contact'));
 const MentionsLegales = lazy(() => import('./pages/MentionsLegales'));
 const PolitiqueConfidentialite = lazy(() => import('./pages/PolitiqueConfidentialite'));
 const CGV = lazy(() => import('./pages/CGV'));
-const Calculateur = lazy(() => import('./pages/Calculateur'));
 const APropos = lazy(() => import('./pages/APropos'));
 const Tarifs = lazy(() => import('./pages/Tarifs'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
@@ -96,7 +95,6 @@ export default function App() {
             <Route path="/mentions-legales" element={<MentionsLegales />} />
             <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
             <Route path="/cgv" element={<CGV />} />
-            <Route path="/devis" element={<Calculateur />} />
             <Route path="/a-propos" element={<APropos />} />
             <Route path="/tarifs" element={<Tarifs />} />
             <Route path="/portfolio" element={<Portfolio />} />

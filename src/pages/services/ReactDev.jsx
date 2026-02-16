@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   Code2,
@@ -8,65 +8,58 @@ import {
   Shield,
   Smartphone,
   Search,
-  Gauge,
   Layers,
   MessageCircle,
-  ChevronDown,
   CheckCircle2,
   ArrowRight,
   Globe,
   RefreshCw,
   Database,
-  Lock
+  Star,
+  Check,
+  Palette,
+  TrendingUp,
+  Clock,
+  Users,
 } from 'lucide-react';
 import SEOHead from '../../components/SEOHead';
+import FAQSection from '../../components/common/FAQSection';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: 'easeOut' }
-  })
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
 };
 
-function FAQItem({ question, answer }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <motion.div
-      className="border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden"
-      initial={false}
-    >
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors"
-      >
-        <span className="font-semibold text-lg pr-4">{question}</span>
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex-shrink-0"
-        >
-          <ChevronDown className="w-5 h-5 text-[#0066FF]" />
-        </motion.div>
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed">
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
+const stagger = {
+  visible: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const reactFaqs = [
+  {
+    question: "Quelle est la différence entre un site React et un site WordPress ?",
+    answer: "Un site React est construit entièrement sur mesure avec du code JavaScript moderne. Contrairement à WordPress qui repose sur des thèmes et des plugins préfabriqués, React vous offre une liberté totale sur le design et les fonctionnalités. Les performances sont nettement supérieures : un site React charge en moyenne 2 à 5 fois plus vite qu'un site WordPress équivalent."
+  },
+  {
+    question: "Combien coûte le développement d'une application React sur mesure ?",
+    answer: "Un site vitrine React performant démarre à 600€. Une application web interactive se situe entre 1500€ et 5000€. Pour un projet full-stack complet, comptez à partir de 3000€. Devis gratuit et détaillé sous 24h."
+  },
+  {
+    question: "Combien de temps faut-il pour développer un site React ?",
+    answer: "Un site vitrine React est livré en 1 à 2 semaines. Une application web avec des fonctionnalités personnalisées prend entre 3 et 6 semaines. Un projet full-stack complexe peut nécessiter 2 à 3 mois."
+  },
+  {
+    question: "Un site React est-il bien référencé sur Google ?",
+    answer: "Oui, avec Next.js qui propose le rendu côté serveur (SSR) et la génération statique (SSG). J'intègre systématiquement les bonnes pratiques SEO : balises meta, données structurées, sitemap XML, temps de chargement optimisé."
+  },
+  {
+    question: "Est-ce que je peux modifier mon site React moi-même ?",
+    answer: "Pour le contenu régulier, j'intègre un CMS headless (Sanity, Strapi ou Notion) qui vous permet de modifier textes et images sans toucher au code. Pour les modifications techniques, il faudra faire appel à un développeur."
+  }
+];
 
 export default function ReactDev() {
   return (
@@ -114,339 +107,413 @@ export default function ReactDev() {
           </h1>
 
           <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
-            Développeur React freelance en France, je conçois des applications web modernes,
-            ultra-rapides et parfaitement optimisées pour le référencement. De la simple landing page
-            à la plateforme complexe, chaque projet est construit sur mesure pour répondre exactement
-            à vos objectifs business.
+            Applications web modernes, ultra-rapides et optimisees SEO. Du site vitrine a la plateforme SaaS, tout est construit sur mesure.
           </p>
         </motion.header>
 
-        {/* Pourquoi React & Next.js */}
+        {/* Pourquoi React & Next.js — Bento Grid */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pourquoi choisir React et Next.js pour votre projet web ?
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-            React est la bibliothèque JavaScript la plus utilisée au monde, développée par Meta (Facebook)
-            et adoptée par des géants comme Netflix, Airbnb, Uber et Spotify. Combiné avec Next.js,
-            le framework de référence créé par Vercel, vous obtenez une stack technologique capable de
-            propulser n'importe quel projet web vers l'excellence. Ce n'est pas un hasard si les plus grandes
-            entreprises du monde entier font confiance à cette combinaison : React et Next.js offrent
-            une flexibilité, une performance et une scalabilité inégalées sur le marché du développement web.
-          </p>
-          <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-            En tant que développeur React freelance basé en France, j'utilise ces technologies au quotidien
-            pour créer des applications web sur mesure qui dépassent les limites des CMS traditionnels comme
-            WordPress ou Shopify. Là où ces plateformes imposent des contraintes de design, de performance
-            et de fonctionnalités, React et Next.js vous donnent une liberté totale pour concevoir exactement
-            l'expérience utilisateur que vous imaginez, sans aucun compromis.
-          </p>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Pourquoi <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">React & Next.js</span> ?
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              La stack des leaders : Netflix, Airbnb, Uber, Spotify.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: Zap,
-                title: 'Performance exceptionnelle',
-                desc: 'Les applications React utilisent un DOM virtuel qui minimise les manipulations du navigateur. Résultat : des temps de chargement ultra-courts, un score Lighthouse proche de 100 et une expérience fluide qui retient vos visiteurs.'
-              },
-              {
-                icon: Search,
-                title: 'SEO optimisé avec Next.js',
-                desc: 'Next.js intègre le Server-Side Rendering (SSR) et la génération statique (SSG) nativement. Vos pages sont pré-rendues côté serveur, ce qui permet à Google de les indexer parfaitement et d\'améliorer votre positionnement naturel.'
-              },
-              {
-                icon: Smartphone,
-                title: 'Responsive et mobile-first',
-                desc: 'Chaque application est conçue en mobile-first. L\'interface s\'adapte parfaitement à tous les écrans : smartphone, tablette, desktop. Une expérience cohérente et optimale sur tous les appareils de vos utilisateurs.'
-              },
-              {
-                icon: Shield,
-                title: 'Sécurité et fiabilité',
-                desc: 'L\'architecture React avec Next.js offre des protections intégrées contre les attaques XSS, CSRF et les injections. Les mises à jour régulières de l\'écosystème garantissent un niveau de sécurité toujours à la pointe.'
-              }
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                variants={fadeUp}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="p-6 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-[#0066FF]/30 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#0066FF]/10 flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-[#0066FF]" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
+            {/* Performance — large */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0066FF]/[0.08] to-purple-600/[0.06] dark:from-[#0066FF]/[0.12] dark:to-purple-600/[0.08] border border-[#0066FF]/15 dark:border-[#0066FF]/20 relative overflow-hidden group hover:shadow-lg hover:shadow-[#0066FF]/5 transition-shadow duration-300"
+            >
+              <Zap className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Score Lighthouse 100</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">DOM virtuel, temps de chargement ultra-courts, experience fluide.</p>
+              </div>
+            </motion.div>
+
+            {/* SEO */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Search className="w-7 h-7 text-[#A855F7]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">SEO natif</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">SSR & SSG avec Next.js</p>
+              </div>
+            </motion.div>
+
+            {/* Mobile */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Smartphone className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Mobile-first</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Responsive tous ecrans</p>
+              </div>
+            </motion.div>
+
+            {/* Securite */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Shield className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Securise</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Protection XSS, CSRF integree</p>
+              </div>
+            </motion.div>
+
+            {/* Scalable — wide dark */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
+            >
+              <Layers className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Scalable a l'infini</h3>
+                <p className="text-sm text-gray-400">Architecture modulaire qui grandit avec votre business. De la landing page au SaaS complet.</p>
+              </div>
+            </motion.div>
           </div>
         </motion.section>
 
-        {/* Services détaillés */}
+        {/* Nos formules React */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Mes services de développement React et Next.js
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
-            Que vous ayez besoin d'une application web complète, d'un site vitrine haute performance
-            ou d'une refonte de votre plateforme existante, je propose une gamme complète de services
-            de développement React adaptés à chaque besoin et chaque budget. Chaque projet bénéficie
-            d'une approche sur mesure, d'un code propre et maintenable, et d'un accompagnement complet
-            du cahier des charges jusqu'à la mise en production.
-          </p>
+          <h2 className="text-3xl font-bold mb-2">Nos formules React & Next.js</h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">Tarifs transparents, code source livre.</p>
 
-          <div className="space-y-8">
+          <div className="grid md:grid-cols-3 gap-5">
             {[
               {
+                name: 'Site Vitrine React',
+                price: '600',
                 icon: Globe,
-                title: 'Site vitrine React / Next.js',
-                price: 'À partir de 600€',
-                features: [
-                  'Design sur mesure responsive et moderne',
-                  'Animations fluides avec Framer Motion',
-                  'Optimisation SEO complète (SSR/SSG)',
-                  'Score Lighthouse 90+ garanti',
-                  'Formulaire de contact fonctionnel',
-                  'Hébergement et déploiement inclus'
-                ]
+                description: 'Landing page haute performance',
+                features: ['Design sur mesure responsive', 'Animations Framer Motion', 'SEO complet (SSR/SSG)', 'Score Lighthouse 90+', 'Deploiement inclus'],
               },
               {
+                name: 'Application Web SPA',
+                price: '1500',
                 icon: Layers,
-                title: 'Application web sur mesure (SPA)',
-                price: 'À partir de 1500€',
-                features: [
-                  'Architecture React scalable et modulaire',
-                  'Gestion d\'état avancée (Redux, Zustand)',
-                  'Intégration API REST ou GraphQL',
-                  'Authentification et gestion des rôles',
-                  'Dashboard et interfaces interactives',
-                  'Tests unitaires et d\'intégration'
-                ]
+                description: 'App interactive sur mesure',
+                popular: true,
+                features: ['Architecture scalable', 'Integration API REST/GraphQL', 'Auth et gestion roles', 'Dashboard interactif', 'Tests automatises'],
               },
               {
-                icon: RefreshCw,
-                title: 'Migration et refonte vers React',
-                price: 'Sur devis',
-                features: [
-                  'Audit complet de votre site existant',
-                  'Migration progressive sans interruption',
-                  'Amélioration des performances de 50 à 300%',
-                  'Conservation du référencement acquis',
-                  'Modernisation de l\'interface utilisateur',
-                  'Formation à la gestion du nouveau site'
-                ]
-              },
-              {
+                name: 'Full-Stack Next.js',
+                price: '3000',
                 icon: Database,
-                title: 'Application full-stack Next.js',
-                price: 'À partir de 3000€',
-                features: [
-                  'API Routes Next.js intégrées',
-                  'Base de données (PostgreSQL, MongoDB)',
-                  'Système de paiement (Stripe)',
-                  'Espace membre et tableau de bord',
-                  'Notifications en temps réel',
-                  'Infrastructure cloud scalable'
-                ]
-              }
-            ].map((service, i) => (
-              <motion.div
-                key={service.title}
-                variants={fadeUp}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:shadow-lg hover:shadow-[#0066FF]/5 transition-all"
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0066FF] to-purple-600 flex items-center justify-center">
-                      <service.icon className="w-6 h-6 text-white" />
+                description: 'Plateforme complete',
+                features: ['API Routes integrees', 'Base de donnees', 'Paiement Stripe', 'Espace membre', 'Infrastructure cloud'],
+              },
+            ].map((plan, index) => {
+              const Icon = plan.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`relative rounded-2xl p-6 flex flex-col transition-all duration-300 ${
+                    plan.popular
+                      ? 'bg-gray-50 dark:bg-white/[0.08] border-2 border-[#0066FF]/30 dark:border-[#0066FF]/40 shadow-xl shadow-[#0066FF]/5 dark:shadow-[#0066FF]/10 ring-1 ring-[#0066FF]/10'
+                      : 'bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] hover:border-gray-300 dark:hover:border-white/[0.15] hover:shadow-lg dark:hover:bg-white/[0.06]'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#0066FF] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#0066FF]/30">
+                        <Star className="w-3 h-3 fill-white" /> Populaire
+                      </span>
                     </div>
-                    <h3 className="text-2xl font-bold">{service.title}</h3>
+                  )}
+
+                  <div className="flex items-center gap-3 mb-5 pt-1">
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#0066FF]/20 to-purple-600/20 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#0066FF]" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-tight">{plan.name}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{plan.description}</p>
+                    </div>
                   </div>
-                  <span className="text-lg font-bold text-[#0066FF] whitespace-nowrap">{service.price}</span>
-                </div>
-                <ul className="grid md:grid-cols-2 gap-3">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-gray-600 dark:text-gray-400">
-                      <CheckCircle2 className="w-5 h-5 text-[#0066FF] flex-shrink-0 mt-0.5" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+
+                  <div className="mb-6">
+                    <span className="text-xs text-gray-400 dark:text-gray-500">A partir de</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-extrabold text-gray-900 dark:text-white">{plan.price}{plan.price !== 'Sur devis' ? '€' : ''}</span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-sm">
+                        <Check className="w-4 h-4 text-[#0066FF] mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-600 dark:text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <motion.a
+                    href={`https://wa.me/33635505374?text=${encodeURIComponent(
+                      `Bonjour, je suis interesse par l'offre ${plan.name}. Pouvez-vous m'envoyer un devis ?`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-full py-3 rounded-xl font-semibold text-center text-sm transition-all ${
+                      plan.popular
+                        ? 'bg-[#0066FF] text-white hover:bg-[#0055DD] shadow-lg shadow-[#0066FF]/25'
+                        : 'bg-gray-900 dark:bg-white/10 text-white hover:bg-gray-800 dark:hover:bg-white/[0.15] border border-transparent dark:border-white/[0.06]'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Demander un devis
+                  </motion.a>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.section>
 
-        {/* Processus de travail */}
+        {/* Processus — Horizontal */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Comment se déroule un projet de développement React ?
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
-            Mon processus de développement est structuré pour garantir la transparence, la qualité
-            et le respect des délais. À chaque étape, vous avez une visibilité totale sur l'avancement
-            de votre projet. Je privilégie une communication directe et régulière, car un projet web
-            réussi repose avant tout sur une collaboration fluide entre le développeur et le client.
-          </p>
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#0066FF] border border-[#0066FF]/20 bg-[#0066FF]/5 mb-4">
+              Processus
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              5 Etapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">0 Surprise.</span>
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Du cahier des charges a la mise en production.
+            </p>
+          </div>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 mb-10">
             {[
-              {
-                step: '01',
-                title: 'Analyse et cahier des charges',
-                desc: 'On définit ensemble vos objectifs, votre cible, les fonctionnalités nécessaires et le design souhaité. Je vous propose une architecture technique adaptée et un planning de réalisation détaillé.'
-              },
-              {
-                step: '02',
-                title: 'Maquettage et validation',
-                desc: 'Je crée les maquettes de votre application ou site React. Vous validez chaque écran avant le début du développement. Les ajustements sont inclus jusqu\'à votre satisfaction complète.'
-              },
-              {
-                step: '03',
-                title: 'Développement itératif',
-                desc: 'Le développement se fait par sprints avec des livraisons régulières. Vous testez chaque fonctionnalité en temps réel sur un environnement de préproduction accessible en ligne.'
-              },
-              {
-                step: '04',
-                title: 'Tests, optimisation et déploiement',
-                desc: 'Tests approfondis sur tous les navigateurs et appareils, optimisation des performances, configuration SEO, puis mise en production sur l\'hébergement de votre choix.'
-              },
-              {
-                step: '05',
-                title: 'Suivi et maintenance',
-                desc: 'Après le lancement, je reste disponible pour les ajustements, les mises à jour de sécurité et les évolutions futures de votre application. Un support réactif par WhatsApp ou email.'
-              }
-            ].map((item, i) => (
-              <motion.div
-                key={item.step}
-                variants={fadeUp}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="flex gap-6 p-6 rounded-2xl border border-gray-200 dark:border-white/10"
-              >
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-[#0066FF]/10 flex items-center justify-center">
-                  <span className="text-xl font-bold text-[#0066FF]">{item.step}</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+              { icon: MessageCircle, step: '01', title: 'Analyse', desc: 'Objectifs, cible et architecture technique.' },
+              { icon: Palette, step: '02', title: 'Design', desc: 'Maquettes validees avant developpement.' },
+              { icon: Code2, step: '03', title: 'Dev', desc: 'Sprints iteratifs, livraisons regulieres.' },
+              { icon: Search, step: '04', title: 'Tests', desc: 'Performance, SEO, compatibilite verifies.' },
+              { icon: Zap, step: '05', title: 'Launch', desc: 'Deploiement et suivi des performances.' },
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="relative mb-4">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-100 dark:bg-white/[0.06] border border-gray-200 dark:border-white/10 flex items-center justify-center">
+                      <Icon className="w-6 h-6 md:w-7 md:h-7 text-gray-500 dark:text-gray-400" />
+                    </div>
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#0066FF] text-white text-xs font-bold flex items-center justify-center shadow-lg shadow-[#0066FF]/30">
+                      {item.step}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-[160px]">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <motion.a
+              href="https://wa.me/33635505374"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#0066FF] to-[#A855F7] text-white font-bold shadow-lg shadow-[#0066FF]/20 hover:shadow-xl hover:shadow-[#0066FF]/30 transition-shadow"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Demarrer mon projet
+              <Zap className="w-4 h-4" />
+            </motion.a>
           </div>
         </motion.section>
 
-        {/* Technologies */}
+        {/* Technologies avec logos */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Les technologies que j'utilise au quotidien
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-            Je travaille exclusivement avec des technologies modernes, éprouvées et maintenues activement
-            par des communautés de développeurs parmi les plus actives au monde. Chaque outil est choisi
-            pour sa fiabilité, sa performance et sa capacité à s'adapter aux besoins spécifiques de votre projet.
-          </p>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Notre stack technique</h2>
+            <p className="text-gray-500 dark:text-gray-400">Technologies modernes, eprouvees, maintenues.</p>
+          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
             {[
-              'React 19', 'Next.js 15', 'TypeScript', 'Tailwind CSS',
-              'Framer Motion', 'Node.js', 'PostgreSQL', 'MongoDB',
-              'Stripe API', 'Vercel', 'GitHub Actions', 'Prisma ORM'
+              { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+              { name: 'Next.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+              { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+              { name: 'Tailwind', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
+              { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+              { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+              { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+              { name: 'Vercel', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg' },
             ].map((tech, i) => (
               <motion.div
-                key={tech}
-                variants={fadeUp}
-                custom={i * 0.05}
-                initial="hidden"
-                whileInView="visible"
+                key={tech.name}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="p-4 rounded-xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 text-center font-medium"
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+                className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-gray-50 dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] hover:border-[#0066FF]/30 hover:shadow-lg transition-all duration-300 group"
               >
-                {tech}
+                <img
+                  src={tech.logo}
+                  alt={tech.name}
+                  className="w-10 h-10 md:w-12 md:h-12 object-contain dark:brightness-0 dark:invert group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{tech.name}</span>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
-        {/* Avantages concurrentiels */}
+        {/* Pourquoi freelance — Bento */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pourquoi faire appel à un développeur React freelance ?
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-            Travailler avec un développeur React freelance plutôt qu'une agence web présente de nombreux
-            avantages concrets pour votre projet et votre budget. Voici les principales raisons pour
-            lesquelles mes clients choisissent de travailler directement avec moi :
-          </p>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Pourquoi un <span className="text-[#0066FF]">freelance React</span> ?
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              -50% vs agence. +100% implication.
+            </p>
+          </div>
 
-          <ul className="space-y-4 mb-8">
-            {[
-              'Un interlocuteur unique du début à la fin : pas de chef de projet intermédiaire, vous échangez directement avec le développeur qui code votre application.',
-              'Des tarifs 30 à 50% inférieurs à ceux d\'une agence web classique, sans compromis sur la qualité du code ni sur les délais de livraison.',
-              'Une réactivité maximale : je réponds sous 24h et suis disponible sur WhatsApp pour les échanges rapides et le suivi de projet.',
-              'Un code propre, documenté et maintenable : votre application vous appartient à 100%, vous pouvez la faire évoluer librement.',
-              'Une expertise spécialisée React/Next.js plutôt qu\'une connaissance généraliste dispersée sur dix technologies différentes.'
-            ].map((item, i) => (
-              <motion.li
-                key={i}
-                variants={fadeUp}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="flex items-start gap-3 text-gray-600 dark:text-gray-400"
-              >
-                <CheckCircle2 className="w-5 h-5 text-[#0066FF] flex-shrink-0 mt-1" />
-                <span className="leading-relaxed">{item}</span>
-              </motion.li>
-            ))}
-          </ul>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0066FF]/[0.08] to-purple-600/[0.06] dark:from-[#0066FF]/[0.12] dark:to-purple-600/[0.08] border border-[#0066FF]/15 dark:border-[#0066FF]/20 hover:shadow-lg hover:shadow-[#0066FF]/5 transition-shadow duration-300"
+            >
+              <TrendingUp className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">-50% vs agence</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Pas de commercial, pas de chef de projet. Vous payez le code, pas la structure.</p>
+              </div>
+            </motion.div>
 
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            Que vous soyez une startup qui lance son premier produit, une PME qui souhaite moderniser
-            sa présence en ligne, ou un entrepreneur qui a besoin d'une application web spécifique,
-            je m'adapte à votre contexte pour vous livrer exactement ce dont vous avez besoin.
-            Mon objectif est simple : créer des applications web qui génèrent des résultats concrets
-            pour votre activité.
-          </p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Clock className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Reponse 24h</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">WhatsApp, email, visio</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Users className="w-7 h-7 text-[#A855F7]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">1 interlocuteur</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Du brief au deploiement</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Code2 className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Code a vous</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">100% proprietaire</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
+            >
+              <Star className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Expert React specialise</h3>
+                <p className="text-sm text-gray-400">Pas de generaliste. React, Next.js, TypeScript au quotidien depuis des annees.</p>
+              </div>
+            </motion.div>
+          </div>
         </motion.section>
 
         {/* FAQ Section */}
@@ -465,28 +532,7 @@ export default function ReactDev() {
             d'applications web avec React et Next.js.
           </p>
 
-          <div className="space-y-4">
-            <FAQItem
-              question="Quelle est la différence entre un site React et un site WordPress ?"
-              answer="Un site React est construit entièrement sur mesure avec du code JavaScript moderne. Contrairement à WordPress qui repose sur des thèmes et des plugins préfabriqués, React vous offre une liberté totale sur le design et les fonctionnalités. Les performances sont nettement supérieures : un site React charge en moyenne 2 à 5 fois plus vite qu'un site WordPress équivalent. Le SEO est également mieux maîtrisé grâce au rendu côté serveur de Next.js. En revanche, un site WordPress peut convenir si vous avez un budget très limité et des besoins simples (blog, site vitrine basique)."
-            />
-            <FAQItem
-              question="Combien coûte le développement d'une application React sur mesure ?"
-              answer="Les tarifs varient selon la complexité du projet. Un site vitrine React performant démarre à 500€. Une application web interactive avec fonctionnalités avancées (authentification, dashboard, API) se situe entre 1500€ et 5000€. Pour un projet full-stack complet avec base de données, paiement en ligne et espace membre, comptez à partir de 3000€. Je propose toujours un devis gratuit et détaillé après avoir analysé vos besoins spécifiques. Le paiement peut être échelonné en plusieurs fois."
-            />
-            <FAQItem
-              question="Combien de temps faut-il pour développer un site React ?"
-              answer="Les délais dépendent de l'envergure du projet. Un site vitrine React est livré en 1 à 2 semaines. Une application web avec des fonctionnalités personnalisées prend entre 3 et 6 semaines. Un projet full-stack complexe peut nécessiter 2 à 3 mois de développement. Je m'engage sur des délais précis dès le début du projet et je vous tiens informé de l'avancement à chaque étape grâce à des livraisons régulières sur un environnement de test."
-            />
-            <FAQItem
-              question="Un site React est-il bien référencé sur Google ?"
-              answer="Oui, à condition d'utiliser Next.js comme framework. Next.js propose le rendu côté serveur (SSR) et la génération de pages statiques (SSG), ce qui permet à Google d'indexer parfaitement toutes vos pages. J'intègre systématiquement les bonnes pratiques SEO : balises meta optimisées, données structurées (schema.org), sitemap XML automatique, temps de chargement optimisé, et architecture URL propre. Mes clients constatent régulièrement une amélioration de leur positionnement après la migration vers React/Next.js."
-            />
-            <FAQItem
-              question="Est-ce que je peux modifier mon site React moi-même après la livraison ?"
-              answer="Cela dépend du type de contenu à modifier. Pour les sites avec du contenu régulièrement mis à jour, j'intègre un CMS headless (comme Sanity, Strapi ou Notion) qui vous permet de modifier textes et images depuis une interface simple, sans toucher au code. Pour les modifications techniques (nouvelles fonctionnalités, changement de structure), il faudra faire appel à un développeur. Je propose également des forfaits de maintenance mensuels pour les mises à jour régulières et les évolutions de votre application."
-            />
-          </div>
+          <FAQSection faqs={reactFaqs} />
         </motion.section>
 
         {/* CTA Section */}
@@ -522,10 +568,10 @@ export default function ReactDev() {
 
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Link
-                  to="/devis"
+                  to="/tarifs"
                   className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#0066FF] to-purple-600 text-white font-bold flex items-center justify-center gap-3 shadow-lg shadow-[#0066FF]/25"
                 >
-                  Estimer mon projet
+                  Voir les tarifs
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
@@ -544,7 +590,7 @@ export default function ReactDev() {
           <h2 className="text-2xl font-bold mb-6">Découvrez nos autres services</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {[
-              { to: '/devis', label: 'Calculateur de projet', desc: 'Estimez le coût de votre site ou application en ligne' },
+              { to: '/tarifs', label: 'Nos tarifs', desc: 'Consultez nos tarifs pour chaque prestation' },
               { to: '/', label: 'Tous nos services', desc: 'Sites web, SEO, publicité en ligne, marketing digital' }
             ].map((link) => (
               <Link

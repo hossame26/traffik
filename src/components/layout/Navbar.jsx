@@ -106,7 +106,6 @@ export default function Navbar() {
     { label: 'AUDIT', href: '/audit-site-web', isRoute: true },
     { label: 'PORTFOLIO', href: '/portfolio', isRoute: true },
     { label: 'BLOG', href: '/blog', isRoute: true },
-    { label: 'TARIFS', href: '/tarifs', isRoute: true },
     { label: 'CONTACT', href: '/#contact' }
   ];
 

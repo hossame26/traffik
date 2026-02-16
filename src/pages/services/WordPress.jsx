@@ -11,15 +11,16 @@ import {
   Zap,
   Search,
   Settings,
-  ChevronDown,
-  ChevronUp,
   Star,
   Clock,
   Users,
   TrendingUp,
-  Layers
+  Layers,
+  FileText,
+  ShoppingCart
 } from 'lucide-react';
 import SEOHead from '../../components/SEOHead';
+import FAQSection from '../../components/common/FAQSection';
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -39,7 +40,7 @@ const FAQ_DATA = [
   {
     question: 'Combien coute un site WordPress en 2026 ?',
     answer:
-      "Le prix d'un site WordPress varie selon la complexite du projet. Chez Traffik Web, nos tarifs commencent a 500\u20AC pour un site vitrine simple d'une page. Un site vitrine complet de 5 a 10 pages se situe entre 300\u20AC et 600\u20AC. Pour un site e-commerce avec WooCommerce, comptez entre 500\u20AC et 1200\u20AC. Ces prix incluent l'installation, la configuration, le theme premium, l'optimisation SEO de base et la mise en ligne. C'est bien en dessous des tarifs pratiques par les agences web traditionnelles qui facturent souvent entre 2000\u20AC et 5000\u20AC pour un resultat equivalent."
+      "Le prix d'un site WordPress varie selon la complexite du projet. Chez Traffik Web, nos tarifs commencent a 500€ pour un site vitrine simple d'une page. Un site vitrine complet de 5 a 10 pages se situe entre 300€ et 600€. Pour un site e-commerce avec WooCommerce, comptez entre 500€ et 1200€. Ces prix incluent l'installation, la configuration, le theme premium, l'optimisation SEO de base et la mise en ligne. C'est bien en dessous des tarifs pratiques par les agences web traditionnelles qui facturent souvent entre 2000€ et 5000€ pour un resultat equivalent."
   },
   {
     question: 'Quel theme WordPress choisir pour un site professionnel ?',
@@ -54,7 +55,7 @@ const FAQ_DATA = [
   {
     question: 'La maintenance WordPress est-elle incluse ?',
     answer:
-      "La livraison de votre site inclut une periode de 30 jours de support gratuit pour les ajustements mineurs et questions. Apres cette periode, nous proposons un forfait maintenance mensuel a partir de 49\u20AC/mois qui comprend : les mises a jour WordPress, themes et plugins, la surveillance de securite 24/7, les sauvegardes hebdomadaires, le monitoring de disponibilite et les corrections de bugs. Sans maintenance reguliere, un site WordPress devient vulnerable aux failles de securite et aux problemes de compatibilite. C'est un investissement essentiel pour la perennite de votre site."
+      "La livraison de votre site inclut une periode de 30 jours de support gratuit pour les ajustements mineurs et questions. Apres cette periode, nous proposons un forfait maintenance mensuel a partir de 49€/mois qui comprend : les mises a jour WordPress, themes et plugins, la surveillance de securite 24/7, les sauvegardes hebdomadaires, le monitoring de disponibilite et les corrections de bugs. Sans maintenance reguliere, un site WordPress devient vulnerable aux failles de securite et aux problemes de compatibilite. C'est un investissement essentiel pour la perennite de votre site."
   },
   {
     question: 'Mon site WordPress sera-t-il bien reference sur Google ?',
@@ -64,17 +65,12 @@ const FAQ_DATA = [
 ];
 
 export default function WordPress() {
-  const [openFaq, setOpenFaq] = React.useState(null);
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
-        title="Creation Site WordPress Pas Cher | Site Vitrine a partir de 500\u20AC | Traffik Web"
-        description="Creation de site WordPress professionnel a partir de 500\u20AC. Site vitrine, blog, e-commerce WooCommerce. Freelance WordPress en France. Devis gratuit en 24h. Design sur mesure, SEO optimise, responsive mobile."
+        title="Creation Site WordPress Pas Cher | Site Vitrine a partir de 500€ | Traffik Web"
+        description="Creation de site WordPress professionnel a partir de 500€. Site vitrine, blog, e-commerce WooCommerce. Freelance WordPress en France. Devis gratuit en 24h. Design sur mesure, SEO optimise, responsive mobile."
         canonical="https://traffik-web.fr/creation-site-wordpress"
         keywords="creation site wordpress, site vitrine wordpress, wordpress pas cher, wordpress freelance france, prix site wordpress, creation site web wordpress, site wordpress professionnel, developpeur wordpress freelance, agence wordpress pas cher, site vitrine prix"
       />
@@ -93,7 +89,7 @@ export default function WordPress() {
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
             Creation de Site{' '}
             <span className="text-[#0066FF]">WordPress</span> Professionnel a
-            partir de 500\u20AC
+            partir de 500€
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
             Vous cherchez un <strong>freelance WordPress en France</strong> pour
@@ -214,253 +210,296 @@ export default function WordPress() {
 
         {/* Nos offres WordPress */}
         <motion.section
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={stagger}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <motion.h2 variants={fadeUp} className="text-3xl font-bold mb-4">
-            Nos formules de creation de site WordPress
-          </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed"
-          >
-            Des tarifs transparents, adaptes a votre budget. Chaque formule inclut l'hebergement initial, l'installation WordPress, un theme premium personnalise, l'optimisation SEO de base et la mise en ligne. Pas de frais caches, pas de mauvaise surprise.
-          </motion.p>
+          <h2 className="text-3xl font-bold mb-2">
+            Nos formules WordPress
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">
+            Tarifs transparents, pas de frais caches.
+          </p>
 
-          <div className="space-y-4">
+          <div className="grid md:grid-cols-3 gap-5">
             {[
               {
                 name: 'Site One Page',
                 price: '500',
+                icon: FileText,
+                description: 'Carte de visite en ligne',
                 features: [
                   'Page unique responsive',
-                  'Design professionnel personnalise',
+                  'Design personnalise',
                   'Formulaire de contact',
-                  'Optimisation SEO de base',
-                  'Compatible mobile et tablette',
-                  'Livraison en 3-5 jours'
-                ],
-                ideal: 'Ideal pour : freelances, artisans, carte de visite en ligne'
+                  'SEO de base',
+                  'Livraison 3-5 jours'
+                ]
               },
               {
                 name: 'Site Vitrine',
-                price: '300',
+                price: '500',
+                icon: Globe,
+                description: 'Presence pro complete',
                 popular: true,
                 features: [
                   '5 a 10 pages sur mesure',
-                  'Theme premium personnalise',
+                  'Theme premium',
                   'Blog integre',
-                  'Formulaire de contact avance',
-                  'Optimisation SEO complete',
-                  'Integration Google Analytics',
-                  'Livraison en 7-10 jours'
-                ],
-                ideal: 'Ideal pour : PME, consultants, coachs, restaurants'
+                  'SEO complete',
+                  'Google Analytics'
+                ]
               },
               {
                 name: 'Site E-commerce',
                 price: '500',
+                icon: ShoppingCart,
+                description: 'Boutique WooCommerce',
                 features: [
-                  'Boutique WooCommerce complete',
-                  'Gestion des produits et stocks',
-                  'Paiement en ligne securise (Stripe, PayPal)',
-                  'Pages produits optimisees SEO',
-                  'Emails transactionnels configures',
-                  'Formation gestion boutique incluse',
-                  'Livraison en 10-15 jours'
-                ],
-                ideal: 'Ideal pour : e-commercants, createurs, marques'
+                  'Boutique complete',
+                  'Paiement securise',
+                  'Gestion stocks',
+                  'Pages produits SEO',
+                  'Formation incluse'
+                ]
               }
-            ].map((plan, index) => (
-              <motion.div
-                key={index}
-                variants={fadeUp}
-                className={`p-6 md:p-8 rounded-2xl border transition-all ${
-                  plan.popular
-                    ? 'border-[#0066FF] bg-[#0066FF]/5 dark:bg-[#0066FF]/5'
-                    : 'border-gray-200 dark:border-white/10'
-                }`}
-              >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-xl font-bold">{plan.name}</h3>
-                      {plan.popular && (
-                        <span className="px-3 py-1 text-xs font-bold bg-[#0066FF] text-white rounded-full flex items-center gap-1">
-                          <Star className="w-3 h-3" /> Populaire
-                        </span>
-                      )}
+            ].map((plan, index) => {
+              const Icon = plan.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`relative rounded-2xl p-6 flex flex-col transition-all duration-300 ${
+                    plan.popular
+                      ? 'bg-gray-50 dark:bg-white/[0.08] border-2 border-[#0066FF]/30 dark:border-[#0066FF]/40 shadow-xl shadow-[#0066FF]/5 dark:shadow-[#0066FF]/10 ring-1 ring-[#0066FF]/10'
+                      : 'bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] hover:border-gray-300 dark:hover:border-white/[0.15] hover:shadow-lg dark:hover:bg-white/[0.06]'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#0066FF] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#0066FF]/30">
+                        <Star className="w-3 h-3 fill-white" /> Populaire
+                      </span>
                     </div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      {plan.ideal}
-                    </p>
-                  </div>
-                  <div className="text-left md:text-right">
-                    <span className="text-3xl font-bold text-[#0066FF]">
-                      {plan.price}\u20AC
-                    </span>
-                    <span className="text-sm text-gray-400 ml-1">
-                      a partir de
-                    </span>
-                  </div>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-2">
-                  {plan.features.map((feature, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      <Check className="w-4 h-4 text-[#0066FF] flex-shrink-0" />
-                      {feature}
+                  )}
+
+                  <div className="flex items-center gap-3 mb-5 pt-1">
+                    <div className="w-11 h-11 rounded-xl bg-[#0066FF]/10 dark:bg-[#0066FF]/20 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#0066FF]" />
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-tight">{plan.name}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{plan.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <span className="text-xs text-gray-400 dark:text-gray-500">A partir de</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-extrabold text-gray-900 dark:text-white">{plan.price}€</span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-sm">
+                        <Check className="w-4 h-4 text-[#0066FF] mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-600 dark:text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <motion.a
+                    href={`https://wa.me/33635505374?text=${encodeURIComponent(
+                      `Bonjour, je suis interesse par l'offre ${plan.name} WordPress. Pouvez-vous m'envoyer un devis ?`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-full py-3 rounded-xl font-semibold text-center text-sm transition-all ${
+                      plan.popular
+                        ? 'bg-[#0066FF] text-white hover:bg-[#0055DD] shadow-lg shadow-[#0066FF]/25'
+                        : 'bg-gray-900 dark:bg-white/10 text-white hover:bg-gray-800 dark:hover:bg-white/[0.15] border border-transparent dark:border-white/[0.06]'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Demander un devis
+                  </motion.a>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.section>
 
         {/* Notre processus */}
         <motion.section
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={stagger}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <motion.h2 variants={fadeUp} className="text-3xl font-bold mb-4">
-            Comment se deroule la creation de votre site WordPress ?
-          </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed"
-          >
-            Un processus clair et efficace, de la prise de contact a la mise en ligne. Vous etes accompagne a chaque etape pour un resultat qui correspond exactement a vos attentes.
-          </motion.p>
-
-          <div className="space-y-6">
-            {[
-              {
-                step: '1',
-                icon: MessageCircle,
-                title: 'Echange et brief',
-                desc: 'Nous discutons de votre projet par WhatsApp ou visio. Objectifs, cible, fonctionnalites souhaitees, references visuelles. En 30 minutes, nous avons une vision claire de votre besoin.'
-              },
-              {
-                step: '2',
-                icon: Palette,
-                title: 'Maquette et design',
-                desc: 'Nous creons une maquette personnalisee basee sur votre charte graphique. Vous validez le design avant tout developpement. Modifications illimitees jusqu\'a satisfaction.'
-              },
-              {
-                step: '3',
-                icon: Layers,
-                title: 'Developpement WordPress',
-                desc: 'Installation de WordPress, configuration du theme, integration de vos contenus, installation et parametrage des plugins essentiels. Chaque page est optimisee pour la performance et le SEO.'
-              },
-              {
-                step: '4',
-                icon: Search,
-                title: 'Optimisation SEO et tests',
-                desc: 'Audit technique complet : vitesse de chargement, compatibilite mobile, balises meta, sitemap XML, schema markup. Tests sur tous les navigateurs et appareils avant mise en ligne.'
-              },
-              {
-                step: '5',
-                icon: Zap,
-                title: 'Mise en ligne et formation',
-                desc: 'Deploiement sur votre hebergement, configuration du nom de domaine, activation du SSL. Vous recevez une formation pour gerer votre site en autonomie. Support gratuit pendant 30 jours.'
-              }
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  variants={fadeUp}
-                  className="flex gap-4 md:gap-6"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-[#0066FF] text-white font-bold flex items-center justify-center text-sm flex-shrink-0">
-                      {item.step}
-                    </div>
-                    {index < 4 && (
-                      <div className="w-px h-full bg-[#0066FF]/20 mt-2" />
-                    )}
-                  </div>
-                  <div className="pb-6">
-                    <h3 className="text-lg font-bold mb-2 flex items-center gap-2">
-                      <Icon className="w-4 h-4 text-[#0066FF]" />
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#0066FF] border border-[#0066FF]/20 bg-[#0066FF]/5 mb-4">
+              Processus
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              5 Etapes. <span className="text-[#0066FF]">0 Surprise.</span>
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Une methodologie eprouvee pour des projets livres dans les temps.
+            </p>
           </div>
-        </motion.section>
 
-        {/* Pourquoi nous choisir */}
-        <motion.section
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={stagger}
-          className="mb-16"
-        >
-          <motion.h2 variants={fadeUp} className="text-3xl font-bold mb-4">
-            Pourquoi confier votre site WordPress a Traffik Web ?
-          </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed"
-          >
-            Contrairement aux agences web classiques qui facturent des milliers d'euros, nous proposons des{' '}
-            <strong>sites WordPress professionnels a prix freelance</strong>. Notre approche est simple : un interlocuteur unique, des delais rapides, une qualite irreprehensible et des tarifs justes. Pas de commercial, pas de chef de projet intermediaire, pas de surfacturation.
-          </motion.p>
-
-          <div className="grid sm:grid-cols-2 gap-4">
+          {/* Horizontal steps */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 mb-10">
             {[
-              {
-                icon: TrendingUp,
-                title: 'Prix imbattables',
-                desc: 'A partir de 500\u20AC pour un site WordPress complet. Jusqu\'a 70% moins cher qu\'une agence traditionnelle.'
-              },
-              {
-                icon: Clock,
-                title: 'Livraison rapide',
-                desc: 'Votre site est en ligne en 3 a 15 jours selon la complexite. Pas de delais interminables.'
-              },
-              {
-                icon: Search,
-                title: 'SEO des la conception',
-                desc: 'Chaque site est construit pour plaire a Google. Structure, vitesse, balisage : rien n\'est laisse au hasard.'
-              },
-              {
-                icon: Users,
-                title: 'Support reactif',
-                desc: 'Un freelance dedie qui repond en moins de 24h. Support WhatsApp, email ou visio selon vos preferences.'
-              }
+              { icon: MessageCircle, step: '01', title: 'Echange', desc: 'On discute de vos objectifs et on definit la strategie.' },
+              { icon: Palette, step: '02', title: 'Design', desc: 'Maquettes sur-mesure validees avant developpement.' },
+              { icon: Layers, step: '03', title: 'Creation', desc: 'Developpement avec les meilleures technologies.' },
+              { icon: Search, step: '04', title: 'Tests', desc: 'Performance, securite et compatibilite verifiees.' },
+              { icon: Zap, step: '05', title: 'Lancement', desc: 'Mise en ligne et suivi des performances.' }
             ].map((item, index) => {
               const Icon = item.icon;
               return (
                 <motion.div
                   key={index}
-                  variants={fadeUp}
-                  className="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.02] border border-gray-100 dark:border-white/5"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="flex flex-col items-center text-center"
                 >
-                  <Icon className="w-6 h-6 text-[#0066FF] mb-3" />
-                  <h3 className="font-bold mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="relative mb-4">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-100 dark:bg-white/[0.06] border border-gray-200 dark:border-white/10 flex items-center justify-center">
+                      <Icon className="w-6 h-6 md:w-7 md:h-7 text-gray-500 dark:text-gray-400" />
+                    </div>
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#0066FF] text-white text-xs font-bold flex items-center justify-center shadow-lg shadow-[#0066FF]/30">
+                      {item.step}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-[160px]">
                     {item.desc}
                   </p>
                 </motion.div>
               );
             })}
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <motion.a
+              href="https://wa.me/33635505374"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#0066FF] to-[#A855F7] text-white font-bold shadow-lg shadow-[#0066FF]/20 hover:shadow-xl hover:shadow-[#0066FF]/30 transition-shadow"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Demarrer mon projet
+              <Zap className="w-4 h-4" />
+            </motion.a>
+          </div>
+        </motion.section>
+
+        {/* Pourquoi nous choisir — Bento Grid */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Pourquoi <span className="text-[#0066FF]">Traffik Web</span> ?
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Sites WordPress pro a prix freelance. Sans compromis.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
+            {/* Prix — large card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0066FF]/[0.08] to-[#A855F7]/[0.06] dark:from-[#0066FF]/[0.12] dark:to-[#A855F7]/[0.08] border border-[#0066FF]/15 dark:border-[#0066FF]/20 relative overflow-hidden group hover:shadow-lg hover:shadow-[#0066FF]/5 transition-shadow duration-300"
+            >
+              <TrendingUp className="w-8 h-8 text-[#0066FF] relative z-10" />
+              <div className="relative z-10">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">-70% vs agence</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Sites complets a partir de 500€. Qualite pro, prix freelance.</p>
+              </div>
+            </motion.div>
+
+            {/* Livraison */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] relative overflow-hidden group hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Clock className="w-7 h-7 text-[#0066FF] relative z-10" />
+              <div className="relative z-10">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">3-15 jours</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Livraison rapide garantie</p>
+              </div>
+            </motion.div>
+
+            {/* SEO */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] relative overflow-hidden group hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Search className="w-7 h-7 text-[#A855F7] relative z-10" />
+              <div className="relative z-10">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">SEO natif</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Optimise Google des le depart</p>
+              </div>
+            </motion.div>
+
+            {/* Support */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] relative overflow-hidden group hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Users className="w-7 h-7 text-[#0066FF] relative z-10" />
+              <div className="relative z-10">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Support 24h</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">WhatsApp, email, visio</p>
+              </div>
+            </motion.div>
+
+            {/* Securite — wide card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] relative overflow-hidden group hover:shadow-xl transition-shadow duration-300"
+            >
+              <Shield className="w-8 h-8 text-[#0066FF] relative z-10" />
+              <div className="relative z-10">
+                <h3 className="text-xl font-bold text-white mb-1">Securite & performance</h3>
+                <p className="text-sm text-gray-400">SSL, sauvegardes auto, plugins securite, cache avance. Score PageSpeed 90+.</p>
+              </div>
+            </motion.div>
           </div>
         </motion.section>
 
@@ -610,39 +649,7 @@ export default function WordPress() {
             Questions frequentes sur la creation de site WordPress
           </motion.h2>
 
-          <div className="space-y-3">
-            {FAQ_DATA.map((faq, index) => (
-              <motion.div
-                key={index}
-                variants={fadeUp}
-                className="border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden"
-              >
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full p-5 flex items-center justify-between text-left font-bold hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors"
-                >
-                  <span className="pr-4">{faq.question}</span>
-                  {openFaq === index ? (
-                    <ChevronUp className="w-5 h-5 text-[#0066FF] flex-shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                  )}
-                </button>
-                {openFaq === index && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    transition={{ duration: 0.3 }}
-                    className="px-5 pb-5"
-                  >
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
+          <FAQSection faqs={FAQ_DATA} />
         </motion.section>
 
         {/* Internal Links Section */}
@@ -720,7 +727,7 @@ export default function WordPress() {
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
             Contactez-nous des maintenant pour discuter de votre projet. Devis gratuit en moins de 24 heures. Sites WordPress a partir de{' '}
-            <strong className="text-[#0066FF]">500\u20AC</strong>. Paiement en plusieurs fois possible.
+            <strong className="text-[#0066FF]">500€</strong>. Paiement en plusieurs fois possible.
           </p>
           <motion.a
             href="https://wa.me/33635505374"

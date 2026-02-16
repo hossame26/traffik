@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowLeft,
   Target,
@@ -9,7 +9,6 @@ import {
   Users,
   Zap,
   CheckCircle2,
-  ChevronDown,
   MessageCircle,
   Eye,
   DollarSign,
@@ -17,9 +16,11 @@ import {
   Megaphone,
   Rocket,
   ShieldCheck,
-  Clock
+  Clock,
+  ArrowRight
 } from 'lucide-react';
 import SEOHead from '../../components/SEOHead';
+import FAQSection from '../../components/common/FAQSection';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -33,137 +34,53 @@ const fadeUp = {
 const platforms = [
   {
     name: 'Facebook & Instagram Ads',
-    description: 'Touchez vos clients ideaux sur les reseaux sociaux les plus puissants au monde. Ciblage par centres d\'interet, comportements et audiences similaires.',
     icon: Users,
     color: 'from-blue-600 to-indigo-600',
     features: ['Ciblage ultra-precis', 'Retargeting dynamique', 'Audiences Lookalike', 'Stories & Reels Ads']
   },
   {
-    name: 'Google Ads (Search & Display)',
-    description: 'Apparaissez en premiere position quand vos clients recherchent vos produits ou services. Captez une intention d\'achat immediate.',
+    name: 'Google Ads',
     icon: Target,
     color: 'from-red-500 to-orange-500',
     features: ['Search Ads', 'Display Network', 'Google Shopping', 'YouTube Ads']
   },
   {
     name: 'TikTok Ads',
-    description: 'Exploitez la plateforme a la croissance la plus rapide pour toucher une audience jeune et engagee avec des formats video immersifs.',
     icon: Zap,
     color: 'from-pink-500 to-purple-600',
     features: ['In-Feed Ads', 'TopView', 'Branded Effects', 'Spark Ads']
   }
 ];
 
-const processSteps = [
-  {
-    step: '01',
-    title: 'Audit & Strategie',
-    description: 'Analyse de votre marche, de vos concurrents et definition d\'une strategie publicitaire sur mesure avec des objectifs clairs et mesurables.',
-    icon: Eye
-  },
-  {
-    step: '02',
-    title: 'Creation & Configuration',
-    description: 'Creation des visuels, redaction des annonces, configuration du pixel de suivi et parametrage des campagnes avec un ciblage optimise.',
-    icon: Megaphone
-  },
-  {
-    step: '03',
-    title: 'Lancement & Optimisation',
-    description: 'Mise en ligne des campagnes, suivi quotidien des performances et optimisations continues pour maximiser votre retour sur investissement.',
-    icon: Rocket
-  },
-  {
-    step: '04',
-    title: 'Reporting & Scaling',
-    description: 'Rapports detailles hebdomadaires, analyse des KPIs et recommandations strategiques pour scaler les campagnes rentables.',
-    icon: BarChart3
-  }
-];
-
-const benefits = [
-  'Ciblage precis de votre audience ideale',
-  'Resultats mesurables et transparents',
-  'Optimisation quotidienne des campagnes',
-  'Rapports detailles chaque semaine',
-  'Pas d\'engagement longue duree',
-  'Expert dedie a votre compte',
-  'Strategies testees et prouvees',
-  'Accompagnement personnalise'
-];
-
 const faqs = [
   {
-    question: 'Quel budget publicitaire minimum faut-il prevoir pour Facebook Ads ou Google Ads ?',
-    answer: 'Nous recommandons un budget publicitaire minimum de 300 a 500 euros par mois par plateforme pour obtenir des resultats significatifs. Ce budget s\'ajoute a nos frais de gestion a partir de 300 euros/mois. Ce montant permet de collecter suffisamment de donnees pour optimiser vos campagnes et atteindre un retour sur investissement positif. Pour les e-commerces, un budget de 500 a 1000 euros par mois est ideal pour scaler rapidement.'
+    question: 'Quel budget publicitaire minimum faut-il prevoir ?',
+    answer: 'Minimum 300 a 500 euros par mois par plateforme pour des resultats significatifs. Ce budget s\'ajoute a nos frais de gestion (a partir de 300 euros/mois). Pour les e-commerces, 500 a 1000 euros/mois est ideal pour scaler rapidement.'
   },
   {
-    question: 'En combien de temps vais-je voir des resultats avec la publicite en ligne ?',
-    answer: 'Les premiers resultats sont generalement visibles des la premiere semaine de diffusion. Cependant, la phase d\'optimisation reelle commence apres 2 a 4 semaines, le temps que les algorithmes des plateformes collectent suffisamment de donnees pour identifier les audiences les plus performantes. Apres 1 a 2 mois de gestion, les campagnes atteignent generalement leur rythme de croisiere avec un cout par acquisition stable et optimise.'
+    question: 'En combien de temps vais-je voir des resultats ?',
+    answer: 'Premiers resultats des la premiere semaine. Phase d\'optimisation reelle apres 2 a 4 semaines. Apres 1 a 2 mois, les campagnes atteignent leur rythme de croisiere avec un cout par acquisition stable.'
   },
   {
-    question: 'Quelle plateforme publicitaire choisir entre Facebook Ads, Google Ads et TikTok Ads ?',
-    answer: 'Le choix depend de votre activite et de votre cible. Facebook et Instagram Ads sont ideaux pour le e-commerce, les services B2C et la generation de leads grace a leur ciblage comportemental avance. Google Ads est recommande quand vos clients recherchent activement vos produits ou services (intention d\'achat forte). TikTok Ads est parfait pour toucher une audience 18-35 ans avec des produits visuels. Nous vous conseillons gratuitement sur la meilleure strategie lors de notre premier echange.'
+    question: 'Quelle plateforme choisir entre Facebook, Google et TikTok ?',
+    answer: 'Facebook/Instagram pour le e-commerce et la generation de leads. Google Ads quand vos clients recherchent activement vos produits (intention d\'achat forte). TikTok pour toucher les 18-35 ans avec des produits visuels. On vous conseille gratuitement.'
   },
   {
-    question: 'Comment mesurez-vous le retour sur investissement (ROI) de mes campagnes ?',
-    answer: 'Nous mettons en place un suivi complet avec le pixel Facebook, Google Analytics et le suivi des conversions. Chaque vente, chaque lead, chaque action est tracee. Vous recevez un rapport hebdomadaire detaillant : le nombre d\'impressions, le taux de clic (CTR), le cout par clic (CPC), le cout par acquisition (CPA), le nombre de conversions et le retour sur investissement global (ROAS). Tout est transparent et mesurable.'
+    question: 'Comment mesurez-vous le ROI de mes campagnes ?',
+    answer: 'Pixel Facebook, Google Analytics et suivi des conversions. Chaque vente et chaque lead est trace. Rapport hebdomadaire : impressions, CTR, CPC, CPA, conversions et ROAS. Tout est transparent.'
   },
   {
-    question: 'Dois-je m\'engager sur une duree minimum pour la gestion publicitaire ?',
-    answer: 'Non, nous ne demandons aucun engagement de duree minimum. Nous fonctionnons au mois le mois. Cependant, nous recommandons un minimum de 3 mois pour laisser le temps aux campagnes d\'etre correctement optimisees et atteindre leur plein potentiel. La majorite de nos clients restent avec nous sur le long terme car les resultats parlent d\'eux-memes.'
+    question: 'Dois-je m\'engager sur une duree minimum ?',
+    answer: 'Non, zero engagement. Mois par mois. On recommande 3 mois minimum pour laisser les campagnes atteindre leur plein potentiel. La majorite de nos clients restent sur le long terme.'
   }
 ];
-
-function FAQItem({ question, answer, index }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <motion.div
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      custom={index * 0.1}
-      className="border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden"
-    >
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors"
-      >
-        <h3 className="text-lg font-semibold pr-4">{question}</h3>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex-shrink-0"
-        >
-          <ChevronDown className="w-5 h-5 text-[#0066FF]" />
-        </motion.div>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <p className="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
 
 export default function Publicite() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
         title="Publicite Digitale Facebook Ads & Google Ads | ROI Garanti | Traffik Web"
-        description="Expert en publicite digitale Facebook Ads, Google Ads et TikTok Ads. Gestion de campagnes publicitaires en ligne avec ROI garanti. Agence Facebook Ads France. A partir de 300 euros/mois."
+        description="Expert en publicite digitale Facebook Ads, Google Ads et TikTok Ads. Gestion de campagnes publicitaires en ligne avec ROI garanti. A partir de 300 euros/mois."
         canonical="https://traffik-web.fr/publicite-digitale"
         keywords="publicite facebook ads, google ads, publicite digitale, gestion publicite en ligne, agence facebook ads france, campagne publicitaire en ligne, publicite instagram, tiktok ads, cout publicite facebook, retour sur investissement publicite"
       />
@@ -184,32 +101,32 @@ export default function Publicite() {
           animate="visible"
           className="mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-sm font-medium mb-6">
-            <Megaphone className="w-4 h-4" />
-            Publicite digitale
+          <div className="flex items-center gap-3 mb-5">
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-[#0066FF] to-purple-600">
+              <Megaphone className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-sm font-medium text-[#0066FF] bg-[#0066FF]/10 px-3 py-1 rounded-full">
+              Publicite digitale
+            </span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             Publicite Digitale{' '}
-            <span className="text-[#0066FF]">Facebook Ads</span> &{' '}
-            <span className="text-[#0066FF]">Google Ads</span> :
-            Generez des Clients avec un ROI Garanti
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">
+              Facebook Ads & Google Ads
+            </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            Vous investissez dans la publicite en ligne mais les resultats ne sont pas au rendez-vous ?
-            Vous ne savez pas par ou commencer pour lancer vos premieres campagnes publicitaires ?
-            Chez <strong>Traffik Web</strong>, nous gerons vos campagnes <strong>Facebook Ads</strong>,{' '}
-            <strong>Google Ads</strong> et <strong>TikTok Ads</strong> de A a Z pour transformer chaque
-            euro investi en clients et en chiffre d'affaires.
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mb-8">
+            Generez des clients et du chiffre d'affaires avec des campagnes Facebook Ads, Google Ads et TikTok Ads gerees de A a Z.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-wrap gap-4">
             <motion.a
               href="https://wa.me/33635505374"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#25D366] text-white font-bold text-lg shadow-lg shadow-[#25D366]/25"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#0066FF] text-white font-bold shadow-lg shadow-[#0066FF]/25 hover:shadow-[#0066FF]/40 transition-shadow"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
@@ -218,7 +135,7 @@ export default function Publicite() {
             </motion.a>
             <Link
               to="/tarifs"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border-2 border-[#0066FF] text-[#0066FF] font-bold text-lg hover:bg-[#0066FF]/5 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-gray-200 dark:border-white/10 text-black dark:text-white font-bold hover:border-[#0066FF] hover:text-[#0066FF] transition-colors"
             >
               <DollarSign className="w-5 h-5" />
               Voir les tarifs
@@ -226,200 +143,260 @@ export default function Publicite() {
           </div>
         </motion.div>
 
-        {/* Pourquoi la publicite digitale */}
+        {/* Bento Grid — Pourquoi investir */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Pourquoi Investir dans la <span className="text-[#0066FF]">Publicite Digitale</span> en 2026 ?
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Pourquoi la <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">Publicite Digitale</span> ?
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Le levier le plus rapide pour generer des clients.
+            </p>
+          </div>
 
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-            La publicite digitale est devenue le levier d'acquisition le plus puissant pour les entreprises
-            de toutes tailles. Contrairement au referencement naturel (SEO) qui prend plusieurs mois pour
-            porter ses fruits, la <strong>publicite Facebook Ads</strong> et la <strong>publicite Google Ads</strong>{' '}
-            permettent de generer des resultats immediats : plus de visites, plus de prospects, plus de ventes.
-          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
+            {/* Large gradient — Resultats des J1 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0066FF]/[0.08] to-[#A855F7]/[0.06] dark:from-[#0066FF]/[0.12] dark:to-[#A855F7]/[0.08] border border-[#0066FF]/15 dark:border-[#0066FF]/20 hover:shadow-lg hover:shadow-[#0066FF]/5 transition-shadow duration-300"
+            >
+              <TrendingUp className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Resultats des J1</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Premiers leads et ventes des les premiers jours de diffusion.</p>
+              </div>
+            </motion.div>
 
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-            En France, plus de <strong>80% des consommateurs</strong> recherchent un produit ou un service en ligne
-            avant d'acheter. Si votre entreprise n'est pas visible sur Google ou sur les reseaux sociaux,
-            vous laissez vos concurrents capter ces clients potentiels. La <strong>gestion de publicite en ligne</strong>{' '}
-            professionnelle vous permet de vous positionner exactement devant les personnes les plus susceptibles
-            d'acheter chez vous.
-          </p>
+            {/* Small — Ciblage chirurgical */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Target className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Ciblage chirurgical</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Audiences ultra-precises</p>
+              </div>
+            </motion.div>
 
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            Notre expertise en tant qu'<strong>agence Facebook Ads en France</strong> nous permet de creer des
-            campagnes publicitaires hautement ciblees qui maximisent votre retour sur investissement. Que vous
-            vendiez des produits en ligne, proposiez des services locaux ou cherchiez a generer des leads qualifies,
-            nous avons la strategie adaptee a vos objectifs.
-          </p>
+            {/* Small — ROI mesurable */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <LineChart className="w-7 h-7 text-[#A855F7]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">ROI mesurable</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Chaque euro trace</p>
+              </div>
+            </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: TrendingUp, title: 'Resultats immediats', desc: 'Premiers leads et ventes des les premiers jours de diffusion de vos campagnes publicitaires.' },
-              { icon: Target, title: 'Ciblage chirurgical', desc: 'Touchez uniquement les personnes correspondant a votre client ideal grace au ciblage avance.' },
-              { icon: LineChart, title: 'ROI mesurable', desc: 'Chaque euro investi est trace. Vous savez exactement combien vous rapporte votre publicite.' }
-            ].map((item, index) => (
-              <motion.div
-                key={item.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={index}
-                className="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#0066FF]/10 flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-[#0066FF]" />
-                </div>
-                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
-              </motion.div>
-            ))}
+            {/* Small — Expert dedie */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Users className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Expert dedie</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">1 interlocuteur unique</p>
+              </div>
+            </motion.div>
+
+            {/* Wide dark — Multi-plateforme */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
+            >
+              <Megaphone className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Multi-plateforme</h3>
+                <p className="text-sm text-gray-400">Facebook, Instagram, Google, TikTok — on gere toutes vos campagnes.</p>
+              </div>
+            </motion.div>
           </div>
         </motion.section>
 
-        {/* Plateformes */}
+        {/* Plateformes — Horizontal Grid */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Les Plateformes Publicitaires que Nous <span className="text-[#0066FF]">Gerons</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            Plateformes que nous <span className="text-[#0066FF]">gerons</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-10">
-            Chaque plateforme publicitaire a ses specificites. Nous maitrisons les trois ecosystemes
-            principaux pour deployer la strategie la plus adaptee a votre marche et a vos objectifs commerciaux.
+          <p className="text-gray-500 dark:text-gray-400 mb-8">
+            Chaque ecosysteme maitrise pour maximiser votre ROI.
           </p>
 
-          <div className="space-y-6">
+          <div className="grid md:grid-cols-3 gap-5">
             {platforms.map((platform, index) => (
               <motion.div
                 key={platform.name}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                custom={index}
-                className="p-8 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
+                transition={{ delay: index * 0.1 }}
+                className="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 hover:border-[#0066FF]/30 transition-colors"
               >
-                <div className="flex items-start gap-5">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${platform.color} flex items-center justify-center flex-shrink-0`}>
-                    <platform.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">{platform.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                      {platform.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {platform.features.map((feature) => (
-                        <span
-                          key={feature}
-                          className="px-3 py-1 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-sm font-medium"
-                        >
-                          {feature}
-                        </span>
-                      ))}
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${platform.color} flex items-center justify-center mb-4`}>
+                  <platform.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold mb-3">{platform.name}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {platform.features.map((feature) => (
+                    <span
+                      key={feature}
+                      className="px-3 py-1 rounded-full bg-[#0066FF]/10 text-[#0066FF] text-xs font-medium"
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Processus — Horizontal */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-20"
+        >
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#0066FF] border border-[#0066FF]/20 bg-[#0066FF]/5 mb-4">
+              Processus
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              5 Etapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">0 Surprise.</span>
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              De l'audit au scaling, tout est cadre.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 mb-10">
+            {[
+              { icon: Eye, step: '01', title: 'Audit', desc: 'Analyse marche, concurrence et objectifs.' },
+              { icon: Megaphone, step: '02', title: 'Creation', desc: 'Visuels, annonces et ciblage.' },
+              { icon: Rocket, step: '03', title: 'Lancement', desc: 'Mise en ligne et suivi quotidien.' },
+              { icon: BarChart3, step: '04', title: 'Optimisation', desc: 'Tests A/B et ajustements continus.' },
+              { icon: TrendingUp, step: '05', title: 'Scaling', desc: 'On monte le budget sur ce qui marche.' },
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="relative mb-4">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-100 dark:bg-white/[0.06] border border-gray-200 dark:border-white/10 flex items-center justify-center">
+                      <Icon className="w-6 h-6 md:w-7 md:h-7 text-gray-500 dark:text-gray-400" />
                     </div>
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#0066FF] text-white text-xs font-bold flex items-center justify-center shadow-lg shadow-[#0066FF]/30">
+                      {item.step}
+                    </span>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-[160px]">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <motion.a
+              href="https://wa.me/33635505374"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-[#0066FF] to-[#A855F7] text-white font-bold shadow-lg shadow-[#0066FF]/20 hover:shadow-xl hover:shadow-[#0066FF]/30 transition-shadow"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Lancer mes campagnes
+              <Zap className="w-4 h-4" />
+            </motion.a>
           </div>
         </motion.section>
 
-        {/* Notre Methode */}
+        {/* Ce que comprend — compact grid + pricing */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Notre Methode pour des <span className="text-[#0066FF]">Campagnes Rentables</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            Ce qui est <span className="text-[#0066FF]">inclus</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-10">
-            Une publicite digitale performante ne s'improvise pas. Notre processus eprouve en 4 etapes
-            garantit que chaque campagne est optimisee pour maximiser votre retour sur investissement et
-            atteindre vos objectifs business.
+          <p className="text-gray-500 dark:text-gray-400 mb-8">
+            Service complet, transparent, oriente resultats.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.step}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={index}
-                className="p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-3xl font-black text-[#0066FF]/20">{step.step}</span>
-                  <div className="w-10 h-10 rounded-xl bg-[#0066FF]/10 flex items-center justify-center">
-                    <step.icon className="w-5 h-5 text-[#0066FF]" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-bold mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Ce que vous obtenez */}
-        <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ce que Comprend Notre <span className="text-[#0066FF]">Gestion Publicitaire</span>
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            En confiant la gestion de vos campagnes publicitaires a Traffik Web, vous beneficiez d'un
-            service complet, transparent et oriente resultats. Notre offre de <strong>gestion publicite en ligne</strong>{' '}
-            inclut tout ce dont vous avez besoin pour reussir.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-4 mb-10">
-            {benefits.map((benefit, index) => (
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mb-10">
+            {[
+              'Ciblage precis de votre audience',
+              'Resultats mesurables et transparents',
+              'Optimisation quotidienne',
+              'Rapports hebdomadaires',
+              'Zero engagement longue duree',
+              'Expert dedie a votre compte',
+              'Strategies testees et prouvees',
+              'Accompagnement personnalise',
+              'Configuration pixel & tracking'
+            ].map((benefit, index) => (
               <motion.div
                 key={benefit}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                custom={index * 0.05}
-                className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
+                transition={{ delay: index * 0.03 }}
+                className="flex items-center gap-3 p-3 rounded-xl"
               >
-                <CheckCircle2 className="w-5 h-5 text-[#0066FF] flex-shrink-0" />
-                <span className="text-sm font-medium">{benefit}</span>
+                <CheckCircle2 className="w-4 h-4 text-[#0066FF] flex-shrink-0" />
+                <span className="text-sm text-gray-600 dark:text-gray-300">{benefit}</span>
               </motion.div>
             ))}
           </div>
 
           {/* Pricing highlight */}
           <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="p-8 rounded-3xl bg-gradient-to-br from-[#0066FF]/5 to-purple-500/5 border border-[#0066FF]/20"
           >
@@ -442,152 +419,157 @@ export default function Publicite() {
           </motion.div>
         </motion.section>
 
-        {/* Pourquoi nous choisir */}
+        {/* Pourquoi nous choisir — Bento Grid */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Pourquoi Choisir <span className="text-[#0066FF]">Traffik Web</span> pour Vos Campagnes ?
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Pourquoi <span className="text-[#0066FF]">Traffik Web</span> ?
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              Expert dedie, transparence totale, resultats concrets.
+            </p>
+          </div>
 
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-            Contrairement aux grandes agences de publicite digitale qui facturent des milliers d'euros
-            et vous considerent comme un numero, Traffik Web offre un <strong>accompagnement personnalise</strong>{' '}
-            avec un expert dedie a votre compte. Nous travaillons avec des entreprises de toutes tailles,
-            des auto-entrepreneurs aux PME, et nous adaptons notre strategie a votre budget et vos objectifs.
-          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
+            {/* Large gradient — Transparence */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0066FF]/[0.08] to-[#A855F7]/[0.06] dark:from-[#0066FF]/[0.12] dark:to-[#A855F7]/[0.08] border border-[#0066FF]/15 dark:border-[#0066FF]/20 hover:shadow-lg hover:shadow-[#0066FF]/5 transition-shadow duration-300"
+            >
+              <ShieldCheck className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Transparence totale</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Acces complet a vos comptes publicitaires. Vos donnees restent les votres.</p>
+              </div>
+            </motion.div>
 
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-            Notre approche est simple : la transparence totale. Vous avez acces a vos comptes publicitaires,
-            vous recevez des rapports detailles chaque semaine, et nous vous expliquons chaque decision
-            strategique. Pas de jargon inutile, pas de frais caches, juste des resultats concrets et mesurables.
-          </p>
+            {/* Small — Reactivite */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Clock className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Reponse 24h</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Optimisations quotidiennes</p>
+              </div>
+            </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { icon: ShieldCheck, title: 'Transparence totale', desc: 'Acces complet a vos comptes publicitaires. Vous restez proprietaire de vos donnees et de vos campagnes.' },
-              { icon: Clock, title: 'Reactivite maximale', desc: 'Optimisations quotidiennes et reponse sous 24h. Votre budget publicitaire est entre de bonnes mains.' },
-              { icon: TrendingUp, title: 'Focus sur le ROI', desc: 'Notre objectif : que chaque euro investi vous rapporte plus. Nous optimisons pour les conversions, pas les clics.' },
-              { icon: Users, title: 'Expert dedie', desc: 'Un seul interlocuteur qui connait votre business. Pas de turnover, pas de perte de contexte.' }
-            ].map((item, index) => (
-              <motion.div
-                key={item.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={index}
-                className="flex items-start gap-4 p-5 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10"
-              >
-                <div className="w-10 h-10 rounded-lg bg-[#0066FF]/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-5 h-5 text-[#0066FF]" />
-                </div>
-                <div>
-                  <h3 className="font-bold mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+            {/* Small — Focus ROI */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <TrendingUp className="w-7 h-7 text-[#A855F7]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Focus ROI</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Conversions, pas les clics</p>
+              </div>
+            </motion.div>
+
+            {/* Small — Expert dedie */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
+            >
+              <Users className="w-7 h-7 text-[#0066FF]" />
+              <div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">1 interlocuteur</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Pas de turnover</p>
+              </div>
+            </motion.div>
+
+            {/* Wide dark — Prix freelance */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
+            >
+              <DollarSign className="w-8 h-8 text-[#0066FF]" />
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Prix freelance, resultats agence</h3>
+                <p className="text-sm text-gray-400">Pas de commercial, pas de chef de projet. Vous payez la performance, pas la structure.</p>
+              </div>
+            </motion.div>
           </div>
         </motion.section>
 
-        {/* Complement SEO + Site */}
+        {/* Internal links pills */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Publicite Digitale + <span className="text-[#0066FF]">SEO + Site Web</span> : Le Combo Gagnant
-          </h2>
-
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-            La publicite digitale seule ne suffit pas toujours. Pour maximiser vos resultats, nous recommandons
-            de combiner vos campagnes publicitaires avec un <strong>site web optimise</strong> qui convertit
-            vos visiteurs en clients, et une strategie de <strong>referencement naturel (SEO)</strong> pour
-            capter du trafic organique gratuit sur le long terme.
-          </p>
-
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            Un site mal concu fait fuir les visiteurs que votre publicite attire. C'est pourquoi nous proposons
-            egalement la <Link to="/creation-site-shopify" className="text-[#0066FF] font-semibold hover:underline">creation de sites Shopify</Link>{' '}
-            optimises pour la conversion, ainsi qu'un service de{' '}
-            <Link to="/referencement-seo" className="text-[#0066FF] font-semibold hover:underline">referencement SEO</Link>{' '}
-            complet pour dominer les resultats de recherche Google sur le long terme.
-          </p>
-
+          <h2 className="text-2xl font-bold mb-6">Nos autres services</h2>
           <div className="flex flex-wrap gap-3">
-            <Link
-              to="/creation-site-shopify"
-              className="px-5 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-medium hover:border-[#0066FF] hover:text-[#0066FF] transition-colors"
-            >
-              Creation Site Shopify
-            </Link>
-            <Link
-              to="/referencement-seo"
-              className="px-5 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-medium hover:border-[#0066FF] hover:text-[#0066FF] transition-colors"
-            >
-              Referencement SEO
-            </Link>
-            <Link
-              to="/tarifs"
-              className="px-5 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-medium hover:border-[#0066FF] hover:text-[#0066FF] transition-colors"
-            >
-              Tous nos tarifs
-            </Link>
-            <Link
-              to="/blog"
-              className="px-5 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-medium hover:border-[#0066FF] hover:text-[#0066FF] transition-colors"
-            >
-              Blog & Conseils
-            </Link>
+            {[
+              { to: '/creation-site-shopify', label: 'Creation Site Shopify' },
+              { to: '/referencement-seo', label: 'Referencement SEO' },
+              { to: '/creation-site-wordpress', label: 'Creation Site WordPress' },
+              { to: '/tarifs', label: 'Tous nos tarifs' },
+            ].map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="px-5 py-3 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-medium hover:border-[#0066FF] hover:text-[#0066FF] transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </motion.section>
 
         {/* FAQ */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Questions Frequentes sur la <span className="text-[#0066FF]">Publicite Digitale</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            Questions <span className="text-[#0066FF]">frequentes</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-10">
-            Retrouvez les reponses aux questions les plus posees par nos clients sur la gestion
-            de campagnes publicitaires Facebook Ads, Google Ads et TikTok Ads.
+          <p className="text-gray-500 dark:text-gray-400 mb-10">
+            Les reponses aux questions les plus posees sur nos campagnes publicitaires.
           </p>
 
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <FAQItem key={index} question={faq.question} answer={faq.answer} index={index} />
-            ))}
-          </div>
+          <FAQSection faqs={faqs} />
         </motion.section>
 
         {/* CTA Final */}
         <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center p-10 md:p-14 rounded-3xl bg-gradient-to-br from-[#0066FF]/10 to-purple-500/10 border border-[#0066FF]/20"
+          className="text-center p-10 md:p-14 rounded-3xl bg-gradient-to-br from-[#0066FF]/10 to-purple-600/10 border border-[#0066FF]/20"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pret a Lancer Vos Campagnes Publicitaires ?
+            Pret a lancer vos campagnes ?
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8 max-w-2xl mx-auto">
-            Discutons de votre projet gratuitement. Nous analysons votre marche, definissons la meilleure
-            strategie publicitaire et vous proposons un plan d'action concret pour atteindre vos objectifs.
-            Premier echange gratuit et sans engagement.
+          <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            Premier echange gratuit et sans engagement. On analyse votre marche et on vous propose un plan d'action concret.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -595,19 +577,22 @@ export default function Publicite() {
               href="https://wa.me/33635505374"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#25D366] text-white font-bold text-lg shadow-lg shadow-[#25D366]/25"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-[#25D366]/25"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
               <MessageCircle className="w-5 h-5" />
               Discuter sur WhatsApp
             </motion.a>
-            <Link
-              to="/tarifs"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border-2 border-[#0066FF] text-[#0066FF] font-bold text-lg hover:bg-[#0066FF]/5 transition-colors"
-            >
-              Voir les tarifs
-            </Link>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                to="/tarifs"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#0066FF] to-purple-600 text-white font-bold shadow-lg shadow-[#0066FF]/25"
+              >
+                Voir les tarifs
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </motion.div>
           </div>
         </motion.section>
       </div>

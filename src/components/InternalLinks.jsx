@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
 const allLinks = [
-  { href: '/creation-site-shopify', title: 'Création Shopify', desc: 'Boutique e-commerce à partir de 250\u20AC' },
-  { href: '/creation-site-wordpress', title: 'Création WordPress', desc: 'Site vitrine professionnel à partir de 500\u20AC' },
-  { href: '/developpement-react-nextjs', title: 'Développement React', desc: 'Application web sur mesure à partir de 600\u20AC' },
-  { href: '/publicite-digitale', title: 'Publicité Digitale', desc: 'Facebook Ads & Google Ads dès 300\u20AC/mois' },
-  { href: '/referencement-seo', title: 'Référencement SEO', desc: 'Première page Google dès 400\u20AC/mois' },
+  { href: '/creation-site-shopify', title: 'Création Shopify', desc: 'Boutique e-commerce à partir de 250€' },
+  { href: '/creation-site-wordpress', title: 'Création WordPress', desc: 'Site vitrine professionnel à partir de 500€' },
+  { href: '/developpement-react-nextjs', title: 'Développement React', desc: 'Application web sur mesure à partir de 600€' },
+  { href: '/publicite-digitale', title: 'Publicité Digitale', desc: 'Facebook Ads & Google Ads dès 300€/mois' },
+  { href: '/referencement-seo', title: 'Référencement SEO', desc: 'Première page Google dès 90€/mois' },
   { href: '/tarifs', title: 'Nos Tarifs', desc: 'Grille tarifaire transparente' },
   { href: '/portfolio', title: 'Portfolio', desc: 'Nos réalisations web' },
   { href: '/blog', title: 'Blog', desc: 'Guides et conseils web & SEO' },

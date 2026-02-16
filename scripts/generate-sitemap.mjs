@@ -21,7 +21,6 @@ const STATIC_ROUTES = [
   { path: '/portfolio', priority: '0.7', changefreq: 'monthly' },
   { path: '/a-propos', priority: '0.6', changefreq: 'monthly' },
   { path: '/blog', priority: '0.9', changefreq: 'daily' },
-  { path: '/devis', priority: '0.7', changefreq: 'monthly' },
   { path: '/mentions-legales', priority: '0.3', changefreq: 'yearly' },
   { path: '/politique-confidentialite', priority: '0.3', changefreq: 'yearly' },
   { path: '/cgv', priority: '0.3', changefreq: 'yearly' },
