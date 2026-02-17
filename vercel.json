@@ -1,7 +1,7 @@
 {
   "rewrites": [
     { "source": "/blog/:slug", "destination": "/blog/:slug/index.html" },
-    { "source": "/((?!assets|favicon|og-image|robots|sitemap|blog|vite).*)", "destination": "/$1/index.html" }
+    { "source": "/((?!assets|favicon|og-image|robots|sitemap|blog|vite).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

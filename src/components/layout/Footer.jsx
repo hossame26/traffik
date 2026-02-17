@@ -134,7 +134,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm">
               {footerLinks.services.map((link) => (
-                <FooterLink key={link.label} href={link.href}>
+                <FooterLink key={link.label} href={link.href} isRoute={link.isRoute}>
                   {link.label}
                 </FooterLink>
               ))}
@@ -148,7 +148,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm">
               {footerLinks.navigation.map((link) => (
-                <FooterLink key={link.label} href={link.href}>
+                <FooterLink key={link.label} href={link.href} isRoute={link.isRoute}>
                   {link.label}
                 </FooterLink>
               ))}
