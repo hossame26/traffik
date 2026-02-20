@@ -330,7 +330,7 @@ function DesktopHero() {
         <div className="absolute inset-0 bg-noise opacity-[0.02] dark:opacity-[0.03] pointer-events-none" />
 
         {/* Phase 0 */}
-        <motion.div style={{ opacity: phase0 }} className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6">
+        <motion.div style={{ opacity: phase0 }} className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 pointer-events-none">
           <div className="text-center max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -365,7 +365,7 @@ function DesktopHero() {
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.6 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center">
+              className="flex flex-col sm:flex-row gap-3 justify-center pointer-events-auto">
               <motion.a href="#contact"
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -8px rgba(0,102,255,0.5)' }}
                 whileTap={{ scale: 0.95 }}
@@ -392,7 +392,7 @@ function DesktopHero() {
         </motion.div>
 
         {/* Phase 1 */}
-        <motion.div style={{ opacity: phase1 }} className="absolute inset-0 flex items-center justify-center z-10 px-6">
+        <motion.div style={{ opacity: phase1 }} className="absolute inset-0 flex items-center justify-center z-10 px-6 pointer-events-none">
           <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.2rem] font-semibold text-gray-900 dark:text-white text-center max-w-4xl leading-snug tracking-tight">
             Votre site web est votre<br />meilleur commercial.{' '}
             <span className="text-[#0066FF] font-bold">24/7.</span>
@@ -400,14 +400,14 @@ function DesktopHero() {
         </motion.div>
 
         {/* Phase 2 */}
-        <motion.div style={{ opacity: phase2 }} className="absolute inset-0 flex items-center justify-center z-10 px-6">
+        <motion.div style={{ opacity: phase2 }} className="absolute inset-0 flex items-center justify-center z-10 px-6 pointer-events-none">
           <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[3.2rem] font-semibold text-gray-900 dark:text-white text-center max-w-4xl leading-snug tracking-tight">
             Dans le bruit digital, seule<br />la <span className="text-[#0066FF] font-bold">performance</span> convertit
           </p>
         </motion.div>
 
         {/* Phase 3 */}
-        <motion.div style={{ opacity: phase3 }} className="absolute inset-0 flex items-center justify-center z-10 px-6">
+        <motion.div style={{ opacity: phase3 }} className="absolute inset-0 flex items-center justify-center z-10 px-6 pointer-events-none">
           <div className="text-center">
             <p className="text-lg sm:text-xl md:text-2xl text-gray-500 dark:text-gray-400 font-medium mb-3 tracking-wide">Nous sommes</p>
             <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.05em] text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] via-[#6C5CE7] to-[#A855F7]">
@@ -417,13 +417,13 @@ function DesktopHero() {
         </motion.div>
 
         {/* Phase 4 */}
-        <motion.div style={{ opacity: phase4 }} className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6">
+        <motion.div style={{ opacity: phase4 }} className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 pointer-events-none">
           <div className="text-center max-w-4xl">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-8 leading-tight tracking-tight">
               Des sites web performants,<br />du design au ROI, livrés{' '}
               <span className="text-[#0066FF]">en 2 semaines</span>
             </h2>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12 pointer-events-auto">
               <motion.a href="#contact"
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -8px rgba(0,102,255,0.5)' }}
                 whileTap={{ scale: 0.95 }}

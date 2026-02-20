@@ -10,9 +10,6 @@ import ScrollToTop from './components/layout/ScrollToTop';
 const WhatsAppButton = lazy(() => import('./components/layout/WhatsAppButton'));
 const CookieBanner = lazy(() => import('./components/layout/CookieBanner'));
 
-// Lazy load UI Effects (heavy animations)
-const GlobalSparkles = lazy(() => import('./components/ui/GlobalSparkles'));
-
 // Critical above-the-fold section
 import Hero from './components/sections/Hero';
 
@@ -80,11 +77,6 @@ export default function App() {
     <Router>
       <ScrollToTop />
       <div className="min-h-screen bg-[#F8F9FA] dark:bg-black text-black dark:text-white font-sans selection:bg-[#0066FF] selection:text-white transition-colors duration-500">
-        {/* Global Sparkles - lazy loaded, hidden on mobile for performance */}
-        <Suspense fallback={null}>
-          <GlobalSparkles />
-        </Suspense>
-
         <Navbar />
 
         <Suspense fallback={<SectionLoader />}>
