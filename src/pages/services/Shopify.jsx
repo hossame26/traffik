@@ -229,12 +229,16 @@ export default function Shopify() {
         </motion.div>
 
         {/* ── 2. Pricing Cards with animated previews ── */}
+        <div className="relative mb-20 rounded-3xl p-6 md:p-10 -mx-2 md:-mx-4">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0066FF]/[0.07] via-[#A855F7]/[0.04] to-[#0066FF]/[0.06] dark:from-[#0066FF]/[0.1] dark:via-[#A855F7]/[0.06] dark:to-[#0066FF]/[0.08] rounded-3xl" />
+          <div className="absolute top-10 -left-10 w-60 h-60 bg-[#0066FF]/10 dark:bg-[#0066FF]/[0.15] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-10 -right-10 w-60 h-60 bg-[#A855F7]/10 dark:bg-[#A855F7]/[0.15] rounded-full blur-3xl pointer-events-none" />
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-20"
+          className="relative z-10"
         >
           <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">
             Nos formules Shopify
@@ -282,8 +286,8 @@ export default function Shopify() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className={`relative rounded-2xl p-5 flex flex-col transition-all duration-300 ${
                     plan.popular
-                      ? 'bg-gray-50 dark:bg-white/[0.08] border-2 border-[#0066FF]/30 dark:border-[#0066FF]/40 shadow-xl shadow-[#0066FF]/5 dark:shadow-[#0066FF]/10 ring-1 ring-[#0066FF]/10'
-                      : 'bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] hover:border-gray-300 dark:hover:border-white/[0.15] hover:shadow-lg dark:hover:bg-white/[0.06]'
+                      ? 'bg-white/40 dark:bg-white/[0.08] backdrop-blur-xl border border-black/[0.08] dark:border-[#0066FF]/40 shadow-lg shadow-black/[0.06] dark:shadow-[#0066FF]/10 ring-1 ring-black/[0.04] dark:ring-[#0066FF]/10'
+                      : 'bg-white/30 dark:bg-white/[0.04] backdrop-blur-xl border border-black/[0.06] dark:border-white/[0.08] shadow-md shadow-black/[0.05] dark:shadow-black/[0.2] hover:shadow-lg hover:shadow-black/[0.08] hover:bg-white/50 dark:hover:bg-white/[0.07] transition-all'
                   }`}
                 >
                   {plan.popular && (
@@ -348,6 +352,7 @@ export default function Shopify() {
             * Hors abonnement Shopify (à partir de 36€/mois) et nom de domaine (~12€/an)
           </p>
         </motion.section>
+        </div>
 
         {/* ── 3. Bento Grid (simplified) ── */}
         <motion.section
