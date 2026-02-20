@@ -29,46 +29,46 @@ const stagger = {
 const skills = [
   {
     name: 'React / Next.js',
-    description: 'Applications web modernes, rapides et interactives avec les dernieres technologies JavaScript.',
+    description: 'Applications web modernes, rapides et interactives avec les dernières technologies JavaScript.',
     icon: Code,
     color: 'from-cyan-500 to-blue-600',
   },
   {
     name: 'Shopify',
-    description: 'Boutiques e-commerce optimisees pour la conversion, du theme sur mesure au tunnel de vente.',
+    description: 'Boutiques e-commerce optimisées pour la conversion, du thème sur mesure au tunnel de vente.',
     icon: TrendingUp,
     color: 'from-green-500 to-emerald-600',
   },
   {
     name: 'WordPress',
-    description: 'Sites vitrines professionnels, blogs performants et solutions CMS flexibles et evolutives.',
+    description: 'Sites vitrines professionnels, blogs performants et solutions CMS flexibles et évolutives.',
     icon: Palette,
     color: 'from-indigo-500 to-purple-600',
   },
   {
     name: 'SEO Technique',
-    description: 'Optimisation on-page, performance Core Web Vitals, strategie de contenu et link building.',
+    description: 'Optimisation on-page, performance Core Web Vitals, stratégie de contenu et link building.',
     icon: TrendingUp,
     color: 'from-orange-500 to-red-600',
   },
   {
-    name: 'Publicite (Ads)',
-    description: 'Campagnes Meta Ads, Google Ads, TikTok Ads avec tracking avance et optimisation ROAS.',
+    name: 'Publicité (Ads)',
+    description: 'Campagnes Meta Ads, Google Ads, TikTok Ads avec tracking avancé et optimisation ROAS.',
     icon: Users,
     color: 'from-pink-500 to-rose-600',
   },
   {
     name: 'UI / UX Design',
-    description: 'Interfaces intuitives centrees utilisateur, wireframes, maquettes et prototypes interactifs.',
+    description: 'Interfaces intuitives centrées utilisateur, wireframes, maquettes et prototypes interactifs.',
     icon: Palette,
     color: 'from-violet-500 to-fuchsia-600',
   },
 ];
 
 const stats = [
-  { value: '50+', label: 'Projets realises', icon: Award },
+  { value: '50+', label: 'Projets réalisés', icon: Award },
   { value: '350%', label: 'ROI moyen', icon: TrendingUp },
-  { value: '24h', label: 'Temps de reponse', icon: Clock },
+  { value: '24h', label: 'Temps de réponse', icon: Clock },
   { value: '98%', label: 'Satisfaction client', icon: Users },
 ];
 
@@ -76,22 +76,22 @@ const values = [
   {
     title: 'Transparence',
     description:
-      'Pas de jargon inutile, pas de frais caches. Vous savez exactement ce que vous payez, pourquoi, et ou en est votre projet a chaque etape. Je communique clairement et regulierement.',
+      'Pas de jargon inutile, pas de frais cachés. Vous savez exactement ce que vous payez, pourquoi, et où en est votre projet à chaque étape. Je communique clairement et régulièrement.',
   },
   {
     title: 'Performance',
     description:
-      'Chaque ligne de code, chaque pixel, chaque campagne est pensee pour la performance. Un site beau qui ne convertit pas, ca ne sert a rien. Mon objectif : des resultats mesurables et concrets.',
+      'Chaque ligne de code, chaque pixel, chaque campagne est pensée pour la performance. Un site beau qui ne convertit pas, ça ne sert à rien. Mon objectif : des résultats mesurables et concrets.',
   },
   {
     title: 'Accompagnement',
     description:
-      'Je ne suis pas un prestataire qui disparait apres la livraison. Je vous accompagne dans la duree : formation, maintenance, evolution. Votre reussite est ma meilleure carte de visite.',
+      'Je ne suis pas un prestataire qui disparaît après la livraison. Je vous accompagne dans la durée : formation, maintenance, évolution. Votre réussite est ma meilleure carte de visite.',
   },
   {
     title: 'Innovation',
     description:
-      'Le web evolue vite. Je me forme en permanence aux dernieres technologies et tendances pour vous proposer des solutions modernes, performantes et en avance sur vos concurrents.',
+      'Le web évolue vite. Je me forme en permanence aux dernières technologies et tendances pour vous proposer des solutions modernes, performantes et en avance sur vos concurrents.',
   },
 ];
 
@@ -100,37 +100,37 @@ const timeline = [
     year: '2019',
     title: 'Les premiers pas',
     description:
-      'Passion pour le code et le web design. Premiers projets personnels, apprentissage autodidacte intensif de HTML, CSS et JavaScript. Des nuits entieres a coder, a experimenter, a apprendre.',
+      'Passion pour le code et le web design. Premiers projets personnels, apprentissage autodidacte intensif de HTML, CSS et JavaScript. Des nuits entières à coder, à expérimenter, à apprendre.',
   },
   {
     year: '2020',
     title: 'Freelance & premiers clients',
     description:
-      'Lancement officiel en freelance. Premiers clients, premiers sites livres. Decouverte du marketing digital et de l\'importance de la conversion. Chaque projet m\'apprend enormement.',
+      'Lancement officiel en freelance. Premiers clients, premiers sites livrés. Découverte du marketing digital et de l\'importance de la conversion. Chaque projet m\'apprend énormément.',
   },
   {
     year: '2021',
-    title: 'Specialisation e-commerce',
+    title: 'Spécialisation e-commerce',
     description:
-      'Focus sur Shopify et le e-commerce. Maitrise des tunnels de vente, du copywriting et des strategies de publicite en ligne. Les resultats clients explosent.',
+      'Focus sur Shopify et le e-commerce. Maîtrise des tunnels de vente, du copywriting et des stratégies de publicité en ligne. Les résultats clients explosent.',
   },
   {
     year: '2022',
     title: 'React & technologies modernes',
     description:
-      'Montee en competences sur React, Next.js et les architectures modernes. Les sites deviennent plus rapides, plus interactifs, et les taux de conversion suivent.',
+      'Montée en compétences sur React, Next.js et les architectures modernes. Les sites deviennent plus rapides, plus interactifs, et les taux de conversion suivent.',
   },
   {
     year: '2023',
-    title: 'Marketing digital avance',
+    title: 'Marketing digital avancé',
     description:
-      'Integration complete du marketing digital : SEO avance, Meta Ads, Google Ads, analytics. Approche full-stack : du design a la campagne publicitaire.',
+      'Intégration complète du marketing digital : SEO avancé, Meta Ads, Google Ads, analytics. Approche full-stack : du design à la campagne publicitaire.',
   },
   {
     year: '2024',
     title: 'Traffik Web',
     description:
-      'Creation de Traffik Web. Une offre complete et transparente pour les entrepreneurs et PME. L\'objectif : democratiser l\'acces a un web de qualite professionnelle.',
+      'Création de Traffik Web. Une offre complète et transparente pour les entrepreneurs et PME. L\'objectif : démocratiser l\'accès à un web de qualité professionnelle.',
   },
 ];
 
@@ -138,8 +138,8 @@ export default function APropos() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
-        title="A Propos | Freelance Web & Marketing Digital | Traffik Web"
-        description="Decouvrez le parcours et les competences du freelance derriere Traffik Web. Developpeur web passionne, specialise en React, Shopify, WordPress, SEO et publicite digitale. Plus de 50 projets livres avec un ROI moyen de 350%."
+        title="À Propos | Freelance Web & Marketing Digital | Traffik Web"
+        description="Découvrez le parcours et les compétences du freelance derrière Traffik Web. Développeur web passionné, spécialisé en React, Shopify, WordPress, SEO et publicité digitale. Plus de 50 projets livrés avec un ROI moyen de 350%."
         canonical="https://traffik-web.fr/a-propos"
         keywords="freelance web, developpeur freelance france, agence web, a propos traffik web, creation site internet freelance, developpeur react freelance, marketing digital freelance, seo freelance, shopify expert france"
       />
@@ -150,7 +150,7 @@ export default function APropos() {
           to="/"
           className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-10"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour a l'accueil
+          <ArrowLeft className="w-4 h-4" /> Retour à l'accueil
         </Link>
 
         {/* ========== HERO / H1 ========== */}
@@ -163,10 +163,10 @@ export default function APropos() {
           </h1>
           <div className="w-20 h-1 bg-[#0066FF] rounded-full mb-8" />
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl">
-            Je suis un developpeur web passionne, autodidacte et specialise dans la creation de sites
+            Je suis un développeur web passionné, autodidacte et spécialisé dans la création de sites
             internet qui <strong>convertissent</strong>, pas seulement des sites qui font joli. Mon
-            approche allie technique, design et strategie marketing pour transformer votre presence en
-            ligne en veritable levier de croissance.
+            approche allie technique, design et stratégie marketing pour transformer votre présence en
+            ligne en véritable levier de croissance.
           </p>
         </motion.section>
 
@@ -175,47 +175,47 @@ export default function APropos() {
           <h2 className="text-2xl md:text-3xl font-bold mb-6">Mon histoire</h2>
           <div className="space-y-5 text-gray-600 dark:text-gray-300 leading-relaxed text-base md:text-lg">
             <p>
-              Tout a commence par une curiosite insatiable pour le web. A une epoque ou la plupart des
+              Tout a commencé par une curiosité insatiable pour le web. À une époque où la plupart des
               gens se contentaient de consommer du contenu en ligne, moi je voulais comprendre comment
-              tout cela fonctionnait. Comment un site web pouvait influencer une decision d'achat.
+              tout cela fonctionnait. Comment un site web pouvait influencer une décision d'achat.
               Comment quelques lignes de code pouvaient transformer un visiteur en client. Cette
-              fascination ne m'a jamais quitte.
+              fascination ne m'a jamais quitté.
             </p>
             <p>
-              Je me suis forme en autodidacte, nuit apres nuit, projet apres projet. Pas d'ecole
-              classique, pas de diplome accroche au mur -- juste une determination feroce et des
-              centaines de projets pour affiner mon savoir-faire. J'ai appris en faisant, en echouant,
-              en recommencant. Chaque erreur m'a rendu meilleur. Chaque client m'a appris quelque chose
+              Je me suis formé en autodidacte, nuit après nuit, projet après projet. Pas d'école
+              classique, pas de diplôme accroché au mur -- juste une détermination féroce et des
+              centaines de projets pour affiner mon savoir-faire. J'ai appris en faisant, en échouant,
+              en recommençant. Chaque erreur m'a rendu meilleur. Chaque client m'a appris quelque chose
               de nouveau.
             </p>
             <p>
-              Aujourd'hui, apres plusieurs annees d'experience et plus de 50 projets livres, j'ai cree
+              Aujourd'hui, après plusieurs années d'expérience et plus de 50 projets livrés, j'ai créé
               <strong> Traffik Web</strong> avec une mission claire : offrir aux entrepreneurs, aux PME
-              et aux createurs un acces a des services web de qualite professionnelle, sans les tarifs
-              prohibitifs des grandes agences. Je crois que chaque entreprise merite un site web
-              performant et une strategie digitale efficace, quel que soit son budget.
+              et aux créateurs un accès à des services web de qualité professionnelle, sans les tarifs
+              prohibitifs des grandes agences. Je crois que chaque entreprise mérite un site web
+              performant et une stratégie digitale efficace, quel que soit son budget.
             </p>
             <p>
-              Ce qui me differencie ? Je ne me contente pas de livrer un site web. Je prends le temps de
-              comprendre votre activite, vos objectifs, votre marche. Je construis ensuite une solution
-              sur mesure qui allie un design soigne, une performance technique irreprochable et une
-              strategie marketing orientee resultats. Du premier pixel a la derniere campagne
-              publicitaire, je suis a vos cotes.
+              Ce qui me différencie ? Je ne me contente pas de livrer un site web. Je prends le temps de
+              comprendre votre activité, vos objectifs, votre marché. Je construis ensuite une solution
+              sur mesure qui allie un design soigné, une performance technique irréprochable et une
+              stratégie marketing orientée résultats. Du premier pixel à la dernière campagne
+              publicitaire, je suis à vos côtés.
             </p>
             <p>
               Mon objectif n'est pas d'avoir le plus grand nombre de clients possible. C'est d'avoir
-              des clients satisfaits, des projets dont je suis fier, et des resultats qui parlent
-              d'eux-memes. La qualite plutot que la quantite. La relation humaine plutot que le simple
-              echange commercial. C'est ca, l'esprit Traffik Web.
+              des clients satisfaits, des projets dont je suis fier, et des résultats qui parlent
+              d'eux-mêmes. La qualité plutôt que la quantité. La relation humaine plutôt que le simple
+              échange commercial. C'est ça, l'esprit Traffik Web.
             </p>
           </div>
         </motion.section>
 
         {/* ========== SKILLS ========== */}
         <motion.section className="mb-20" {...fadeInUp} transition={{ duration: 0.6, delay: 0.15 }}>
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">Competences</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Compétences</h2>
           <p className="text-gray-500 dark:text-gray-400 mb-8">
-            Un eventail de competences pour couvrir l'integralite de vos besoins digitaux.
+            Un éventail de compétences pour couvrir l'intégralité de vos besoins digitaux.
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -272,7 +272,7 @@ export default function APropos() {
         <motion.section className="mb-20" {...fadeInUp} transition={{ duration: 0.6, delay: 0.25 }}>
           <h2 className="text-2xl md:text-3xl font-bold mb-2">Mes valeurs</h2>
           <p className="text-gray-500 dark:text-gray-400 mb-8">
-            Les principes qui guident chaque projet et chaque decision.
+            Les principes qui guident chaque projet et chaque décision.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-6">
@@ -299,7 +299,7 @@ export default function APropos() {
         <motion.section className="mb-20" {...fadeInUp} transition={{ duration: 0.6, delay: 0.3 }}>
           <h2 className="text-2xl md:text-3xl font-bold mb-2">Mon parcours</h2>
           <p className="text-gray-500 dark:text-gray-400 mb-10">
-            Chaque annee a forge une expertise supplementaire.
+            Chaque année a forgé une expertise supplémentaire.
           </p>
 
           <div className="relative">
@@ -335,10 +335,10 @@ export default function APropos() {
           transition={{ duration: 0.6, delay: 0.35 }}
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Un projet en tete ?
+            Un projet en tête ?
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-xl mx-auto">
-            Discutons de votre projet. Je vous reponds en moins de 24 heures avec une premiere
+            Discutons de votre projet. Je vous réponds en moins de 24 heures avec une première
             estimation gratuite et sans engagement.
           </p>
 
@@ -378,7 +378,7 @@ export default function APropos() {
               to="/portfolio"
               className="text-[#0066FF] hover:underline inline-flex items-center gap-1"
             >
-              Portfolio & realisations <ArrowRight className="w-3 h-3" />
+              Portfolio & réalisations <ArrowRight className="w-3 h-3" />
             </Link>
             <Link
               to="/blog"

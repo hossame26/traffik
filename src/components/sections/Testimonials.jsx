@@ -29,34 +29,41 @@ function AnimatedNumber({ value, suffix = "", isInView }) {
   return <>{count}{suffix}</>;
 }
 
+const AVATAR_GRADIENTS = [
+  'from-[#0066FF] to-[#6C5CE7]',
+  'from-[#6C5CE7] to-[#A855F7]',
+  'from-[#A855F7] to-[#0066FF]',
+  'from-[#0052CC] to-[#8B5CF6]',
+];
+
+function getInitials(name) {
+  return name.split(' ').map(n => n[0]).join('').toUpperCase();
+}
+
 const testimonials = [
   {
-    name: "Marie Dupont",
+    name: "Marie D.",
     role: "Fondatrice, Boutique Mode",
     content: "Traffik Web a transformé notre présence en ligne. Notre site Shopify génère maintenant 3x plus de ventes qu'avant. L'équipe est réactive et professionnelle.",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/women/44.jpg"
   },
   {
-    name: "Thomas Bernard",
+    name: "Thomas B.",
     role: "CEO, StartUp Tech",
     content: "Un site sur mesure livré en un temps record. La qualité du code et le design sont exceptionnels. Je recommande à 100% pour tout projet ambitieux.",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/men/32.jpg"
   },
   {
-    name: "Sophie Martin",
+    name: "Sophie M.",
     role: "Directrice Marketing, Agence",
     content: "Collaboration parfaite du début à la fin. Ils ont compris nos besoins immédiatement et le résultat dépasse nos attentes. Notre taux de conversion a doublé.",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/women/68.jpg"
   },
   {
-    name: "Lucas Petit",
+    name: "Lucas P.",
     role: "Artisan Plombier",
     content: "Grâce à leur travail SEO, je suis maintenant premier sur Google dans ma ville. Les appels ont explosé ! Investissement largement rentabilisé.",
     rating: 5,
-    image: "https://randomuser.me/api/portraits/men/75.jpg"
   }
 ];
 
@@ -122,21 +129,9 @@ function TestimonialCard({ testimonial, index, isActive }) {
 
       {/* Author */}
       <div className="flex items-center gap-4">
-        <motion.div
-          className="relative"
-          whileHover={{ scale: 1.1 }}
-        >
-          <img
-            src={testimonial.image}
-            alt={testimonial.name}
-            width={56}
-            height={56}
-            className="w-14 h-14 rounded-full object-cover"
-            loading="lazy"
-          />
-          {/* Gradient border */}
-          <div className="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-primary to-accent-purple opacity-0 hover:opacity-100 transition-opacity" style={{ padding: '2px', background: 'linear-gradient(135deg, #0066FF, #A855F7)', WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude' }} />
-        </motion.div>
+        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${AVATAR_GRADIENTS[index % AVATAR_GRADIENTS.length]} flex items-center justify-center text-white text-sm font-bold shrink-0`}>
+          {getInitials(testimonial.name)}
+        </div>
         <div>
           <div className="font-bold text-black dark:text-white">{testimonial.name}</div>
           <div className="text-sm text-gray-500 dark:text-gray-400">{testimonial.role}</div>

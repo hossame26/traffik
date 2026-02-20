@@ -16,6 +16,7 @@ const footerLinks = {
     { label: "Portfolio", href: "/portfolio", isRoute: true },
     { label: "Blog", href: "/blog", isRoute: true },
     { label: "À Propos", href: "/a-propos", isRoute: true },
+    { label: "FAQ", href: "/faq", isRoute: true },
     { label: "Contact", href: "/#contact" },
   ],
   legal: [

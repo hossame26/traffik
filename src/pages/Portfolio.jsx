@@ -6,6 +6,8 @@ import SEOHead from '../components/SEOHead';
 import shonensportsImg from '../assets/projects/shonensports.jpg';
 import cremyaImg from '../assets/projects/cremya.jpg';
 import focusbusinessImg from '../assets/projects/focusbusiness.jpg';
+import novaImg from '../assets/projects/nova.jpg';
+import helixImg from '../assets/projects/helix.jpg';
 
 const categories = ['Tous', 'Shopify', 'WordPress', 'React'];
 
@@ -92,6 +94,34 @@ const projects = [
       { label: 'Vendeurs actifs', value: '350+' },
       { label: 'Transactions', value: '12K+' },
       { label: 'Score perf.', value: '98/100' },
+    ],
+  },
+  {
+    id: 7,
+    title: 'NOVA Creative Studio',
+    description: "Site vitrine immersif pour un studio créatif digital. Effets de particules 3D, animations fluides et design dark premium. Expérience full-screen.",
+    tech: 'React',
+    category: 'React',
+    gradient: 'from-purple-600 to-cyan-500',
+    image: novaImg,
+    results: [
+      { label: 'Score perf.', value: '97/100' },
+      { label: 'Temps charg.', value: '0.9s' },
+      { label: 'Engagement', value: '+85%' },
+    ],
+  },
+  {
+    id: 8,
+    title: 'HELIX Genomics',
+    description: "Plateforme web pour un laboratoire de génomique avancée. Visualisation ADN 3D interactive, dashboard recherche temps réel et interface sci-fi.",
+    tech: 'React',
+    category: 'React',
+    gradient: 'from-emerald-500 to-cyan-500',
+    image: helixImg,
+    results: [
+      { label: 'Publications', value: '147' },
+      { label: 'Chercheurs', value: '89' },
+      { label: 'Précision', value: '99.97%' },
     ],
   },
 ];

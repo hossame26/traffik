@@ -66,6 +66,8 @@ const AnimatedTitle = ({ text, className }) => {
 import cremyaImg from '../../assets/projects/cremya.webp';
 import shonensportsImg from '../../assets/projects/shonensports.webp';
 import focusbusinessImg from '../../assets/projects/focusbusiness.webp';
+import novaImg from '../../assets/projects/nova.jpg';
+import helixImg from '../../assets/projects/helix.jpg';
 
 const projects = [
   {
@@ -94,6 +96,24 @@ const projects = [
     description: "Restez concentré sur l'essentiel. Productivité maximale, design premium.",
     details: "Plateforme de gestion du temps et productivité au design sombre et sophistiqué. Interface minimaliste avec gradients élégants pour une expérience professionnelle haut de gamme.",
     year: "2025"
+  },
+  {
+    title: "NOVA Creative Studio",
+    category: "React • Creative",
+    url: "#",
+    image: novaImg,
+    description: "Studio créatif digital avec effets de particules 3D et animations immersives.",
+    details: "Site vitrine immersif pour un studio créatif. Effets de particules WebGL, animations fluides Framer Motion et design dark premium. Expérience full-screen pensée pour impressionner dès la première seconde.",
+    year: "2026"
+  },
+  {
+    title: "HELIX Genomics",
+    category: "React • Science",
+    url: "#",
+    image: helixImg,
+    description: "Plateforme de recherche génomique avec visualisation ADN 3D interactive.",
+    details: "Site web pour un laboratoire de génomique avancée. Visualisation ADN 3D en temps réel, dashboard recherche interactif et interface sci-fi. Design dark immersif avec données live.",
+    year: "2026"
   }
 ];
 

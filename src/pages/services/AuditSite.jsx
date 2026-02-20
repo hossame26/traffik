@@ -1,597 +1,638 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
   Search,
   Shield,
   Zap,
-  FileText,
   BarChart3,
   TrendingUp,
   CheckCircle,
   MessageCircle,
-  Eye,
-  Clock,
-  Target,
-  Users,
-  Settings,
-  Smartphone
+  Star,
+  Smartphone,
+  Crosshair,
+  Mail,
+  ArrowUpRight,
+  X
 } from 'lucide-react';
 import SEOHead from '../../components/SEOHead';
 import FAQSection from '../../components/common/FAQSection';
 
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
-};
+/* ── Marketing Services Data (for modals) ── */
+const marketingServices = [
+  {
+    id: 'acquisition',
+    icon: Crosshair,
+    title: 'Acquisition Automatisée',
+    shortDesc: 'SEO technique + Google Ads pour capturer le trafic intentionniste.',
+    stats: [
+      { value: '90%', label: 'Trafic capturé' },
+      { value: '4.2x', label: 'ROAS moyen' },
+    ],
+    description: 'On combine le SEO technique et Google Ads pour capter les prospects qui cherchent activement vos services. Votre site apparait en haut de Google, 24h/24.',
+    features: [
+      'Audit SEO complet + corrections techniques',
+      'Campagnes Google Ads optimisées (Search + Display)',
+      'Landing pages conversion-ready',
+      'Suivi des conversions et attribution',
+      'Reporting mensuel détaillé',
+      'A/B testing continu des annonces',
+    ],
+    waMsg: "Bonjour, je suis intéressé par votre service d'Acquisition Automatisée (SEO + Google Ads). Pouvez-vous m'en dire plus ?",
+  },
+  {
+    id: 'emailing',
+    icon: Mail,
+    title: 'Cold Emailing',
+    shortDesc: 'Campagnes B2B ciblées avec IA.',
+    description: 'Des campagnes email B2B ultra-personnalisées grâce à l\'IA. On cible les décideurs de votre marché avec des séquences qui convertissent.',
+    features: [
+      'Scraping et enrichissement de leads qualifiés',
+      'Rédaction IA de séquences personnalisées',
+      'Configuration domaine + warm-up',
+      'Séquences multi-touch (3 à 5 relances)',
+      'Tracking ouvertures, clics, réponses',
+      'Optimisation continue du taux de réponse',
+    ],
+    waMsg: "Bonjour, je suis intéressé par votre service de Cold Emailing B2B. Pouvez-vous m'en dire plus ?",
+  },
+  {
+    id: 'tracking',
+    icon: BarChart3,
+    title: 'Tracking & Data',
+    shortDesc: 'Dashboards temps réel, ROI par euro.',
+    description: 'Installez un système de tracking complet pour savoir exactement combien chaque canal vous rapporte. Fini les décisions à l\'aveugle.',
+    features: [
+      'Google Analytics 4 + Tag Manager setup',
+      'Tracking des conversions multi-canal',
+      'Dashboard temps réel personnalisé',
+      'Attribution des ventes par source',
+      'Alertes automatiques sur les KPIs',
+      'Rapport hebdomadaire automatisé',
+    ],
+    waMsg: "Bonjour, je suis intéressé par votre service Tracking & Data. Pouvez-vous m'en dire plus ?",
+  },
+];
 
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
+/* ── Service Modal ── */
+function ServiceModal({ service, onClose }) {
+  if (!service) return null;
+  const Icon = service.icon;
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <motion.div
+        className="relative w-full max-w-lg bg-white dark:bg-[#111] rounded-2xl border border-gray-200 dark:border-white/10 shadow-2xl overflow-hidden"
+        initial={{ scale: 0.95, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.95, y: 20 }}
+        transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        {/* Header */}
+        <div className="p-6 pb-4 flex items-start justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center">
+              <Icon className="w-5 h-5 text-orange-500" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">{service.title}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{service.shortDesc}</p>
+            </div>
+          </div>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-white/[0.06] transition-colors">
+            <X className="w-5 h-5 text-gray-400" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="px-6 pb-2">
+          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-5">{service.description}</p>
+
+          <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Ce qui est inclus</h4>
+          <ul className="space-y-2.5 mb-6">
+            {service.features.map((f, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-sm">
+                <CheckCircle className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                <span className="text-gray-600 dark:text-gray-400">{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Footer CTA */}
+        <div className="p-6 pt-4 border-t border-gray-100 dark:border-white/[0.06]">
+          <motion.a
+            href={`https://wa.me/33635505374?text=${encodeURIComponent(service.waMsg)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-lg shadow-[#25D366]/20"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <MessageCircle className="w-4 h-4" />
+            Discuter sur WhatsApp
+          </motion.a>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ── Animated Pricing Previews ── */
+function EssentielPreview() {
+  const checks = [
+    { label: 'Meta tags', color: 'text-green-400', delay: 0 },
+    { label: 'SSL valid', color: 'text-green-400', delay: 0.5 },
+    { label: 'Mobile OK', color: 'text-green-400', delay: 1 },
+    { label: 'Speed: 2.1s', color: 'text-amber-400', delay: 1.5 },
+    { label: 'H1 missing', color: 'text-red-400', delay: 2 },
+  ];
+  return (
+    <div className="h-32 rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden relative p-3 font-mono border border-white/[0.06]">
+      <div className="flex items-center gap-1.5 mb-2">
+        <Search className="w-3 h-3 text-amber-400" />
+        <span className="text-[9px] text-white/40 font-medium">Scan en cours...</span>
+        <div className="ml-auto">
+          <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+        </div>
+      </div>
+      <div className="flex flex-col gap-1">
+        {checks.map((c, i) => (
+          <motion.div
+            key={i}
+            className="flex items-center gap-1.5"
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: [0, 1, 1, 0.7], x: 0 }}
+            transition={{ duration: 2, delay: c.delay, repeat: Infinity, repeatDelay: 4 }}
+          >
+            <span className={`text-[9px] ${c.color}`}>●</span>
+            <span className="text-[9px] text-white/50">{c.label}</span>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CompletPreview() {
+  const bars = [
+    { label: 'SEO', value: '72%', w: '72%', color: 'from-amber-500 to-amber-400' },
+    { label: 'Perf', value: '45%', w: '45%', color: 'from-red-500 to-red-400' },
+    { label: 'Sécu', value: '88%', w: '88%', color: 'from-green-500 to-green-400' },
+    { label: 'UX', value: '61%', w: '61%', color: 'from-orange-500 to-orange-400' },
+  ];
+  return (
+    <div className="h-32 rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden relative p-3 flex flex-col border border-white/[0.06]">
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-1.5">
+          <BarChart3 className="w-3 h-3 text-amber-500" />
+          <span className="text-[9px] text-white/40 font-medium">Score global</span>
+        </div>
+        <motion.span
+          className="text-[10px] font-bold text-amber-400"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >66/100</motion.span>
+      </div>
+      <div className="flex flex-col gap-1.5 flex-1 justify-center">
+        {bars.map((bar, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="text-[8px] text-white/40 w-6 text-right">{bar.label}</span>
+            <div className="flex-1 h-2.5 rounded-full bg-white/[0.06] overflow-hidden">
+              <motion.div
+                className={`h-full rounded-full bg-gradient-to-r ${bar.color}`}
+                initial={{ width: '0%' }}
+                animate={{ width: ['0%', bar.w] }}
+                transition={{ duration: 1.5, delay: i * 0.3, repeat: Infinity, repeatDelay: 3 }}
+              />
+            </div>
+            <span className="text-[8px] text-white/30 w-6">{bar.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PremiumPreview() {
+  const items = [
+    { label: 'Corrections SEO', delay: 0 },
+    { label: 'Optimisation vitesse', delay: 0.5 },
+    { label: 'Headers sécurité', delay: 1 },
+  ];
+  return (
+    <div className="h-32 rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden relative p-3 flex flex-col items-center justify-center gap-2 border border-white/[0.06]">
+      <div className="flex items-center gap-1.5 mb-1">
+        <motion.div
+          className="text-[10px] font-bold text-red-400"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse' }}
+        >45/100</motion.div>
+        <span className="text-[9px] text-white/30">→</span>
+        <motion.div
+          className="text-[10px] font-bold text-green-400"
+          animate={{ opacity: [0, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse' }}
+        >92/100</motion.div>
+      </div>
+      {items.map((item, i) => (
+        <motion.div
+          key={i}
+          className="w-full flex items-center gap-2 px-2 py-1 rounded-lg border border-green-500/20 bg-green-500/[0.05]"
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 2, delay: item.delay, repeat: Infinity }}
+        >
+          <span className="text-[9px] text-green-400">✓</span>
+          <span className="text-[9px] text-white/40">{item.label}</span>
+          <motion.div className="ml-auto w-1.5 h-1.5 rounded-full bg-green-400" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.5, delay: i * 0.3, repeat: Infinity }} />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 const faqData = [
   {
     question: "Que contient exactement le rapport d'audit ?",
-    answer: "Un document de 15 a 30 pages couvrant 4 piliers : SEO (balises, mots-cles, maillage), Performance (Core Web Vitals, vitesse), Securite (SSL, headers, failles) et UX (navigation, responsive, accessibilite). Chaque point est note avec des recommandations priorisees."
+    answer: "Un document de 15 à 30 pages couvrant 4 piliers : SEO (balises, mots-clés, maillage), Performance (Core Web Vitals, vitesse), Sécurité (SSL, headers, failles) et UX (navigation, responsive, accessibilité). Chaque point est noté avec des recommandations priorisées."
   },
   {
     question: "Combien de temps faut-il pour recevoir l'audit ?",
-    answer: "L'audit Essentiel est livre sous 24 a 48 heures. L'audit + Plan d'action sous 3 a 5 jours ouvrables. Pour l'offre Implementation, le rapport initial arrive sous 48h et l'implementation se fait sur 2 a 4 semaines."
+    answer: "L'audit Essentiel est livré sous 24 à 48 heures. L'audit + Plan d'action sous 3 à 5 jours ouvrables. Pour l'offre Implémentation, le rapport initial arrive sous 48h et l'implémentation se fait sur 2 à 4 semaines."
   },
   {
     question: "Mon site est-il compatible avec votre audit ?",
-    answer: "Oui. WordPress, Shopify, Wix, Squarespace, React, Next.js, PrestaShop, Magento et plus. Notre processus s'adapte a chaque technologie."
-  },
-  {
-    question: "Quelle est la difference entre l'audit et un simple test PageSpeed ?",
-    answer: "PageSpeed ne mesure que la vitesse. Notre audit couvre 230+ regles dans 4 domaines (SEO, Performance, Securite, UX) avec des recommandations actionnables et un plan de priorites. C'est la difference entre un thermometre et un bilan medical complet."
-  },
-  {
-    question: "Proposez-vous un suivi apres l'audit ?",
-    answer: "Oui. L'offre Audit + Plan inclut un appel de 30 minutes pour prioriser les actions. L'offre Implementation inclut les corrections + 30 jours de suivi avec rapport de progression."
+    answer: "Oui. WordPress, Shopify, Wix, Squarespace, React, Next.js, PrestaShop, Magento et plus. Notre processus s'adapte à chaque technologie."
   }
 ];
 
+const plans = [
+  {
+    name: 'Audit Essentiel',
+    price: '100',
+    icon: Search,
+    description: 'Diagnostic rapide en 24h',
+    preview: EssentielPreview,
+    features: ['Analyse SEO (50+ règles)', 'Performance mobile & desktop', 'Sécurité SSL & headers', 'Analyse UX responsive', 'Rapport PDF détaillé'],
+  },
+  {
+    name: 'Audit + Plan',
+    price: '200',
+    icon: BarChart3,
+    description: 'Diagnostic complet + stratégie',
+    popular: true,
+    preview: CompletPreview,
+    features: ['Tout de l\'Essentiel', 'Analyse approfondie (230+ règles)', 'Plan d\'action priorisé', 'Analyse concurrence SEO', 'Appel restitution 30 min'],
+  },
+  {
+    name: 'Audit + Implémentation',
+    price: '499',
+    icon: TrendingUp,
+    description: 'Diagnostic + corrections',
+    preview: PremiumPreview,
+    features: ['Tout de l\'Audit + Plan', 'Implémentation corrections', 'Optimisation SEO on-page', 'Amélioration performance', 'Support 30 jours inclus'],
+  },
+];
+
 export default function AuditSite() {
+  const [activeService, setActiveService] = useState(null);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
+      <AnimatePresence>
+        {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
+      </AnimatePresence>
+
       <SEOHead
-        title="Audit de Site Web Complet | SEO, Performance, Securite | Traffik Web"
-        description="Audit professionnel de votre site web : SEO, performance, securite et UX. Rapport detaille en 24h avec plan d'action concret. A partir de 100 euros. Identifiez ce qui freine votre croissance."
+        title="Audit de Site Web Complet | SEO, Performance, Sécurité | Traffik Web"
+        description="Audit professionnel de votre site web : SEO, performance, sécurité et UX. Rapport détaillé en 24h avec plan d'action concret. À partir de 100 euros. Identifiez ce qui freine votre croissance."
         canonical="https://traffik-web.fr/audit-site-web"
         keywords="audit site web, audit seo, audit performance site, audit securite site web, analyse site web, test site web, audit ux, core web vitals, audit technique, audit site internet"
       />
 
-      <div className="max-w-4xl mx-auto py-20 px-4">
+      <div className="max-w-5xl mx-auto py-20 px-4">
 
         {/* Back Link */}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-8"
+          className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-8 text-sm"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour a l'accueil
+          <ArrowLeft className="w-4 h-4" /> Retour
         </Link>
 
-        {/* Hero Section */}
+        {/* ── Hero ── */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-sm font-medium mb-6">
-            <Search className="w-4 h-4" />
-            Audit Complet
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-5">
+            <Search className="w-3.5 h-3.5" />
+            230+ règles vérifiées
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Audit de Site Web :{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Identifiez Ce Qui Freine Votre Croissance</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-5">
+            Votre site vous coûte{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">des clients.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl">
-            Votre site ne convertit pas ? Un <strong>audit professionnel</strong> de <strong>230+ regles</strong> revele les problemes invisibles qui plombent vos resultats.
+          <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mb-8">
+            Un audit professionnel révèle les problèmes invisibles qui plombent vos conversions. Rapport en 24h, recommandations actionnables.
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
+          <div className="flex flex-wrap gap-3">
             <motion.a
               href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20un%20audit%20de%20mon%20site%20web."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-[#25D366]/25"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-lg shadow-[#25D366]/20"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <MessageCircle className="w-5 h-5" />
+              <MessageCircle className="w-4 h-4" />
               Demander un Audit
             </motion.a>
-            <Link
-              to="/tarifs"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-amber-500 text-amber-600 dark:text-amber-400 font-bold hover:bg-amber-500/5 transition-colors"
+            <a
+              href="#tarifs"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 font-medium text-sm hover:bg-gray-50 dark:hover:bg-white/[0.04] transition-colors"
             >
-              <BarChart3 className="w-5 h-5" />
-              Voir les tarifs
-            </Link>
+              Voir les formules
+            </a>
           </div>
         </motion.div>
 
-        {/* Stats Section */}
-        <motion.div
-          variants={stagger}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20"
-        >
-          {[
-            { value: '230+', label: 'regles verifiees' },
-            { value: '24h', label: 'delai de livraison' },
-            { value: '+45%', label: 'performance moyenne' },
-            { value: '100%', label: 'recommandations actionnables' }
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              variants={fadeUp}
-              className="p-5 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 text-center"
-            >
-              <div className="text-2xl md:text-3xl font-bold text-amber-500 mb-2">{stat.value}</div>
-              <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Ce qu'on analyse — Bento Grid */}
+        {/* ── Pricing Cards ── */}
         <motion.section
+          id="tarifs"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-20"
+          className="mb-24 scroll-mt-24"
         >
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              Ce Que Nous <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Analysons</span>
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">
-              4 piliers pour un diagnostic complet de votre site.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
-            {/* SEO — large gradient card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-amber-500/[0.08] to-orange-600/[0.06] dark:from-amber-500/[0.12] dark:to-orange-600/[0.08] border border-amber-500/15 dark:border-amber-500/20 relative overflow-hidden group hover:shadow-lg hover:shadow-amber-500/5 transition-shadow duration-300"
-            >
-              <Search className="w-8 h-8 text-amber-500" />
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">SEO & Referencement</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Balises, mots-cles, maillage interne, sitemap, indexation.</p>
-              </div>
-            </motion.div>
-
-            {/* Performance — small */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
-            >
-              <Zap className="w-7 h-7 text-amber-500" />
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Performance</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Core Web Vitals, vitesse</p>
-              </div>
-            </motion.div>
-
-            {/* Securite — small */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.15 }}
-              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
-            >
-              <Shield className="w-7 h-7 text-orange-500" />
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Securite</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">SSL, headers, failles</p>
-              </div>
-            </motion.div>
-
-            {/* UX & Mobile — small */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
-            >
-              <Smartphone className="w-7 h-7 text-amber-500" />
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">UX & Mobile</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Responsive, accessibilite</p>
-              </div>
-            </motion.div>
-
-            {/* 230+ regles — wide dark card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.25 }}
-              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
-            >
-              <Eye className="w-8 h-8 text-amber-500" />
-              <div>
-                <h3 className="text-xl font-bold text-white mb-1">230+ regles verifiees</h3>
-                <p className="text-sm text-gray-400">SEO, performance, securite et UX analyses en profondeur avec un plan d'action priorise.</p>
-              </div>
-            </motion.div>
-          </div>
-        </motion.section>
-
-        {/* Processus — Horizontal */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-20"
-        >
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-amber-500 border border-amber-500/20 bg-amber-500/5 mb-4">
-              Processus
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              5 Etapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">0 Surprise.</span>
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">
-              De la demande au suivi, un processus clair et efficace.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 mb-10">
-            {[
-              { icon: MessageCircle, step: '01', title: 'Briefing', desc: 'URL et objectifs.' },
-              { icon: Settings, step: '02', title: 'Scan', desc: '230+ regles verifiees.' },
-              { icon: Eye, step: '03', title: 'Analyse', desc: 'Expert review.' },
-              { icon: FileText, step: '04', title: 'Rapport', desc: 'PDF detaille + plan.' },
-              { icon: TrendingUp, step: '05', title: 'Suivi', desc: 'Accompagnement.' },
-            ].map((item, index) => {
-              const Icon = item.icon;
+          <div className="grid md:grid-cols-3 gap-4">
+            {plans.map((plan, index) => {
+              const Icon = plan.icon;
+              const Preview = plan.preview;
               return (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex flex-col items-center text-center"
+                  transition={{ delay: index * 0.1 }}
+                  className={`relative rounded-2xl p-5 flex flex-col ${
+                    plan.popular
+                      ? 'bg-gray-50 dark:bg-white/[0.06] border-2 border-amber-500/30 shadow-lg shadow-amber-500/5'
+                      : 'bg-white dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.08] hover:border-gray-300 dark:hover:border-white/[0.12] hover:shadow-md'
+                  } transition-all duration-300`}
                 >
-                  <div className="relative mb-4">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gray-100 dark:bg-white/[0.06] border border-gray-200 dark:border-white/10 flex items-center justify-center">
-                      <Icon className="w-6 h-6 md:w-7 md:h-7 text-gray-500 dark:text-gray-400" />
+                  {plan.popular && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+                      <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-amber-500/30">
+                        <Star className="w-2.5 h-2.5 fill-white" /> Populaire
+                      </span>
                     </div>
-                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center shadow-lg shadow-amber-500/30">
-                      {item.step}
-                    </span>
+                  )}
+
+                  <div className="mb-3 pt-1">
+                    <Preview />
                   </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-[160px]">
-                    {item.desc}
-                  </p>
+
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-amber-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold leading-tight text-gray-900 dark:text-white">{plan.name}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{plan.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <span className="text-[10px] text-gray-400 uppercase tracking-wider">À partir de</span>
+                    <div className="text-3xl font-extrabold text-gray-900 dark:text-white">{plan.price}<span className="text-lg font-bold text-gray-400">€</span></div>
+                  </div>
+
+                  <ul className="space-y-2 mb-5 flex-1">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <CheckCircle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-600 dark:text-gray-400">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <motion.a
+                    href={`https://wa.me/33635505374?text=${encodeURIComponent(`Bonjour, je suis intéressé par l'offre ${plan.name}. Pouvez-vous m'envoyer un devis ?`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-full py-3 rounded-xl font-semibold text-center text-sm block ${
+                      plan.popular
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md shadow-amber-500/20'
+                        : 'bg-gray-900 dark:bg-white/[0.08] text-white hover:bg-gray-800 dark:hover:bg-white/[0.12]'
+                    } transition-all`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Demander un devis
+                  </motion.a>
                 </motion.div>
               );
             })}
           </div>
-
-          <div className="text-center">
-            <motion.a
-              href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20un%20audit%20de%20mon%20site%20web."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-shadow"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Demander mon audit
-              <Zap className="w-4 h-4" />
-            </motion.a>
-          </div>
         </motion.section>
 
-        {/* Tarifs */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Nos <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Tarifs</span> Audit
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
-            3 formules pour s'adapter a vos besoins et votre budget.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Audit Essentiel */}
-            <motion.div
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl border-2 border-gray-200 dark:border-white/10 hover:border-amber-500/30 transition-colors"
-            >
-              <div className="text-sm text-amber-500 font-bold uppercase tracking-wider mb-2">Essentiel</div>
-              <h3 className="text-xl font-bold mb-2">Audit Essentiel</h3>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-bold text-amber-500">100</span>
-                <span className="text-xl text-gray-400">EUR</span>
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Paiement unique - Livraison sous 24h</p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  'Analyse SEO complete (50+ regles)',
-                  'Test de performance mobile & desktop',
-                  'Verification securite SSL & headers',
-                  'Analyse UX et responsive',
-                  'Rapport PDF detaille',
-                  'Score global et priorites'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <CheckCircle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <motion.a
-                href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20un%20Audit%20Essentiel%20pour%20mon%20site."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full py-3 rounded-xl border-2 border-amber-500 text-amber-600 dark:text-amber-400 font-bold text-center hover:bg-amber-500/5 transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Commander l'audit
-              </motion.a>
-            </motion.div>
-
-            {/* Audit + Plan */}
-            <motion.div
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl border-2 border-amber-500 relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold px-4 py-1 rounded-bl-xl">
-                POPULAIRE
-              </div>
-              <div className="text-sm text-amber-500 font-bold uppercase tracking-wider mb-2">Complet</div>
-              <h3 className="text-xl font-bold mb-2">Audit + Plan d'Action</h3>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-bold text-amber-500">200</span>
-                <span className="text-xl text-gray-400">EUR</span>
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Paiement unique - Livraison sous 5 jours</p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  'Tout de l\'Audit Essentiel',
-                  'Analyse approfondie (230+ regles)',
-                  'Plan d\'action detaille et priorise',
-                  'Analyse de la concurrence SEO',
-                  'Appel de restitution 30 min',
-                  'Recommandations techniques precises',
-                  'Estimation des gains potentiels'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <CheckCircle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <motion.a
-                href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20l'offre%20Audit%20%2B%20Plan%20d'Action%20pour%20mon%20site."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-center shadow-lg shadow-amber-500/25"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Choisir cette offre
-              </motion.a>
-            </motion.div>
-
-            {/* Audit + Implementation */}
-            <motion.div
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl border-2 border-gray-200 dark:border-white/10 hover:border-amber-500/30 transition-colors"
-            >
-              <div className="text-sm text-amber-500 font-bold uppercase tracking-wider mb-2">Premium</div>
-              <h3 className="text-xl font-bold mb-2">Audit + Implementation</h3>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-bold text-amber-500">499</span>
-                <span className="text-xl text-gray-400">EUR</span>
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Paiement unique - Suivi 30 jours</p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  'Tout de l\'Audit + Plan',
-                  'Implementation des corrections',
-                  'Optimisation SEO on-page',
-                  'Amelioration performance',
-                  'Corrections securite',
-                  'Suivi et rapport de progression',
-                  'Support 30 jours inclus'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-                    <CheckCircle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <motion.a
-                href="https://wa.me/33635505374?text=Bonjour%2C%20je%20suis%20interesse%20par%20l'offre%20Audit%20%2B%20Implementation."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full py-3 rounded-xl border-2 border-amber-500 text-amber-600 dark:text-amber-400 font-bold text-center hover:bg-amber-500/5 transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Nous contacter
-              </motion.a>
-            </motion.div>
-          </div>
-        </motion.section>
-
-        {/* Pourquoi Traffik — Bento Grid */}
+        {/* ── Ce qu'on analyse — Grid clean ── */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-20"
+          className="mb-24"
         >
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              Pourquoi Choisir <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Traffik Web</span>
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">
-              Audit expert, resultats concrets.
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            Ce que nous <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">analysons</span>
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-8">4 piliers, 230+ règles, un seul rapport.</p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px]">
-            {/* Rapport en 24h — large gradient card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="col-span-2 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-amber-500/[0.08] to-orange-600/[0.06] dark:from-amber-500/[0.12] dark:to-orange-600/[0.08] border border-amber-500/15 dark:border-amber-500/20 relative overflow-hidden group hover:shadow-lg hover:shadow-amber-500/5 transition-shadow duration-300"
-            >
-              <Clock className="w-8 h-8 text-amber-500" />
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Rapport en 24h</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Pas d'attente, resultats en main le lendemain.</p>
-              </div>
-            </motion.div>
-
-            {/* Actionnable — small */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
-            >
-              <Target className="w-7 h-7 text-amber-500" />
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Actionnable</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Recommandations priorisees</p>
-              </div>
-            </motion.div>
-
-            {/* Expert humain — small */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.15 }}
-              className="col-span-1 row-span-1 rounded-3xl p-5 md:p-6 flex flex-col justify-between bg-gray-50 dark:bg-white/[0.05] border border-gray-200 dark:border-white/[0.08] hover:shadow-lg hover:border-gray-300 dark:hover:border-white/[0.12] transition-all duration-300"
-            >
-              <Users className="w-7 h-7 text-orange-500" />
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Expert humain</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Pas un outil automatise</p>
-              </div>
-            </motion.div>
-
-            {/* +45% performance — wide dark card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="col-span-2 md:col-span-3 row-span-1 rounded-3xl p-6 md:p-8 flex flex-col justify-between bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] hover:shadow-xl transition-shadow duration-300"
-            >
-              <TrendingUp className="w-8 h-8 text-amber-500" />
-              <div>
-                <h3 className="text-xl font-bold text-white mb-1">+45% performance moyenne</h3>
-                <p className="text-sm text-gray-400">Nos clients voient des ameliorations concretes apres implementation des recommandations.</p>
-              </div>
-            </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { icon: Search, title: 'SEO', desc: 'Balises, mots-clés, maillage, sitemap, indexation', accent: 'amber' },
+              { icon: Zap, title: 'Performance', desc: 'Core Web Vitals, temps de chargement, optimisation', accent: 'amber' },
+              { icon: Shield, title: 'Sécurité', desc: 'SSL, headers HTTP, failles, HTTPS, CSP', accent: 'orange' },
+              { icon: Smartphone, title: 'UX & Mobile', desc: 'Responsive, accessibilité, navigation, CTA', accent: 'amber' },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="rounded-2xl p-5 bg-gray-50 dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.06] hover:border-amber-500/20 dark:hover:border-amber-500/15 transition-colors duration-300"
+                >
+                  <div className={`w-10 h-10 rounded-xl bg-${item.accent}-500/10 flex items-center justify-center mb-4`}>
+                    <Icon className={`w-5 h-5 text-${item.accent}-500`} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{item.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.section>
 
-        {/* FAQ Section */}
+        {/* ── Performance Marketing ── */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          className="mb-24"
+        >
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            {/* Left */}
+            <div>
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-bold uppercase tracking-wider mb-5">
+                <TrendingUp className="w-3 h-3" /> Performance Marketing
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4 text-gray-900 dark:text-white">
+                Attirez des clients{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">
+                  qui veulent acheter.
+                </span>
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
+                SEO, publicités ciblées et automatisation. Votre site devient un aimant à prospects qualifiés, 24h/24.
+              </p>
+              <div className="flex gap-8 pt-5 border-t border-gray-200 dark:border-white/[0.06]">
+                {[
+                  { value: '+350%', label: 'Croissance' },
+                  { value: '15K', label: 'Leads' },
+                  { value: '42', label: 'Clients' },
+                ].map((stat, i) => (
+                  <div key={i}>
+                    <div className="text-2xl font-black text-gray-900 dark:text-white">{stat.value}</div>
+                    <div className="text-[10px] text-gray-400 uppercase tracking-wider mt-0.5">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — Clickable Cards */}
+            <div className="flex flex-col gap-3">
+              <motion.button
+                onClick={() => setActiveService(marketingServices[0])}
+                initial={{ opacity: 0, scale: 0.97 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="rounded-2xl bg-gray-900 dark:bg-white/[0.05] border border-gray-800 dark:border-white/[0.08] p-5 relative overflow-hidden text-left cursor-pointer group"
+              >
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ArrowUpRight className="w-4 h-4 text-orange-400" />
+                </div>
+                <Crosshair className="w-8 h-8 text-orange-500/60 mb-3" />
+                <h3 className="text-lg font-bold text-white mb-1.5">Acquisition Automatisée</h3>
+                <p className="text-sm text-gray-400 mb-3">SEO technique + Google Ads pour capturer le trafic intentionniste.</p>
+                <div className="flex gap-6 pt-3 border-t border-white/[0.06]">
+                  <div>
+                    <div className="text-xl font-bold text-white">90%</div>
+                    <div className="text-[10px] text-gray-500 uppercase">Trafic capturé</div>
+                  </div>
+                  <div>
+                    <div className="text-xl font-bold text-white">4.2x</div>
+                    <div className="text-[10px] text-gray-500 uppercase">ROAS moyen</div>
+                  </div>
+                </div>
+              </motion.button>
+
+              <div className="grid grid-cols-2 gap-3">
+                <motion.button
+                  onClick={() => setActiveService(marketingServices[1])}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="rounded-2xl p-4 bg-gradient-to-br from-[#F97066] to-[#E8604C] text-white text-left cursor-pointer group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center mb-2.5">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <h3 className="font-bold text-sm mb-1">Cold Emailing</h3>
+                  <p className="text-[11px] text-white/70 leading-relaxed">Campagnes B2B ciblées avec IA.</p>
+                </motion.button>
+
+                <motion.button
+                  onClick={() => setActiveService(marketingServices[2])}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="rounded-2xl p-4 bg-gradient-to-br from-[#FB923C] to-[#F97316] text-white text-left cursor-pointer group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center mb-2.5">
+                    <BarChart3 className="w-4 h-4" />
+                  </div>
+                  <h3 className="font-bold text-sm mb-1">Tracking & Data</h3>
+                  <p className="text-[11px] text-white/70 leading-relaxed">Dashboards temps réel, ROI par euro.</p>
+                </motion.button>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* ── FAQ ── */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Questions <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">Frequentes</span>
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">
+            Questions <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">fréquentes</span>
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
-            Tout ce que vous devez savoir sur nos audits.
-          </p>
-
           <FAQSection faqs={faqData} />
         </motion.section>
 
-        {/* Final CTA */}
+        {/* ── CTA ── */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center p-10 md:p-16 rounded-3xl bg-gradient-to-br from-amber-500/10 to-orange-600/10 border border-amber-500/20"
+          className="text-center py-12 px-8 md:px-16 rounded-3xl bg-gradient-to-br from-amber-500/[0.06] to-orange-600/[0.04] border border-amber-500/10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pret a Decouvrir Ce Qui Freine Votre Site ?
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">
+            Prêt à découvrir ce qui freine votre site ?
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Diagnostic complet sous 24h. Premier echange gratuit et sans engagement.
+          <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-xl mx-auto">
+            Diagnostic complet sous 24h. Premier échange gratuit.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.a
-              href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20un%20audit%20de%20mon%20site%20web."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#25D366] text-white font-bold shadow-lg shadow-[#25D366]/25"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <MessageCircle className="w-5 h-5" />
-              Demander mon Audit
-            </motion.a>
-            <Link
-              to="/tarifs"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold shadow-lg shadow-amber-500/25 hover:shadow-xl transition-shadow"
-            >
-              Voir les tarifs
-            </Link>
-          </div>
+          <motion.a
+            href="https://wa.me/33635505374?text=Bonjour%2C%20je%20souhaite%20un%20audit%20de%20mon%20site%20web."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-lg shadow-[#25D366]/20"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <MessageCircle className="w-4 h-4" />
+            Demander mon Audit
+          </motion.a>
         </motion.section>
 
       </div>

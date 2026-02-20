@@ -31,24 +31,24 @@ const fadeUp = {
 
 const faqData = [
   {
-    question: "Combien de temps faut-il pour voir les premiers resultats SEO ?",
-    answer: "Le referencement naturel est une strategie a moyen et long terme. En general, les premiers resultats significatifs apparaissent entre 3 et 6 mois apres le debut de l'optimisation. Cela depend de la concurrence sur vos mots-cles, de l'etat actuel de votre site et de la qualite du travail effectue. Certaines actions comme l'optimisation technique peuvent produire des effets plus rapides (quelques semaines), tandis que le netlinking et la creation de contenu necessitent plus de patience. Nous fournissons des rapports mensuels pour suivre chaque progression."
+    question: "Combien de temps faut-il pour voir les premiers résultats SEO ?",
+    answer: "Le référencement naturel est une stratégie à moyen et long terme. En général, les premiers résultats significatifs apparaissent entre 3 et 6 mois après le début de l'optimisation. Cela dépend de la concurrence sur vos mots-clés, de l'état actuel de votre site et de la qualité du travail effectué. Certaines actions comme l'optimisation technique peuvent produire des effets plus rapides (quelques semaines), tandis que le netlinking et la création de contenu nécessitent plus de patience. Nous fournissons des rapports mensuels pour suivre chaque progression."
   },
   {
-    question: "Pouvez-vous garantir la premiere page Google ?",
-    answer: "Aucun professionnel serieux ne peut garantir une position precise sur Google. Les algorithmes evoluent constamment et dependent de centaines de facteurs. Ce que nous garantissons, c'est l'application rigoureuse des meilleures pratiques SEO recommandees par Google, un travail transparent avec des rapports detailles, et une amelioration mesurable de votre visibilite organique. Nos clients constatent en moyenne une augmentation de 150% a 300% de leur trafic organique sur 6 a 12 mois."
+    question: "Pouvez-vous garantir la première page Google ?",
+    answer: "Aucun professionnel sérieux ne peut garantir une position précise sur Google. Les algorithmes évoluent constamment et dépendent de centaines de facteurs. Ce que nous garantissons, c'est l'application rigoureuse des meilleures pratiques SEO recommandées par Google, un travail transparent avec des rapports détaillés, et une amélioration mesurable de votre visibilité organique. Nos clients constatent en moyenne une augmentation de 150% à 300% de leur trafic organique sur 6 à 12 mois."
   },
   {
     question: "Qu'est-ce que le SEO local et en ai-je besoin ?",
-    answer: "Le SEO local est l'optimisation de votre presence en ligne pour les recherches geographiquement ciblees. Si vous avez un commerce physique, un cabinet, un restaurant ou tout business qui sert une zone geographique specifique, le SEO local est indispensable. Il comprend l'optimisation de votre fiche Google Business Profile, la gestion des avis clients, les citations locales et l'optimisation de votre site pour les requetes locales (ex: 'plombier Paris 15'). Le SEO local represente aujourd'hui 46% de toutes les recherches Google."
+    answer: "Le SEO local est l'optimisation de votre présence en ligne pour les recherches géographiquement ciblées. Si vous avez un commerce physique, un cabinet, un restaurant ou tout business qui sert une zone géographique spécifique, le SEO local est indispensable. Il comprend l'optimisation de votre fiche Google Business Profile, la gestion des avis clients, les citations locales et l'optimisation de votre site pour les requêtes locales (ex: 'plombier Paris 15'). Le SEO local représente aujourd'hui 46% de toutes les recherches Google."
   },
   {
     question: "Le contenu est-il vraiment important pour le SEO ?",
-    answer: "Le contenu est le pilier central de toute strategie SEO reussie. Google valorise les sites qui produisent du contenu utile, original et regulier. Un blog professionnel avec des articles optimises permet de cibler des mots-cles longue traine, d'attirer du trafic qualifie et de demontrer votre expertise (E-E-A-T). Nous vous accompagnons dans la creation d'une strategie editoriale adaptee a votre secteur, avec des contenus rediges pour plaire a la fois aux moteurs de recherche et a vos visiteurs."
+    answer: "Le contenu est le pilier central de toute stratégie SEO réussie. Google valorise les sites qui produisent du contenu utile, original et régulier. Un blog professionnel avec des articles optimisés permet de cibler des mots-clés longue traîne, d'attirer du trafic qualifié et de démontrer votre expertise (E-E-A-T). Nous vous accompagnons dans la création d'une stratégie éditoriale adaptée à votre secteur, avec des contenus rédigés pour plaire à la fois aux moteurs de recherche et à vos visiteurs."
   },
   {
-    question: "Quelle est la difference entre SEO et SEA (Google Ads) ?",
-    answer: "Le SEO (referencement naturel) consiste a optimiser votre site pour apparaitre dans les resultats organiques de Google, sans payer pour chaque clic. Le SEA (Search Engine Advertising) consiste a acheter des annonces payantes en haut des resultats. Le SEO offre un retour sur investissement durable : une fois bien positionne, vous recevez du trafic gratuit en continu. Le SEA offre des resultats immediats mais s'arrete des que vous coupez le budget. L'ideal est souvent de combiner les deux pour maximiser votre visibilite."
+    question: "Quelle est la différence entre SEO et SEA (Google Ads) ?",
+    answer: "Le SEO (référencement naturel) consiste à optimiser votre site pour apparaître dans les résultats organiques de Google, sans payer pour chaque clic. Le SEA (Search Engine Advertising) consiste à acheter des annonces payantes en haut des résultats. Le SEO offre un retour sur investissement durable : une fois bien positionné, vous recevez du trafic gratuit en continu. Le SEA offre des résultats immédiats mais s'arrête dès que vous coupez le budget. L'idéal est souvent de combiner les deux pour maximiser votre visibilité."
   }
 ];
 
@@ -56,8 +56,8 @@ export default function SEO() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
-        title="Referencement SEO Naturel | Premiere Page Google | Traffik Web"
-        description="Expert en referencement naturel SEO en France. Audit SEO, optimisation on-page, netlinking, SEO local. Boostez votre visibilite Google et attirez plus de clients. Audit a partir de 200 euros."
+        title="Référencement SEO Naturel | Première Page Google | Traffik Web"
+        description="Expert en référencement naturel SEO en France. Audit SEO, optimisation on-page, netlinking, SEO local. Boostez votre visibilité Google et attirez plus de clients. Audit à partir de 200 euros."
         canonical="https://traffik-web.fr/referencement-seo"
         keywords="referencement seo, referencement naturel, seo france, audit seo, premiere page google, optimisation seo, seo local, netlinking, consultant seo, agence seo france, referencement google, strategie seo"
       />
@@ -69,7 +69,7 @@ export default function SEO() {
           to="/"
           className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-10 text-sm"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour a l'accueil
+          <ArrowLeft className="w-4 h-4" /> Retour à l'accueil
         </Link>
 
         {/* Hero Section */}
@@ -84,19 +84,19 @@ export default function SEO() {
               <Search className="w-6 h-6 text-white" />
             </div>
             <span className="text-sm font-medium text-[#0066FF] bg-[#0066FF]/10 px-3 py-1 rounded-full">
-              Referencement Naturel
+              Référencement Naturel
             </span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Referencement SEO :{' '}
+            Référencement SEO :{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">
-              Atteignez la Premiere Page Google
+              Atteignez la Première Page Google
             </span>
           </h1>
 
           <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mb-8">
-            Boostez votre visibilite Google avec une strategie SEO sur mesure. Audit, optimisation, contenu et netlinking pour des resultats concrets.
+            Boostez votre visibilité Google avec une stratégie SEO sur mesure. Audit, optimisation, contenu et netlinking pour des résultats concrets.
           </p>
 
           <motion.a
@@ -115,8 +115,8 @@ export default function SEO() {
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
           {[
-            { value: '93%', label: 'des experiences commencent sur Google' },
-            { value: '75%', label: 'ne depassent pas la page 1' },
+            { value: '93%', label: 'des expériences commencent sur Google' },
+            { value: '75%', label: 'ne dépassent pas la page 1' },
             { value: '14.6%', label: 'taux de conversion leads SEO' },
             { value: '5.66x', label: 'ROI moyen du SEO' }
           ].map((stat, index) => (
@@ -146,11 +146,11 @@ export default function SEO() {
             <h2 className="text-3xl md:text-4xl font-bold mb-3">
               Nos 4 Piliers du{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">
-                Referencement SEO
+                Référencement SEO
               </span>
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
-              Approche complete pour dominer les resultats de recherche.
+              Approche complète pour dominer les résultats de recherche.
             </p>
           </div>
 
@@ -166,7 +166,7 @@ export default function SEO() {
               <FileText className="w-8 h-8 text-[#0066FF]" />
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">SEO On-Page</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Balises, mots-cles, contenu optimise pour Google.</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Balises, mots-clés, contenu optimisé pour Google.</p>
               </div>
             </motion.div>
 
@@ -196,7 +196,7 @@ export default function SEO() {
               <Link2 className="w-7 h-7 text-[#A855F7]" />
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Netlinking</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Backlinks de qualite</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Backlinks de qualité</p>
               </div>
             </motion.div>
 
@@ -225,8 +225,8 @@ export default function SEO() {
             >
               <TrendingUp className="w-8 h-8 text-[#0066FF]" />
               <div>
-                <h3 className="text-xl font-bold text-white mb-1">Strategie complete 360</h3>
-                <p className="text-sm text-gray-400">On-page + technique + netlinking + local = dominance totale sur vos mots-cles.</p>
+                <h3 className="text-xl font-bold text-white mb-1">Stratégie complète 360</h3>
+                <p className="text-sm text-gray-400">On-page + technique + netlinking + local = dominance totale sur vos mots-clés.</p>
               </div>
             </motion.div>
           </div>
@@ -245,7 +245,7 @@ export default function SEO() {
               Processus
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              5 Etapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">0 Surprise.</span>
+              5 Étapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">0 Surprise.</span>
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
               De l'audit initial au reporting mensuel.
@@ -254,11 +254,11 @@ export default function SEO() {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 mb-10">
             {[
-              { icon: Search, step: '01', title: 'Audit', desc: 'Analyse complete de votre site.' },
-              { icon: Target, step: '02', title: 'Strategie', desc: 'Mots-cles et plan d\'action.' },
+              { icon: Search, step: '01', title: 'Audit', desc: 'Analyse complète de votre site.' },
+              { icon: Target, step: '02', title: 'Stratégie', desc: 'Mots-clés et plan d\'action.' },
               { icon: Zap, step: '03', title: 'Optimisation', desc: 'Technique + on-page.' },
               { icon: Globe, step: '04', title: 'Contenu', desc: 'Articles + netlinking.' },
-              { icon: TrendingUp, step: '05', title: 'Suivi', desc: 'Reporting mensuel detaille.' },
+              { icon: TrendingUp, step: '05', title: 'Suivi', desc: 'Reporting mensuel détaillé.' },
             ].map((item, index) => {
               const Icon = item.icon;
               return (
@@ -296,7 +296,7 @@ export default function SEO() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Demarrer mon audit SEO
+              Démarrer mon audit SEO
               <Zap className="w-4 h-4" />
             </motion.a>
           </div>
@@ -314,7 +314,7 @@ export default function SEO() {
             Nos <span className="text-[#0066FF]">Tarifs SEO</span> Transparents
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
-            Des formules adaptees a chaque budget et chaque objectif.
+            Des formules adaptées à chaque budget et chaque objectif.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -335,11 +335,11 @@ export default function SEO() {
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Paiement unique - Livraison sous 7 jours</p>
               <ul className="space-y-3 mb-8">
                 {[
-                  'Analyse technique complete',
-                  'Audit de contenu et mots-cles',
+                  'Analyse technique complète',
+                  'Audit de contenu et mots-clés',
                   'Analyse des backlinks',
                   'Analyse de la concurrence',
-                  'Rapport PDF detaille',
+                  'Rapport PDF détaillé',
                   'Plan d\'action prioritaire'
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -382,10 +382,10 @@ export default function SEO() {
                 {[
                   'Audit initial offert',
                   'Optimisation technique continue',
-                  'Creation de 4 contenus/mois',
-                  'Strategie de netlinking',
+                  'Création de 4 contenus/mois',
+                  'Stratégie de netlinking',
                   'Suivi des positions quotidien',
-                  'Rapport mensuel detaille',
+                  'Rapport mensuel détaillé',
                   'Support prioritaire'
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -402,7 +402,7 @@ export default function SEO() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Demarrer maintenant
+                Démarrer maintenant
               </motion.a>
             </motion.div>
 
@@ -424,12 +424,12 @@ export default function SEO() {
               <ul className="space-y-3 mb-8">
                 {[
                   'Tout de SEO Performance',
-                  'Creation de 8+ contenus/mois',
+                  'Création de 8+ contenus/mois',
                   'Netlinking intensif (10+ liens/mois)',
                   'SEO local inclus',
                   'Optimisation taux de conversion (CRO)',
-                  'Appel strategique hebdomadaire',
-                  'Support illimite'
+                  'Appel stratégique hebdomadaire',
+                  'Support illimité'
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
                     <CheckCircle className="w-4 h-4 text-[#0066FF] mt-0.5 flex-shrink-0" />
@@ -479,8 +479,8 @@ export default function SEO() {
             >
               <TrendingUp className="w-8 h-8 text-[#0066FF]" />
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Resultats mesurables</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Chaque action tracee, chaque progression documentee.</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Résultats mesurables</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Chaque action tracée, chaque progression documentée.</p>
               </div>
             </motion.div>
 
@@ -495,7 +495,7 @@ export default function SEO() {
               <Users className="w-7 h-7 text-[#0066FF]" />
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Sur mesure</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Strategie adaptee a votre secteur</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Stratégie adaptée à votre secteur</p>
               </div>
             </motion.div>
 
@@ -524,7 +524,7 @@ export default function SEO() {
             >
               <Search className="w-8 h-8 text-[#0066FF]" />
               <div>
-                <h3 className="text-xl font-bold text-white mb-1">Expert SEO dedie</h3>
+                <h3 className="text-xl font-bold text-white mb-1">Expert SEO dédié</h3>
                 <p className="text-sm text-gray-400">Un seul interlocuteur, suivi quotidien de vos positions Google.</p>
               </div>
             </motion.div>
@@ -539,7 +539,7 @@ export default function SEO() {
           className="mb-20"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">
-            Questions <span className="text-[#0066FF]">Frequentes</span> sur le SEO
+            Questions <span className="text-[#0066FF]">Fréquentes</span> sur le SEO
           </h2>
 
           <FAQSection faqs={faqData} />
@@ -554,10 +554,10 @@ export default function SEO() {
           className="text-center p-10 md:p-16 rounded-3xl bg-gradient-to-br from-[#0066FF]/10 to-purple-600/10 border border-[#0066FF]/20"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pret a Dominer Google ?
+            Prêt à Dominer Google ?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Premier echange gratuit et sans engagement. Devis sous 24h.
+            Premier échange gratuit et sans engagement. Devis sous 24h.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.a

@@ -9,7 +9,7 @@ const services = [
     title: 'Audit de Site Web',
     icon: Search,
     description: "Identifiez les freins invisibles qui plombent votre site. Rapport complet en 24h.",
-    features: ['Analyse SEO complete', 'Test de performance', 'Verification securite'],
+    features: ['Analyse SEO complète', 'Test de performance', 'Vérification sécurité'],
     color: 'from-amber-500 to-orange-600',
     accentColor: '#f59e0b',
     href: '/audit-site-web',
@@ -17,9 +17,9 @@ const services = [
   },
   {
     id: 'seo',
-    title: 'Referencement SEO',
+    title: 'Référencement SEO',
     icon: TrendingUp,
-    description: "Montez en premiere page Google et attirez un flux constant de clients qualifies.",
+    description: "Montez en première page Google et attirez un flux constant de clients qualifiés.",
     features: ['SEO on-page & technique', 'Netlinking premium', 'SEO local & national'],
     color: 'from-blue-500 to-indigo-600',
     accentColor: '#3b82f6',
@@ -79,7 +79,7 @@ function DesktopCard({ service, index, isInView }) {
           className={`w-full py-4 rounded-full bg-gradient-to-r ${service.color} text-white text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow duration-300`}
           style={{ boxShadow: `0 10px 30px -10px ${service.accentColor}50` }}
         >
-          Decouvrir
+          Découvrir
           <ArrowRight className="w-4 h-4" />
         </motion.div>
       </Link>
@@ -145,7 +145,7 @@ function MobileCard({ service, index }) {
           className={`w-full py-3.5 rounded-full bg-gradient-to-r ${service.color} text-white text-sm font-semibold flex items-center justify-center gap-2 active:brightness-110 transition-all duration-150`}
           style={{ boxShadow: `0 6px 20px -6px ${service.accentColor}50` }}
         >
-          Decouvrir
+          Découvrir
           <ArrowRight className="w-4 h-4" />
         </motion.button>
       </Link>
@@ -181,7 +181,7 @@ export default function Audit() {
           >
             Boostez votre{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">
-              visibilite.
+              visibilité.
             </span>
           </motion.h2>
 
@@ -191,7 +191,7 @@ export default function Audit() {
             transition={{ delay: 0.2 }}
             className="text-gray-500 dark:text-gray-400 max-w-lg mx-auto"
           >
-            Audit complet et referencement naturel pour des resultats concrets.
+            Audit complet et référencement naturel pour des résultats concrets.
           </motion.p>
         </div>
 

@@ -36,7 +36,7 @@ const platforms = [
     name: 'Facebook & Instagram Ads',
     icon: Users,
     color: 'from-blue-600 to-indigo-600',
-    features: ['Ciblage ultra-precis', 'Retargeting dynamique', 'Audiences Lookalike', 'Stories & Reels Ads']
+    features: ['Ciblage ultra-précis', 'Retargeting dynamique', 'Audiences Lookalike', 'Stories & Reels Ads']
   },
   {
     name: 'Google Ads',
@@ -54,24 +54,24 @@ const platforms = [
 
 const faqs = [
   {
-    question: 'Quel budget publicitaire minimum faut-il prevoir ?',
-    answer: 'Minimum 300 a 500 euros par mois par plateforme pour des resultats significatifs. Ce budget s\'ajoute a nos frais de gestion (a partir de 300 euros/mois). Pour les e-commerces, 500 a 1000 euros/mois est ideal pour scaler rapidement.'
+    question: 'Quel budget publicitaire minimum faut-il prévoir ?',
+    answer: 'Minimum 300 à 500 euros par mois par plateforme pour des résultats significatifs. Ce budget s\'ajoute à nos frais de gestion (à partir de 300 euros/mois). Pour les e-commerces, 500 à 1000 euros/mois est idéal pour scaler rapidement.'
   },
   {
-    question: 'En combien de temps vais-je voir des resultats ?',
-    answer: 'Premiers resultats des la premiere semaine. Phase d\'optimisation reelle apres 2 a 4 semaines. Apres 1 a 2 mois, les campagnes atteignent leur rythme de croisiere avec un cout par acquisition stable.'
+    question: 'En combien de temps vais-je voir des résultats ?',
+    answer: 'Premiers résultats dès la première semaine. Phase d\'optimisation réelle après 2 à 4 semaines. Après 1 à 2 mois, les campagnes atteignent leur rythme de croisière avec un coût par acquisition stable.'
   },
   {
     question: 'Quelle plateforme choisir entre Facebook, Google et TikTok ?',
-    answer: 'Facebook/Instagram pour le e-commerce et la generation de leads. Google Ads quand vos clients recherchent activement vos produits (intention d\'achat forte). TikTok pour toucher les 18-35 ans avec des produits visuels. On vous conseille gratuitement.'
+    answer: 'Facebook/Instagram pour le e-commerce et la génération de leads. Google Ads quand vos clients recherchent activement vos produits (intention d\'achat forte). TikTok pour toucher les 18-35 ans avec des produits visuels. On vous conseille gratuitement.'
   },
   {
     question: 'Comment mesurez-vous le ROI de mes campagnes ?',
-    answer: 'Pixel Facebook, Google Analytics et suivi des conversions. Chaque vente et chaque lead est trace. Rapport hebdomadaire : impressions, CTR, CPC, CPA, conversions et ROAS. Tout est transparent.'
+    answer: 'Pixel Facebook, Google Analytics et suivi des conversions. Chaque vente et chaque lead est tracé. Rapport hebdomadaire : impressions, CTR, CPC, CPA, conversions et ROAS. Tout est transparent.'
   },
   {
-    question: 'Dois-je m\'engager sur une duree minimum ?',
-    answer: 'Non, zero engagement. Mois par mois. On recommande 3 mois minimum pour laisser les campagnes atteindre leur plein potentiel. La majorite de nos clients restent sur le long terme.'
+    question: 'Dois-je m\'engager sur une durée minimum ?',
+    answer: 'Non, zéro engagement. Mois par mois. On recommande 3 mois minimum pour laisser les campagnes atteindre leur plein potentiel. La majorité de nos clients restent sur le long terme.'
   }
 ];
 
@@ -79,8 +79,8 @@ export default function Publicite() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
-        title="Publicite Digitale Facebook Ads & Google Ads | ROI Garanti | Traffik Web"
-        description="Expert en publicite digitale Facebook Ads, Google Ads et TikTok Ads. Gestion de campagnes publicitaires en ligne avec ROI garanti. A partir de 300 euros/mois."
+        title="Publicité Digitale Facebook Ads & Google Ads | ROI Garanti | Traffik Web"
+        description="Expert en publicité digitale Facebook Ads, Google Ads et TikTok Ads. Gestion de campagnes publicitaires en ligne avec ROI garanti. À partir de 300 euros/mois."
         canonical="https://traffik-web.fr/publicite-digitale"
         keywords="publicite facebook ads, google ads, publicite digitale, gestion publicite en ligne, agence facebook ads france, campagne publicitaire en ligne, publicite instagram, tiktok ads, cout publicite facebook, retour sur investissement publicite"
       />
@@ -91,7 +91,7 @@ export default function Publicite() {
           to="/"
           className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-10"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour a l'accueil
+          <ArrowLeft className="w-4 h-4" /> Retour à l'accueil
         </Link>
 
         {/* Hero Section */}
@@ -106,19 +106,19 @@ export default function Publicite() {
               <Megaphone className="w-6 h-6 text-white" />
             </div>
             <span className="text-sm font-medium text-[#0066FF] bg-[#0066FF]/10 px-3 py-1 rounded-full">
-              Publicite digitale
+              Publicité digitale
             </span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Publicite Digitale{' '}
+            Publicité Digitale{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">
               Facebook Ads & Google Ads
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mb-8">
-            Generez des clients et du chiffre d'affaires avec des campagnes Facebook Ads, Google Ads et TikTok Ads gerees de A a Z.
+            Générez des clients et du chiffre d'affaires avec des campagnes Facebook Ads, Google Ads et TikTok Ads gérées de A à Z.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -153,10 +153,10 @@ export default function Publicite() {
         >
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              Pourquoi la <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">Publicite Digitale</span> ?
+              Pourquoi la <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">Publicité Digitale</span> ?
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
-              Le levier le plus rapide pour generer des clients.
+              Le levier le plus rapide pour générer des clients.
             </p>
           </div>
 
@@ -171,8 +171,8 @@ export default function Publicite() {
             >
               <TrendingUp className="w-8 h-8 text-[#0066FF]" />
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Resultats des J1</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Premiers leads et ventes des les premiers jours de diffusion.</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Résultats dès J1</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Premiers leads et ventes dès les premiers jours de diffusion.</p>
               </div>
             </motion.div>
 
@@ -187,7 +187,7 @@ export default function Publicite() {
               <Target className="w-7 h-7 text-[#0066FF]" />
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Ciblage chirurgical</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Audiences ultra-precises</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Audiences ultra-précises</p>
               </div>
             </motion.div>
 
@@ -202,7 +202,7 @@ export default function Publicite() {
               <LineChart className="w-7 h-7 text-[#A855F7]" />
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">ROI mesurable</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Chaque euro trace</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Chaque euro tracé</p>
               </div>
             </motion.div>
 
@@ -216,7 +216,7 @@ export default function Publicite() {
             >
               <Users className="w-7 h-7 text-[#0066FF]" />
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Expert dedie</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Expert dédié</h3>
                 <p className="text-xs text-gray-500 dark:text-gray-400">1 interlocuteur unique</p>
               </div>
             </motion.div>
@@ -232,7 +232,7 @@ export default function Publicite() {
               <Megaphone className="w-8 h-8 text-[#0066FF]" />
               <div>
                 <h3 className="text-xl font-bold text-white mb-1">Multi-plateforme</h3>
-                <p className="text-sm text-gray-400">Facebook, Instagram, Google, TikTok — on gere toutes vos campagnes.</p>
+                <p className="text-sm text-gray-400">Facebook, Instagram, Google, TikTok — on gère toutes vos campagnes.</p>
               </div>
             </motion.div>
           </div>
@@ -247,10 +247,10 @@ export default function Publicite() {
           className="mb-20"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            Plateformes que nous <span className="text-[#0066FF]">gerons</span>
+            Plateformes que nous <span className="text-[#0066FF]">gérons</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-8">
-            Chaque ecosysteme maitrise pour maximiser votre ROI.
+            Chaque écosystème maîtrisé pour maximiser votre ROI.
           </p>
 
           <div className="grid md:grid-cols-3 gap-5">
@@ -295,17 +295,17 @@ export default function Publicite() {
               Processus
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              5 Etapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">0 Surprise.</span>
+              5 Étapes. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-purple-600">0 Surprise.</span>
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
-              De l'audit au scaling, tout est cadre.
+              De l'audit au scaling, tout est cadré.
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 mb-10">
             {[
-              { icon: Eye, step: '01', title: 'Audit', desc: 'Analyse marche, concurrence et objectifs.' },
-              { icon: Megaphone, step: '02', title: 'Creation', desc: 'Visuels, annonces et ciblage.' },
+              { icon: Eye, step: '01', title: 'Audit', desc: 'Analyse marché, concurrence et objectifs.' },
+              { icon: Megaphone, step: '02', title: 'Création', desc: 'Visuels, annonces et ciblage.' },
               { icon: Rocket, step: '03', title: 'Lancement', desc: 'Mise en ligne et suivi quotidien.' },
               { icon: BarChart3, step: '04', title: 'Optimisation', desc: 'Tests A/B et ajustements continus.' },
               { icon: TrendingUp, step: '05', title: 'Scaling', desc: 'On monte le budget sur ce qui marche.' },
@@ -364,19 +364,19 @@ export default function Publicite() {
             Ce qui est <span className="text-[#0066FF]">inclus</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-8">
-            Service complet, transparent, oriente resultats.
+            Service complet, transparent, orienté résultats.
           </p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mb-10">
             {[
-              'Ciblage precis de votre audience',
-              'Resultats mesurables et transparents',
+              'Ciblage précis de votre audience',
+              'Résultats mesurables et transparents',
               'Optimisation quotidienne',
               'Rapports hebdomadaires',
-              'Zero engagement longue duree',
-              'Expert dedie a votre compte',
-              'Strategies testees et prouvees',
-              'Accompagnement personnalise',
+              'Zéro engagement longue durée',
+              'Expert dédié à votre compte',
+              'Stratégies testées et prouvées',
+              'Accompagnement personnalisé',
               'Configuration pixel & tracking'
             ].map((benefit, index) => (
               <motion.div
@@ -413,7 +413,7 @@ export default function Publicite() {
                   <span className="text-xl font-bold text-[#0066FF]">euros</span>
                   <span className="text-gray-500">/mois</span>
                 </div>
-                <p className="text-sm text-gray-500 mt-1">A partir de, par plateforme</p>
+                <p className="text-sm text-gray-500 mt-1">À partir de, par plateforme</p>
               </div>
             </div>
           </motion.div>
@@ -432,7 +432,7 @@ export default function Publicite() {
               Pourquoi <span className="text-[#0066FF]">Traffik Web</span> ?
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
-              Expert dedie, transparence totale, resultats concrets.
+              Expert dédié, transparence totale, résultats concrets.
             </p>
           </div>
 
@@ -448,7 +448,7 @@ export default function Publicite() {
               <ShieldCheck className="w-8 h-8 text-[#0066FF]" />
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Transparence totale</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Acces complet a vos comptes publicitaires. Vos donnees restent les votres.</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Accès complet à vos comptes publicitaires. Vos données restent les vôtres.</p>
               </div>
             </motion.div>
 
@@ -462,7 +462,7 @@ export default function Publicite() {
             >
               <Clock className="w-7 h-7 text-[#0066FF]" />
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Reponse 24h</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-0.5">Réponse 24h</h3>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Optimisations quotidiennes</p>
               </div>
             </motion.div>
@@ -507,7 +507,7 @@ export default function Publicite() {
             >
               <DollarSign className="w-8 h-8 text-[#0066FF]" />
               <div>
-                <h3 className="text-xl font-bold text-white mb-1">Prix freelance, resultats agence</h3>
+                <h3 className="text-xl font-bold text-white mb-1">Prix freelance, résultats agence</h3>
                 <p className="text-sm text-gray-400">Pas de commercial, pas de chef de projet. Vous payez la performance, pas la structure.</p>
               </div>
             </motion.div>
@@ -525,9 +525,9 @@ export default function Publicite() {
           <h2 className="text-2xl font-bold mb-6">Nos autres services</h2>
           <div className="flex flex-wrap gap-3">
             {[
-              { to: '/creation-site-shopify', label: 'Creation Site Shopify' },
-              { to: '/referencement-seo', label: 'Referencement SEO' },
-              { to: '/creation-site-wordpress', label: 'Creation Site WordPress' },
+              { to: '/creation-site-shopify', label: 'Création Site Shopify' },
+              { to: '/referencement-seo', label: 'Référencement SEO' },
+              { to: '/creation-site-wordpress', label: 'Création Site WordPress' },
               { to: '/tarifs', label: 'Tous nos tarifs' },
             ].map((link) => (
               <Link
@@ -549,10 +549,10 @@ export default function Publicite() {
           className="mb-20"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            Questions <span className="text-[#0066FF]">frequentes</span>
+            Questions <span className="text-[#0066FF]">fréquentes</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mb-10">
-            Les reponses aux questions les plus posees sur nos campagnes publicitaires.
+            Les réponses aux questions les plus posées sur nos campagnes publicitaires.
           </p>
 
           <FAQSection faqs={faqs} />
@@ -566,10 +566,10 @@ export default function Publicite() {
           className="text-center p-10 md:p-14 rounded-3xl bg-gradient-to-br from-[#0066FF]/10 to-purple-600/10 border border-[#0066FF]/20"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Pret a lancer vos campagnes ?
+            Prêt à lancer vos campagnes ?
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-            Premier echange gratuit et sans engagement. On analyse votre marche et on vous propose un plan d'action concret.
+            Premier échange gratuit et sans engagement. On analyse votre marché et on vous propose un plan d'action concret.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

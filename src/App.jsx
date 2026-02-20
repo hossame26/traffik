@@ -34,6 +34,8 @@ const CGV = lazy(() => import('./pages/CGV'));
 const APropos = lazy(() => import('./pages/APropos'));
 const Tarifs = lazy(() => import('./pages/Tarifs'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
+const FAQPage = lazy(() => import('./pages/FAQ'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 // Lazy load Service Pages
 const Shopify = lazy(() => import('./pages/services/Shopify'));
@@ -64,14 +66,10 @@ function HomePage() {
       <Hero />
       <Suspense fallback={<SectionLoader />}>
         <Solutions />
-        <Audit />
-        <Process />
-        <Contact />
         <Ads />
         <Projects />
-        <Growth />
         <Testimonials />
-        <FAQ />
+        <Contact />
       </Suspense>
     </>
   );
@@ -98,6 +96,8 @@ export default function App() {
             <Route path="/a-propos" element={<APropos />} />
             <Route path="/tarifs" element={<Tarifs />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/creation-site-shopify" element={<Shopify />} />
             <Route path="/creation-site-wordpress" element={<WordPress />} />
             <Route path="/developpement-react-nextjs" element={<ReactDev />} />
