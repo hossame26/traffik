@@ -214,31 +214,44 @@ const offers = [
     title: 'Site Shopify',
     price: '250',
     image: shopifyImg,
-    description: "E-commerce clé en main. Prêt à vendre en 5 jours.",
+    description: "Boutique e-commerce complète, prête à vendre en 5 jours.",
     link: '/creation-site-shopify',
     accentColor: '#22c55e',
-    features: ['Jusqu\'à 100 produits', 'Paiement sécurisé', 'Design pro'],
+    features: [
+      'Boutique configurée avec vos produits',
+      'Paiement Stripe & PayPal intégré',
+      'Design sur mesure à votre image',
+    ],
   },
   {
     id: 'wordpress',
     title: 'Site WordPress',
     price: '500',
     image: wordpressImg,
-    description: "Site vitrine ou blog professionnel, SEO optimisé.",
+    description: "Site vitrine professionnel de 5 à 10 pages, optimisé Google.",
     link: '/creation-site-wordpress',
     accentColor: '#3b82f6',
-    features: ['5-10 pages sur mesure', 'Blog intégré', 'SEO complet'],
+    features: [
+      '5 à 10 pages rédigées et designées',
+      'Blog prêt à publier + formulaire contact',
+      'Référencement Google (SEO) configuré',
+    ],
   },
   {
     id: 'custom',
     title: 'Site React',
     price: '600',
     image: reactImg,
-    description: "Performance maximale, code sur mesure, scalable.",
+    description: "Site codé sur mesure, ultra-rapide et évolutif.",
     link: '/developpement-react-nextjs',
     accentColor: '#8b5cf6',
     badge: 'BEST SELLER',
-    features: ['Lighthouse 100', 'Next.js / SSR', 'Architecture scalable'],
+    badgeReason: 'Le plus demandé — meilleur rapport performance / prix',
+    features: [
+      'Score Google PageSpeed 95-100',
+      'Code Next.js sur mesure, pas de template',
+      'Évolutif : ajoutez des fonctionnalités à tout moment',
+    ],
   },
 ];
 
@@ -269,9 +282,9 @@ export default function Solutions() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white mb-4"
           >
-            Choisissez votre{' '}
+            Création de site{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#A855F7]">
-              plateforme.
+              clé en main.
             </span>
           </motion.h2>
 
@@ -279,9 +292,9 @@ export default function Solutions() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
-            className="text-gray-500 dark:text-gray-400 max-w-lg mx-auto"
+            className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto"
           >
-            E-commerce, vitrine ou sur mesure. Tarifs transparents.
+            Design, développement et mise en ligne inclus. Choisissez votre technologie, on s'occupe de tout.
           </motion.p>
         </div>
 
@@ -299,15 +312,20 @@ export default function Solutions() {
                 <TiltCard
                   className={`relative rounded-2xl p-6 md:p-7 flex flex-col h-full transition-all duration-300 ${
                     offer.badge
-                      ? 'bg-gray-50 dark:bg-white/[0.06] border-2 border-[#0066FF]/30 dark:border-[#0066FF]/40 shadow-xl shadow-[#0066FF]/5 dark:shadow-[#0066FF]/10 ring-1 ring-[#0066FF]/10'
+                      ? 'pt-10 md:pt-11 bg-gray-50 dark:bg-white/[0.06] border-2 border-[#0066FF]/30 dark:border-[#0066FF]/40 shadow-xl shadow-[#0066FF]/5 dark:shadow-[#0066FF]/10 ring-1 ring-[#0066FF]/10'
                       : 'bg-white dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.08] hover:border-gray-300 dark:hover:border-white/[0.15] hover:shadow-lg dark:hover:bg-white/[0.05]'
                   }`}
                 >
                   {offer.badge && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
                       <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#0066FF] to-[#A855F7] text-white text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-[#0066FF]/30">
                         <Zap className="w-3 h-3 fill-white" /> {offer.badge}
                       </span>
+                      {offer.badgeReason && (
+                        <span className="mt-1.5 text-[10px] text-gray-400 dark:text-gray-500 font-medium">
+                          {offer.badgeReason}
+                        </span>
+                      )}
                     </div>
                   )}
 
@@ -381,15 +399,20 @@ export default function Solutions() {
                   <div
                     className={`relative rounded-2xl p-5 flex flex-col h-full transition-all duration-300 ${
                       offer.badge
-                        ? 'bg-gray-50 dark:bg-white/[0.06] border-2 border-[#0066FF]/30 dark:border-[#0066FF]/40 shadow-xl shadow-[#0066FF]/5 dark:shadow-[#0066FF]/10'
+                        ? 'pt-9 bg-gray-50 dark:bg-white/[0.06] border-2 border-[#0066FF]/30 dark:border-[#0066FF]/40 shadow-xl shadow-[#0066FF]/5 dark:shadow-[#0066FF]/10'
                         : 'bg-white dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.08]'
                     }`}
                   >
                     {offer.badge && (
-                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
                         <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-[#0066FF] to-[#A855F7] text-white text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-[#0066FF]/30">
                           <Zap className="w-2.5 h-2.5 fill-white" /> {offer.badge}
                         </span>
+                        {offer.badgeReason && (
+                          <span className="mt-1 text-[9px] text-gray-400 dark:text-gray-500 font-medium">
+                            {offer.badgeReason}
+                          </span>
+                        )}
                       </div>
                     )}
 

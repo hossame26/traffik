@@ -240,7 +240,7 @@ function MobileHero() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-[11px] text-gray-400 dark:text-gray-600 uppercase tracking-[0.15em] mb-8"
         >
-          Performance. Conversion. Résultats.
+          Création de sites web · Design · Développement
         </motion.p>
 
         <motion.div
@@ -361,7 +361,7 @@ function DesktopHero() {
 
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1.4 }}
               className="text-[11px] text-gray-400 dark:text-gray-600 uppercase tracking-[0.15em] mb-10">
-              Performance. Conversion. Résultats.
+              Création de sites web · Design · Développement
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1.6 }}

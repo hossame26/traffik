@@ -56,6 +56,31 @@ export default function BlogArticle() {
         keywords={article.keywords?.join(', ')}
       />
 
+      {/* Schema Article JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: article.title,
+            description: article.metaDescription || article.excerpt,
+            datePublished: article.date,
+            dateModified: article.date,
+            author: { '@type': 'Person', name: article.author },
+            publisher: {
+              '@type': 'Organization',
+              name: 'Traffik Web',
+              url: 'https://traffik-web.fr',
+              logo: { '@type': 'ImageObject', url: 'https://traffik-web.fr/favicon.png' },
+            },
+            mainEntityOfPage: `https://traffik-web.fr/blog/${article.slug}`,
+            wordCount: article.content ? article.content.replace(/<[^>]+>/g, '').split(/\s+/).length : undefined,
+            keywords: article.keywords?.join(', '),
+          }),
+        }}
+      />
+
       <article className="max-w-3xl mx-auto">
         <Link
           to="/blog"
