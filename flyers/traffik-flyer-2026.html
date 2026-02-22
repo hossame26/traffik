@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 210mm;
+    height: 297mm;
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    background: #050505;
+    color: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === BACKGROUND EFFECTS === */
+  .bg-gradient {
+    position: absolute;
+    top: -60mm;
+    right: -30mm;
+    width: 150mm;
+    height: 150mm;
+    background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, rgba(168,85,247,0.08) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .bg-gradient-2 {
+    position: absolute;
+    bottom: -40mm;
+    left: -40mm;
+    width: 130mm;
+    height: 130mm;
+    background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, rgba(0,102,255,0.05) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .bg-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 8mm 8mm;
+    pointer-events: none;
+  }
+
+  /* === TOP ACCENT === */
+  .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2.5mm;
+    background: linear-gradient(90deg, #0066FF, #A855F7, #0066FF);
+  }
+
+  /* === CONTENT === */
+  .content {
+    position: relative;
+    z-index: 2;
+    padding: 10mm 14mm 8mm;
+    height: 297mm;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5mm;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 2.5mm;
+  }
+
+  .logo-icon {
+    width: 9mm;
+    height: 9mm;
+    background: linear-gradient(135deg, #0066FF, #A855F7);
+    border-radius: 2mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 13pt;
+    color: #fff;
+  }
+
+  .logo-text {
+    font-size: 15pt;
+    font-weight: 800;
+    letter-spacing: 1pt;
+    color: #0066FF;
+  }
+
+  .header-tag {
+    font-size: 7pt;
+    font-weight: 500;
+    color: #64748B;
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+    border: 1px solid #1E293B;
+    padding: 1.5mm 3.5mm;
+    border-radius: 20mm;
+  }
+
+  /* === HERO === */
+  .hero {
+    margin-bottom: 5mm;
+  }
+
+  .eyebrow {
+    font-size: 8pt;
+    font-weight: 600;
+    color: #0066FF;
+    text-transform: uppercase;
+    letter-spacing: 3pt;
+    margin-bottom: 2mm;
+  }
+
+  .headline {
+    font-size: 32pt;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.5pt;
+    margin-bottom: 3mm;
+  }
+
+  .headline .gradient-text {
+    color: #0066FF;
+  }
+
+  .subtitle {
+    font-size: 10.5pt;
+    font-weight: 400;
+    color: #94A3B8;
+    line-height: 1.5;
+    max-width: 85%;
+  }
+
+  /* === STATS BAR === */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 5mm;
+    background: #0A0F1A;
+    border: 1px solid #1E293B;
+    border-radius: 2.5mm;
+    overflow: hidden;
+  }
+
+  .stat {
+    flex: 1;
+    padding: 3.5mm 3mm;
+    text-align: center;
+    border-right: 1px solid #1E293B;
+  }
+
+  .stat:last-child {
+    border-right: none;
+  }
+
+  .stat-number {
+    font-size: 17pt;
+    font-weight: 900;
+    color: #0066FF;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 6pt;
+    font-weight: 500;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    margin-top: 0.5mm;
+  }
+
+  /* === SERVICES === */
+  .services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+    margin-bottom: 5mm;
+  }
+
+  .service-card {
+    background: linear-gradient(135deg, rgba(10,15,26,0.9), rgba(15,20,35,0.9));
+    border: 1px solid #1E293B;
+    border-radius: 2.5mm;
+    padding: 3.5mm;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,102,255,0.5), transparent);
+  }
+
+  .service-icon {
+    font-size: 13pt;
+    margin-bottom: 1.5mm;
+  }
+
+  .service-name {
+    font-size: 9pt;
+    font-weight: 700;
+    margin-bottom: 1mm;
+    color: #FFFFFF;
+  }
+
+  .service-desc {
+    font-size: 7pt;
+    font-weight: 400;
+    color: #64748B;
+    line-height: 1.35;
+  }
+
+  /* === OFFER BOX === */
+  .offer-section {
+    background: linear-gradient(135deg, rgba(0,102,255,0.08), rgba(168,85,247,0.08));
+    border: 1px solid rgba(0,102,255,0.3);
+    border-radius: 2.5mm;
+    padding: 4mm;
+    margin-bottom: 4mm;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .offer-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, #0066FF, #A855F7);
+  }
+
+  .offer-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #0066FF, #A855F7);
+    color: #FFFFFF;
+    font-size: 6.5pt;
+    font-weight: 700;
+    padding: 1.2mm 3.5mm;
+    border-radius: 20mm;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+    margin-bottom: 2.5mm;
+  }
+
+  .offer-title {
+    font-size: 14pt;
+    font-weight: 800;
+    margin-bottom: 1.5mm;
+    line-height: 1.2;
+  }
+
+  .offer-details {
+    font-size: 8pt;
+    color: #94A3B8;
+    line-height: 1.4;
+  }
+
+  .offer-details strong {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  .offer-value {
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    margin-top: 2.5mm;
+  }
+
+  .price-badge {
+    font-size: 10pt;
+    font-weight: 800;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #0066FF, #A855F7);
+    padding: 1.5mm 4mm;
+    border-radius: 1.5mm;
+  }
+
+  .price-note {
+    font-size: 7.5pt;
+    color: #64748B;
+  }
+
+  /* === CTA === */
+  .cta-section {
+    margin-bottom: 3mm;
+  }
+
+  .cta-button {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, #0066FF, #7C3AED);
+    color: #FFFFFF;
+    font-size: 13pt;
+    font-weight: 800;
+    padding: 4mm 0;
+    border-radius: 2.5mm;
+    text-transform: uppercase;
+    letter-spacing: 2pt;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+    pointer-events: none;
+  }
+
+  .urgency {
+    text-align: center;
+    font-size: 8pt;
+    color: #F59E0B;
+    font-weight: 600;
+    margin-top: 2mm;
+    letter-spacing: 0.5pt;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 4mm;
+    border-top: 1px solid #1E293B;
+  }
+
+  .contact-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2mm;
+  }
+
+  .contact-item {
+    font-size: 7.5pt;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+  }
+
+  .contact-item .icon {
+    color: #0066FF;
+    font-size: 7pt;
+    width: 3.5mm;
+    text-align: center;
+  }
+
+  .contact-item .value {
+    color: #CBD5E1;
+    font-weight: 500;
+  }
+
+  .qr-box {
+    width: 20mm;
+    height: 20mm;
+    border: 1px solid #1E293B;
+    border-radius: 2mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8mm;
+    background: #0A0F1A;
+  }
+
+  .qr-placeholder {
+    width: 14mm;
+    height: 14mm;
+    background: #FFFFFF;
+    border-radius: 1mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5.5pt;
+    color: #050505;
+    font-weight: 700;
+  }
+
+  .qr-label {
+    font-size: 5pt;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+  }
+
+  .footer-brand {
+    text-align: right;
+  }
+
+  .footer-tagline {
+    font-size: 6.5pt;
+    color: #475569;
+    font-weight: 400;
+    margin-top: 1mm;
+  }
+
+  .footer-url {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #0066FF;
+  }
+
+  /* === DECORATIVE ELEMENTS === */
+  .deco-line {
+    position: absolute;
+    right: 14mm;
+    top: 55mm;
+    width: 1px;
+    height: 35mm;
+    background: linear-gradient(180deg, transparent, rgba(0,102,255,0.3), transparent);
+  }
+
+  .deco-dot {
+    position: absolute;
+    width: 2mm;
+    height: 2mm;
+    border-radius: 50%;
+    background: rgba(0,102,255,0.4);
+  }
+
+  .deco-dot-1 { right: 13.5mm; top: 53mm; }
+  .deco-dot-2 { right: 13.5mm; top: 92mm; }
+</style>
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="bg-gradient"></div>
+  <div class="bg-gradient-2"></div>
+  <div class="bg-grid"></div>
+  <div class="deco-line"></div>
+  <div class="deco-dot deco-dot-1"></div>
+  <div class="deco-dot deco-dot-2"></div>
+
+  <!-- Top Accent Bar -->
+  <div class="top-bar"></div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">T</div>
+        <div class="logo-text">TRAFFIK</div>
+      </div>
+      <div class="header-tag">Agence Digitale</div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="eyebrow">Agence creation de sites web</div>
+      <h1 class="headline">
+        On cree des sites<br>
+        qui <span class="gradient-text">transforment<br>vos visiteurs<br>en clients.</span>
+      </h1>
+      <p class="subtitle">
+        Design premium, ultra-rapide, optimise pour la conversion.
+        Pas juste un site beau — un site qui vous rapporte.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Sites livres</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">95+</div>
+        <div class="stat-label">Score Google</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">-1s</div>
+        <div class="stat-label">Temps chargement</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">x3</div>
+        <div class="stat-label">Conversions</div>
+      </div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <div class="service-name">Design Sur-Mesure</div>
+        <div class="service-desc">Chaque site est unique. Design premium qui reflete votre image et votre positionnement.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <div class="service-name">Ultra-Rapide</div>
+        <div class="service-desc">Score 95+ sur Google PageSpeed. Temps de chargement sous la seconde.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <div class="service-name">Optimise Conversion</div>
+        <div class="service-desc">Chaque page est pensee pour transformer vos visiteurs en clients qui paient.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <div class="service-name">SEO Integre</div>
+        <div class="service-desc">Votre site sort sur Google des le lancement. Structure, metas, contenu optimise.</div>
+      </div>
+    </div>
+
+    <!-- Offer -->
+    <div class="offer-section">
+      <div class="offer-badge">Offre limitee</div>
+      <div class="offer-title">Maquette gratuite de votre futur site</div>
+      <div class="offer-details">
+        On cree une maquette pro de votre site avant de commencer.
+        <strong>Vous voyez le resultat avant de payer.</strong>
+      </div>
+      <div class="offer-value">
+        <div class="price-badge">GRATUIT</div>
+        <div class="price-note">Valeur 500EUR — Zero engagement, zero risque</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-button">Recevez votre maquette gratuite</div>
+      <div class="urgency">⚡ 5 maquettes offertes par mois — 2 places restantes</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="contact-col">
+        <div class="contact-item">
+          <span class="icon">🌐</span>
+          <span class="value">traffik-web.fr</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">📞</span>
+          <span class="value">06 35 50 53 74</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">✉</span>
+          <span class="value">contact@traffik-web.fr</span>
+        </div>
+        <div class="contact-item">
+          <span class="icon">📍</span>
+          <span class="value">Paris & toute la France</span>
+        </div>
+      </div>
+
+      <div class="qr-box">
+        <div class="qr-placeholder">QR CODE</div>
+        <div class="qr-label">Scannez-moi</div>
+      </div>
+
+      <div class="footer-brand">
+        <div class="footer-url">traffik-web.fr</div>
+        <div class="footer-tagline">Votre agence digitale de confiance</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
