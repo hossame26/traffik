@@ -42,11 +42,24 @@ body{
   overflow-x:hidden;
 }
 
-/* ── NAV (Glassmorphic pill) ── */
+/* ── NAV BLUR BACKGROUND ── */
+.nav-blur{
+  position:fixed;top:0;left:0;right:0;height:120px;pointer-events:none;z-index:40;
+  background:linear-gradient(to bottom,rgba(5,5,5,0.8),rgba(5,5,5,0.5),transparent);
+}
+.nav-blur::after{
+  content:'';position:absolute;inset:0;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  mask-image:linear-gradient(to bottom,black 0%,black 30%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black 30%,transparent 100%);
+}
+
+/* ── NAV (match traffik-web.fr) ── */
 nav{
-  position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:100;
-  display:flex;align-items:center;gap:28px;
-  padding:12px 28px;
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;max-width:860px;
+  padding:16px 32px;
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(40px) saturate(1.8);
   -webkit-backdrop-filter:blur(40px) saturate(1.8);
@@ -54,31 +67,35 @@ nav{
   border-radius:9999px;
 }
 .nav-logo{
-  font-weight:700;font-size:clamp(16px,2vw,22px);letter-spacing:0.1em;color:var(--text);
+  font-weight:700;font-size:22px;letter-spacing:0.1em;color:var(--text);
   text-decoration:none;transition:opacity .2s;
 }
 .nav-logo:hover{opacity:.8}
-.nav-back{
-  display:flex;align-items:center;justify-content:center;
-  width:32px;height:32px;border-radius:50%;
-  background:rgba(255,255,255,0.06);border:1px solid var(--border);
-  color:var(--text-muted);text-decoration:none;transition:all .2s;
-}
-.nav-back:hover{background:rgba(255,255,255,0.1);color:var(--text)}
-.nav-back svg{width:16px;height:16px}
-.nav-links{display:flex;gap:20px;align-items:center}
-.nav-links a{font-size:10px;font-weight:600;letter-spacing:0.15em;color:var(--text-muted);text-decoration:none;transition:color .2s}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:10px;font-weight:600;letter-spacing:0.15em;color:var(--text-muted);text-decoration:none;transition:color .3s}
 .nav-links a:hover{color:var(--text)}
-.nav-counter{font-size:12px;color:var(--text-faint)}
+.nav-links a.active{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:12px}
 .nav-cta{
-  font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+  font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
   color:#fff;text-decoration:none;
-  padding:8px 20px;border-radius:9999px;
+  padding:10px 20px;border-radius:9999px;
   background:linear-gradient(135deg,var(--accent),var(--accent-light));
   box-shadow:0 10px 30px rgba(16,185,129,0.25);
-  transition:opacity .2s,transform .15s;
+  transition:all .2s;
 }
-.nav-cta:hover{opacity:.9;transform:translateY(-1px)}
+.nav-cta:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 16px 40px rgba(16,185,129,0.35)}
+
+/* ── BACK LINK (below nav, on page) ── */
+.back-link{
+  position:absolute;top:90px;left:60px;z-index:10;
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;font-weight:500;color:var(--accent);
+  text-decoration:none;transition:gap .3s,opacity .2s;
+  opacity:0;animation:fadeUp .8s ease .2s forwards;
+}
+.back-link:hover{gap:10px;opacity:.8}
+.back-link svg{width:16px;height:16px}
 
 /* ── SECTION ── */
 section{
@@ -339,8 +356,9 @@ section{
   .project-info{order:2}
   .mockup-wrapper{order:1}
   .browser-content{height:360px}
-  nav{padding:10px 20px;gap:16px}
+  nav{padding:10px 16px;max-width:100%;margin:0 16px}
   .nav-links{display:none}
+  .back-link{top:80px;left:24px;font-size:13px}
 }
 @media(max-width:600px){
   .browser-content{height:280px}
@@ -351,20 +369,26 @@ section{
 </head>
 <body>
 
-<!-- Nav -->
+<div class="nav-blur"></div>
 <nav>
-  <a href="https://traffik-web.fr" class="nav-back" title="Retour au site">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
-  </a>
   <a href="https://traffik-web.fr" class="nav-logo">TRAFFIK</a>
   <div class="nav-links">
-    <span class="nav-counter"><span id="currentIdx">01</span> / 05</span>
     <a href="https://traffik-web.fr/tarifs">SERVICES</a>
+    <a href="https://traffik-web.fr/audit-site-web">AUDIT</a>
+    <a class="active" href="#">PORTFOLIO</a>
     <a href="https://traffik-web.fr/blog">BLOG</a>
     <a href="https://traffik-web.fr/contact">CONTACT</a>
   </div>
-  <a href="https://wa.me/33756881246" class="nav-cta">Démarrer</a>
+  <div class="nav-right">
+    <a href="https://wa.me/33756881246" class="nav-cta">DÉMARRER</a>
+  </div>
 </nav>
+
+<!-- BACK LINK -->
+<a href="https://traffik-web.fr" class="back-link">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  Retour à l'accueil
+</a>
 
 <!-- HERO -->
 <section class="hero" id="hero">
