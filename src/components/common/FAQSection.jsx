@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
@@ -37,8 +37,37 @@ function FAQItem({ question, answer, isOpen, onClick }) {
   );
 }
 
-export default function FAQSection({ faqs, accentColor = '#0066FF' }) {
+export default function FAQSection({ faqs }) {
   const [openIndex, setOpenIndex] = useState(null);
+
+  // Inject JSON-LD FAQPage schema
+  useEffect(() => {
+    if (!faqs || faqs.length === 0) return;
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-faq-schema', 'true');
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+
+    return () => {
+      const el = document.head.querySelector('script[data-faq-schema]');
+      if (el) el.remove();
+    };
+  }, [faqs]);
 
   return (
     <div className="space-y-4">
