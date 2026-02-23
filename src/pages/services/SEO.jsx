@@ -57,7 +57,7 @@ export default function SEO() {
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
         title="Référencement SEO Naturel | Première Page Google | Traffik Web"
-        description="Expert en référencement naturel SEO en France. Audit SEO, optimisation on-page, netlinking, SEO local. Boostez votre visibilité Google et attirez plus de clients. Audit à partir de 200 euros."
+        description="Expert en référencement naturel SEO en France. Audit SEO, optimisation on-page, netlinking, SEO local. Boostez votre visibilité Google et attirez plus de clients. Audit à partir de 500 euros."
         canonical="https://traffik-web.fr/referencement-seo"
         keywords="referencement seo, referencement naturel, seo france, audit seo, premiere page google, optimisation seo, seo local, netlinking, consultant seo, agence seo france, referencement google, strategie seo"
       />
@@ -329,7 +329,7 @@ export default function SEO() {
               <div className="text-sm text-[#0066FF] font-bold uppercase tracking-wider mb-2">Audit</div>
               <h3 className="text-xl font-bold mb-2">Audit SEO Complet</h3>
               <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-bold text-[#0066FF]">200</span>
+                <span className="text-4xl font-bold text-[#0066FF]">500</span>
                 <span className="text-xl text-gray-400">EUR</span>
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Paiement unique - Livraison sous 7 jours</p>
@@ -374,7 +374,7 @@ export default function SEO() {
               <div className="text-sm text-[#0066FF] font-bold uppercase tracking-wider mb-2">Mensuel</div>
               <h3 className="text-xl font-bold mb-2">SEO Performance</h3>
               <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-bold text-[#0066FF]">90</span>
+                <span className="text-4xl font-bold text-[#0066FF]">400</span>
                 <span className="text-xl text-gray-400">EUR/mois</span>
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Sans engagement</p>
@@ -382,7 +382,7 @@ export default function SEO() {
                 {[
                   'Audit initial offert',
                   'Optimisation technique continue',
-                  'Création de 4 contenus/mois',
+                  'Création de 2 contenus/mois',
                   'Stratégie de netlinking',
                   'Suivi des positions quotidien',
                   'Rapport mensuel détaillé',
@@ -417,10 +417,10 @@ export default function SEO() {
               <div className="text-sm text-[#0066FF] font-bold uppercase tracking-wider mb-2">Premium</div>
               <h3 className="text-xl font-bold mb-2">SEO Croissance</h3>
               <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-bold text-[#0066FF]">800</span>
+                <span className="text-4xl font-bold text-[#0066FF]">1 500</span>
                 <span className="text-xl text-gray-400">EUR/mois</span>
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Engagement 3 mois minimum</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Engagement 6 mois minimum</p>
               <ul className="space-y-3 mb-8">
                 {[
                   'Tout de SEO Performance',

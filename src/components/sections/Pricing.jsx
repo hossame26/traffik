@@ -20,7 +20,7 @@ const SITES = [
     id: 'shopify',
     name: 'Site Shopify',
     description: 'E-commerce prêt à vendre',
-    price: 200,
+    price: null,
     icon: ShoppingCart,
     color: 'from-green-500 to-emerald-600',
   },
@@ -28,7 +28,7 @@ const SITES = [
     id: 'wordpress',
     name: 'Site WordPress',
     description: 'Site vitrine professionnel',
-    price: 500,
+    price: 600,
     icon: FileText,
     color: 'from-blue-500 to-indigo-600',
   },
@@ -36,7 +36,7 @@ const SITES = [
     id: 'custom',
     name: 'Site Sur Mesure',
     description: 'Performance maximale',
-    price: 800,
+    price: 600,
     icon: Zap,
     color: 'from-purple-500 to-pink-600',
   }
@@ -54,8 +54,8 @@ const OPTIONS = [
 ];
 
 const MARKETING = [
-  { id: 'audit', name: 'Audit SEO', price: 100, icon: Search, oneTime: true },
-  { id: 'seo', name: 'SEO mensuel', price: 90, icon: LineChart, oneTime: false },
+  { id: 'audit', name: 'Audit SEO', price: 500, icon: Search, oneTime: true },
+  { id: 'seo', name: 'SEO mensuel', price: 400, icon: LineChart, oneTime: false },
   { id: 'analytics', name: 'Setup Analytics', price: 190, icon: BarChart3, oneTime: true },
 ];
 
@@ -112,9 +112,13 @@ export default function Pricing() {
 
     if (selectedSite) {
       const site = SITES.find(s => s.id === selectedSite);
-      oneTimeTotal += site.price;
+      if (site.price) {
+        oneTimeTotal += site.price;
+        breakdown.push({ name: site.name, price: site.price, type: 'one-time' });
+      } else {
+        breakdown.push({ name: site.name, price: null, type: 'quote' });
+      }
       itemCount++;
-      breakdown.push({ name: site.name, price: site.price, type: 'one-time' });
     }
 
     if (selectedOptions.length > 0) {
@@ -248,7 +252,7 @@ export default function Pricing() {
 
                       <div className="font-bold text-sm mb-1">{site.name}</div>
                       <div className="text-xs text-gray-500 mb-2">{site.description}</div>
-                      <div className="text-lg font-bold text-primary">{site.price}$</div>
+                      <div className="text-lg font-bold text-primary">{site.price ? `${site.price}€` : 'Sur devis'}</div>
                     </motion.button>
                   );
                 })}
@@ -266,7 +270,7 @@ export default function Pricing() {
                 <span className="w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center">2</span>
                 Options
               </h3>
-              <p className="text-xs text-gray-500 mb-4">+50$ par option</p>
+              <p className="text-xs text-gray-500 mb-4">+50€ par option</p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {OPTIONS.map((option) => {
@@ -323,7 +327,7 @@ export default function Pricing() {
                           <span className="text-sm font-medium">{item.name}</span>
                         </div>
                         <div className="text-sm font-bold text-primary">
-                          {item.price}${!item.oneTime && <span className="text-xs font-normal">/m</span>}
+                          {item.price}€{!item.oneTime && <span className="text-xs font-normal">/m</span>}
                         </div>
                       </motion.button>
                     );
@@ -361,7 +365,7 @@ export default function Pricing() {
                           <div className={`w-2 h-2 rounded-full ${platform.color}`} />
                           <span className="text-xs font-medium">{platform.name}</span>
                         </div>
-                        <div className="text-sm font-bold text-primary">{platform.price}$<span className="text-xs font-normal text-gray-400">/m</span></div>
+                        <div className="text-sm font-bold text-primary">{platform.price}€<span className="text-xs font-normal text-gray-400">/m</span></div>
                       </motion.button>
                     );
                   })}
@@ -401,8 +405,11 @@ export default function Pricing() {
                       >
                         <span className="text-gray-400">{item.name}</span>
                         <span>
-                          {item.price}$
-                          {item.type === 'monthly' && <span className="text-xs text-gray-500">/m</span>}
+                          {item.price !== null ? (
+                            <>{item.price}€{item.type === 'monthly' && <span className="text-xs text-gray-500">/m</span>}</>
+                          ) : (
+                            <span className="text-xs text-gray-400">Sur devis</span>
+                          )}
                         </span>
                       </motion.div>
                     ))}
@@ -423,7 +430,7 @@ export default function Pricing() {
                     >
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-green-400">Pack -{calculations.discountPercent}%</span>
-                        <span className="font-bold text-green-400">-{calculations.discountAmount}$</span>
+                        <span className="font-bold text-green-400">-{calculations.discountAmount}€</span>
                       </div>
                     </motion.div>
                   )}
@@ -433,13 +440,13 @@ export default function Pricing() {
                     {calculations.finalOneTime > 0 && (
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400 text-sm">One-time</span>
-                        <span className="text-2xl font-bold">{calculations.finalOneTime}$</span>
+                        <span className="text-2xl font-bold">{calculations.finalOneTime}€</span>
                       </div>
                     )}
                     {calculations.finalMonthly > 0 && (
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400 text-sm">Mensuel</span>
-                        <span className="text-2xl font-bold">{calculations.finalMonthly}$<span className="text-sm font-normal text-gray-400">/mois</span></span>
+                        <span className="text-2xl font-bold">{calculations.finalMonthly}€<span className="text-sm font-normal text-gray-400">/mois</span></span>
                       </div>
                     )}
                   </div>

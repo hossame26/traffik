@@ -212,7 +212,7 @@ const offers = [
   {
     id: 'shopify',
     title: 'Site Shopify',
-    price: '250',
+    price: null,
     image: shopifyImg,
     description: "Boutique e-commerce complète, prête à vendre en 5 jours.",
     link: '/creation-site-shopify',
@@ -226,7 +226,7 @@ const offers = [
   {
     id: 'wordpress',
     title: 'Site WordPress',
-    price: '500',
+    price: '600',
     image: wordpressImg,
     description: "Site vitrine professionnel de 5 à 10 pages, optimisé Google.",
     link: '/creation-site-wordpress',

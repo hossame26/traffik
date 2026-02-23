@@ -175,8 +175,8 @@ export default function Shopify() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] transition-colors pt-28 pb-20">
       <SEOHead
-        title="Création Site Shopify | E-commerce à partir de 250€ | Traffik Web"
-        description="Création de boutique Shopify professionnelle à partir de 250€. Freelance en France, site e-commerce clé en main livré en 5 jours."
+        title="Création Site Shopify | E-commerce Clé en Main | Traffik Web"
+        description="Création de boutique Shopify professionnelle sur devis. Freelance en France, site e-commerce clé en main livré en 5 jours."
         canonical="https://traffik-web.fr/creation-site-shopify"
         keywords="création site shopify, boutique shopify, site e-commerce shopify, prix site shopify, shopify freelance france"
       />
@@ -251,7 +251,7 @@ export default function Shopify() {
             {[
               {
                 name: 'Starter',
-                price: '250',
+                price: null,
                 icon: FileText,
                 description: 'Lancement rapide e-commerce',
                 preview: StarterPreview,
@@ -259,7 +259,7 @@ export default function Shopify() {
               },
               {
                 name: 'Business',
-                price: '500',
+                price: null,
                 icon: ShoppingCart,
                 description: 'Boutique pro complète',
                 popular: true,
@@ -268,7 +268,7 @@ export default function Shopify() {
               },
               {
                 name: 'Premium',
-                price: '900',
+                price: null,
                 icon: Layers,
                 description: 'E-commerce sans limites',
                 preview: PremiumPreview,
@@ -314,9 +314,8 @@ export default function Shopify() {
                   </div>
 
                   <div className="mb-5">
-                    <span className="text-xs text-gray-400 dark:text-gray-500">À partir de</span>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-extrabold text-gray-900 dark:text-white">{plan.price}€</span>
+                      <span className="text-3xl font-extrabold text-[#0066FF]">Sur devis</span>
                     </div>
                   </div>
 
