@@ -350,6 +350,7 @@ function DesktopHero() {
               className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-[-0.05em] text-gray-900 dark:text-white mb-5"
             >
               Traffik
+              <span className="sr-only"> — Création de Sites Web & Marketing Digital</span>
             </motion.h1>
 
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.1 }}

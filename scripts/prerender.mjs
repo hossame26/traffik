@@ -1,14 +1,33 @@
-import puppeteer from 'puppeteer';
 import { createServer } from 'http';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, extname } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const DIST = join(__dirname, '..', 'dist');
 const PORT = 4173;
+
+function findChrome() {
+  const paths = [
+    process.env.PUPPETEER_EXECUTABLE_PATH,
+    '/usr/bin/google-chrome-stable',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/chromium',
+  ];
+  for (const p of paths) {
+    if (p && existsSync(p)) return p;
+  }
+  // macOS
+  try {
+    const macPath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+    if (existsSync(macPath)) return macPath;
+  } catch {}
+  return null; // Let puppeteer use its bundled Chrome
+}
 
 // All routes to pre-render
 const STATIC_ROUTES = [
@@ -18,9 +37,12 @@ const STATIC_ROUTES = [
   '/developpement-react-nextjs',
   '/publicite-digitale',
   '/referencement-seo',
+  '/audit-site-web',
   '/tarifs',
+  '/contact',
   '/portfolio',
   '/a-propos',
+  '/faq',
   '/blog',
   '/mentions-legales',
   '/politique-confidentialite',
@@ -90,12 +112,25 @@ async function prerender() {
 
   let browser;
   try {
-    browser = await puppeteer.launch({
+    // Try puppeteer-core first (for Vercel/CI with system Chrome)
+    let puppeteer;
+    try {
+      puppeteer = (await import('puppeteer')).default;
+    } catch {
+      puppeteer = (await import('puppeteer-core')).default;
+    }
+
+    // Find Chrome executable
+    const executablePath = findChrome();
+    const launchOptions = {
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    };
+    if (executablePath) launchOptions.executablePath = executablePath;
+
+    browser = await puppeteer.launch(launchOptions);
   } catch (err) {
-    console.log(`[prerender] Puppeteer not available (CI/Vercel), skipping pre-render.`);
+    console.log(`[prerender] Puppeteer not available (CI/Vercel), skipping pre-render. ${err.message}`);
     server.close();
     return;
   }
