@@ -373,13 +373,10 @@ section{
   .project-info{order:2;opacity:1 !important;transform:none !important}
   .mockup-wrapper{order:1;opacity:1 !important;transform:none !important}
   .browser-content{height:280px}
-  /* Scaled iframes on mobile: fixed height, cropped, no scroll */
+  /* On mobile: screenshots for all iframe projects (WebGL crashes mobile GPU) */
   .browser-content.scaled-iframe{height:280px !important;position:relative;overflow:hidden}
-  .browser-content.scaled-iframe iframe{touch-action:none}
-  .iframe-touch-blocker{display:block}
-  /* External sites that block iframes on mobile — screenshot fallback */
-  .browser-content.scaled-iframe[data-external] iframe{display:none !important}
-  .browser-content.scaled-iframe[data-external] .mobile-fallback{display:block}
+  .browser-content.scaled-iframe iframe{display:none !important}
+  .browser-content.scaled-iframe .mobile-fallback{display:block}
   nav{padding:10px 20px;max-width:calc(100% - 32px);width:calc(100% - 32px)}
   .nav-links{display:none}
   .back-link{top:80px;left:24px;font-size:13px}
@@ -391,7 +388,6 @@ section{
 @media(max-width:600px){
   .browser-content{height:220px}
   .browser-content.scaled-iframe{height:220px !important}
-  .browser-content.scaled-iframe[data-external]{height:220px !important}
   .browser-bar{padding:6px 10px}
   .browser-dot{width:7px;height:7px}
   .browser-url{font-size:9px;padding:3px 8px}
