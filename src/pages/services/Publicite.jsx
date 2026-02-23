@@ -79,8 +79,8 @@ export default function Publicite() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
-        title="Publicité Digitale Facebook Ads & Google Ads | ROI Garanti | Traffik Web"
-        description="Expert en publicité digitale Facebook Ads, Google Ads et TikTok Ads. Gestion de campagnes publicitaires en ligne avec ROI garanti. À partir de 300 euros/mois."
+        title="Publicité Facebook Ads & Google Ads | Traffik Web"
+        description="Expert publicité Facebook Ads, Google Ads et TikTok Ads. Campagnes publicitaires avec ROI garanti. Dès 300€/mois."
         canonical="https://traffik-web.fr/publicite-digitale"
         keywords="publicite facebook ads, google ads, publicite digitale, gestion publicite en ligne, agence facebook ads france, campagne publicitaire en ligne, publicite instagram, tiktok ads, cout publicite facebook, retour sur investissement publicite"
       />

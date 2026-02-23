@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 
 export default function CGV() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white py-20 px-4">
+      <SEOHead
+        title="CGV | Conditions Générales de Vente | Traffik Web"
+        description="Conditions générales de vente de Traffik Web : tarifs, délais, garanties, propriété intellectuelle et processus de validation pour nos services web."
+        canonical="https://traffik-web.fr/cgv"
+        keywords="cgv traffik web, conditions générales vente, agence web cgv"
+      />
       <div className="max-w-3xl mx-auto">
         <Link
           to="/"

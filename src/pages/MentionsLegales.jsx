@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 
 export default function MentionsLegales() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white py-20 px-4">
+      <SEOHead
+        title="Mentions Légales | Traffik Web"
+        description="Mentions légales du site traffik-web.fr : éditeur, hébergement, propriété intellectuelle et informations de contact de Traffik Web."
+        canonical="https://traffik-web.fr/mentions-legales"
+        keywords="mentions légales traffik web, informations légales, éditeur site web"
+      />
       <div className="max-w-3xl mx-auto">
         <Link
           to="/"

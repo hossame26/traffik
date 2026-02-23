@@ -56,8 +56,8 @@ export default function SEO() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
-        title="Référencement SEO Naturel | Première Page Google | Traffik Web"
-        description="Expert en référencement naturel SEO en France. Audit SEO, optimisation on-page, netlinking, SEO local. Boostez votre visibilité Google et attirez plus de clients. Audit à partir de 500 euros."
+        title="Référencement SEO | Première Page Google | Traffik Web"
+        description="Expert SEO en France. Audit, optimisation on-page, netlinking, SEO local. Boostez votre visibilité Google. Audit dès 500€."
         canonical="https://traffik-web.fr/referencement-seo"
         keywords="referencement seo, referencement naturel, seo france, audit seo, premiere page google, optimisation seo, seo local, netlinking, consultant seo, agence seo france, referencement google, strategie seo"
       />

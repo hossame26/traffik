@@ -285,8 +285,8 @@ export default function CityService() {
   const includes = getIncludes(service);
   const faqs = getFAQs(service, city);
 
-  const pageTitle = `${service.name} à ${city.name} | À partir de ${service.price} | Traffik Web`;
-  const pageDescription = `${service.name} à ${city.name} (${city.region}) à partir de ${service.price}. Freelance web en France : site professionnel, livraison rapide en 5 jours, tarifs 3x moins chers qu'une agence. Devis gratuit.`;
+  const pageTitle = `${service.name} à ${city.name} | Traffik Web`;
+  const pageDescription = `${service.name} à ${city.name} dès ${service.price}. Freelance web : livraison rapide, tarifs compétitifs. Devis gratuit 24h.`;
   const canonical = `https://traffik-web.fr/${service.slug}-${city.slug}`;
   const keywords = `${service.keyword} ${city.name}, ${service.keyword} ${city.region}, ${service.name.toLowerCase()} ${city.name}, agence web ${city.name}, freelance web ${city.name}, site internet ${city.name}`;
 

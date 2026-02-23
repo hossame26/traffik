@@ -340,7 +340,7 @@ export default function ReactDev() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-gray-900 dark:text-white transition-colors relative overflow-hidden">
       <SEOHead
-        title="Développement React & Next.js | Application Web Sur Mesure | Traffik Web"
+        title="Développement React & Next.js | Sur Mesure | Traffik Web"
         description="Développeur React & Next.js freelance en France. Applications web sur mesure, performantes et SEO. À partir de 600€. Devis gratuit."
         canonical="https://traffik-web.fr/developpement-react-nextjs"
         keywords="développement react, next.js, application web sur mesure, site react, développeur react freelance france"

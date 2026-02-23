@@ -46,7 +46,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative py-16 lg:py-20 px-4 bg-[#FAFAFA] dark:bg-dark-900 border-t border-gray-100 dark:border-white/5 transition-colors duration-500">
+    <footer aria-label="Pied de page" className="relative py-16 lg:py-20 px-4 bg-[#FAFAFA] dark:bg-dark-900 border-t border-gray-100 dark:border-white/5 transition-colors duration-500">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/[0.02] to-transparent pointer-events-none" />
 

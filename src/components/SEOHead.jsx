@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
-export default function SEOHead({ title, description, canonical, keywords }) {
+const DEFAULT_OG_IMAGE = 'https://traffik-web.fr/og-image.jpg';
+
+export default function SEOHead({ title, description, canonical, keywords, ogImage, ogType = 'website' }) {
   useEffect(() => {
     document.title = title;
 
@@ -24,16 +26,27 @@ export default function SEOHead({ title, description, canonical, keywords }) {
     if (keywords) setMeta('keywords', keywords);
     setMeta('og:title', title);
     setMeta('og:description', description);
+    setMeta('og:type', ogType);
+    setMeta('og:image', ogImage || DEFAULT_OG_IMAGE);
+    setMeta('og:locale', 'fr_FR');
+    setMeta('og:site_name', 'Traffik Web');
     if (canonical) {
       setMeta('og:url', canonical);
       let link = document.querySelector('link[rel="canonical"]');
       if (link) {
         link.setAttribute('href', canonical);
+      } else {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        link.setAttribute('href', canonical);
+        document.head.appendChild(link);
       }
     }
+    setMeta('twitter:card', 'summary_large_image');
     setMeta('twitter:title', title);
     setMeta('twitter:description', description);
-  }, [title, description, canonical, keywords]);
+    setMeta('twitter:image', ogImage || DEFAULT_OG_IMAGE);
+  }, [title, description, canonical, keywords, ogImage, ogType]);
 
   return null;
 }

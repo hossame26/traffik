@@ -135,6 +135,7 @@ export default function Navbar() {
       {/* Navbar */}
       <div className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-4 md:pt-6 px-4">
         <motion.nav
+          aria-label="Navigation principale"
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}

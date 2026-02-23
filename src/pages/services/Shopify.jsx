@@ -175,7 +175,7 @@ export default function Shopify() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] transition-colors pt-28 pb-20">
       <SEOHead
-        title="Création Site Shopify | E-commerce Clé en Main | Traffik Web"
+        title="Création Site Shopify | E-commerce | Traffik Web"
         description="Création de boutique Shopify professionnelle sur devis. Freelance en France, site e-commerce clé en main livré en 5 jours."
         canonical="https://traffik-web.fr/creation-site-shopify"
         keywords="création site shopify, boutique shopify, site e-commerce shopify, prix site shopify, shopify freelance france"

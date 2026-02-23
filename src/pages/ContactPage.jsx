@@ -16,6 +16,7 @@ export default function ContactPage() {
         <Link to="/" className="inline-flex items-center gap-2 text-[#0066FF] hover:underline mb-6 text-sm">
           <ArrowLeft className="w-4 h-4" /> Retour à l'accueil
         </Link>
+        <h1 className="sr-only">Contactez Traffik Web - Devis Gratuit</h1>
       </div>
       <Contact />
     </div>

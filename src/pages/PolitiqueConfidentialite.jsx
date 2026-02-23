@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
 
 export default function PolitiqueConfidentialite() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white py-20 px-4">
+      <SEOHead
+        title="Politique de Confidentialité | Traffik Web"
+        description="Politique de confidentialité de Traffik Web : données collectées, cookies, droits RGPD et protection de vos informations personnelles."
+        canonical="https://traffik-web.fr/politique-confidentialite"
+        keywords="politique confidentialité, rgpd, données personnelles, cookies traffik web"
+      />
       <div className="max-w-3xl mx-auto">
         <Link
           to="/"

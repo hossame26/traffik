@@ -78,27 +78,29 @@ export default function App() {
       <div className="min-h-screen bg-[#F8F9FA] dark:bg-black text-black dark:text-white font-sans selection:bg-[#0066FF] selection:text-white transition-colors duration-500">
         <Navbar />
 
-        <Suspense fallback={<SectionLoader />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/mentions-legales" element={<MentionsLegales />} />
-            <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
-            <Route path="/cgv" element={<CGV />} />
-            <Route path="/a-propos" element={<APropos />} />
-            <Route path="/tarifs" element={<Tarifs />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/creation-site-shopify" element={<Shopify />} />
-            <Route path="/creation-site-wordpress" element={<WordPress />} />
-            <Route path="/developpement-react-nextjs" element={<ReactDev />} />
-            <Route path="/publicite-digitale" element={<Publicite />} />
-            <Route path="/referencement-seo" element={<SEOPage />} />
-            <Route path="/audit-site-web" element={<AuditSite />} />
-            <Route path="/blog" element={<BlogList />} />
-            <Route path="/blog/:slug" element={<BlogArticle />} />
-            <Route path="/:slug" element={<CityService />} />
-          </Routes>
-        </Suspense>
+        <main role="main">
+          <Suspense fallback={<SectionLoader />}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/mentions-legales" element={<MentionsLegales />} />
+              <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+              <Route path="/cgv" element={<CGV />} />
+              <Route path="/a-propos" element={<APropos />} />
+              <Route path="/tarifs" element={<Tarifs />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/creation-site-shopify" element={<Shopify />} />
+              <Route path="/creation-site-wordpress" element={<WordPress />} />
+              <Route path="/developpement-react-nextjs" element={<ReactDev />} />
+              <Route path="/publicite-digitale" element={<Publicite />} />
+              <Route path="/referencement-seo" element={<SEOPage />} />
+              <Route path="/audit-site-web" element={<AuditSite />} />
+              <Route path="/blog" element={<BlogList />} />
+              <Route path="/blog/:slug" element={<BlogArticle />} />
+              <Route path="/:slug" element={<CityService />} />
+            </Routes>
+          </Suspense>
+        </main>
 
         <Footer />
         <Suspense fallback={null}>

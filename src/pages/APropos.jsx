@@ -138,8 +138,8 @@ export default function APropos() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] text-black dark:text-white">
       <SEOHead
-        title="À Propos | Freelance Web & Marketing Digital | Traffik Web"
-        description="Découvrez le parcours et les compétences du freelance derrière Traffik Web. Développeur web passionné, spécialisé en React, Shopify, WordPress, SEO et publicité digitale. Plus de 50 projets livrés avec un ROI moyen de 350%."
+        title="À Propos | Freelance Web & Marketing | Traffik Web"
+        description="Freelance web derrière Traffik Web. Spécialisé React, Shopify, WordPress, SEO et publicité digitale. +50 projets livrés, ROI moyen 350%."
         canonical="https://traffik-web.fr/a-propos"
         keywords="freelance web, developpeur freelance france, agence web, a propos traffik web, creation site internet freelance, developpeur react freelance, marketing digital freelance, seo freelance, shopify expert france"
       />
