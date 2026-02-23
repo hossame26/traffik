@@ -314,6 +314,9 @@ section{
   object-fit:cover;object-position:top center;
   animation:kenBurns 20s ease-in-out infinite alternate;
 }
+
+/* MOBILE FALLBACK IMAGE (replaces iframes on mobile) */
+.mobile-fallback{display:none;width:100%;height:100%;object-fit:cover;object-position:top center}
 @keyframes kenBurns{
   0%{transform:scale(1) translate(0,0)}
   50%{transform:scale(1.06) translate(-0.5%,-1.5%)}
@@ -359,7 +362,9 @@ section{
   .project-inner{grid-template-columns:1fr;height:auto;padding:40px 20px;gap:24px}
   .project-info{order:2;opacity:1 !important;transform:none !important}
   .mockup-wrapper{order:1;opacity:1 !important;transform:none !important}
-  .browser-content{height:360px}
+  .browser-content{height:auto;aspect-ratio:16/10}
+  .browser-content iframe{display:none !important}
+  .browser-content .mobile-fallback{display:block}
   .browser-content.scaled-iframe{height:auto !important}
   nav{padding:10px 20px;max-width:calc(100% - 32px);width:calc(100% - 32px)}
   .nav-links{display:none}
@@ -455,6 +460,7 @@ section{
         </div>
         <div class="browser-content">
           <iframe src="nova/index.html" loading="lazy" title="Nova Studio"></iframe>
+          <img class="mobile-fallback" src="img/nova-screen.jpg" alt="Nova Studio" loading="lazy">
         </div>
       </div>
     </div>
@@ -481,6 +487,7 @@ section{
         </div>
         <div class="browser-content">
           <iframe src="helix/index.html" loading="lazy" title="Helix Lab"></iframe>
+          <img class="mobile-fallback" src="img/helix-screen.jpg" alt="Helix Lab" loading="lazy">
         </div>
       </div>
     </div>
@@ -510,6 +517,7 @@ section{
         </div>
         <div class="browser-content scaled-iframe">
           <iframe src="https://mentalitefocus.com" loading="lazy" title="MentalitéFocus"></iframe>
+          <img class="mobile-fallback" src="img/mentalite-screen.jpg" alt="MentalitéFocus" loading="lazy">
         </div>
       </div>
     </div>
