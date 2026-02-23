@@ -65,7 +65,7 @@ const AnimatedTitle = ({ text, className }) => {
 // Import static images
 import cremyaImg from '../../assets/projects/cremya.webp';
 import shonensportsImg from '../../assets/projects/shonensports.webp';
-import focusbusinessImg from '../../assets/projects/focusbusiness.webp';
+import mentaliteFocusImg from '../../assets/projects/mentaliteFocus.webp';
 import novaImg from '../../assets/projects/nova.jpg';
 import helixImg from '../../assets/projects/helix.jpg';
 
@@ -89,13 +89,13 @@ const projects = [
     year: "2024"
   },
   {
-    title: "Focus Business",
-    category: "SaaS • Productivité",
-    url: "https://focus-business.com",
-    image: focusbusinessImg,
-    description: "Restez concentré sur l'essentiel. Productivité maximale, design premium.",
-    details: "Plateforme de gestion du temps et productivité au design sombre et sophistiqué. Interface minimaliste avec gradients élégants pour une expérience professionnelle haut de gamme.",
-    year: "2025"
+    title: "Mentalité Focus",
+    category: "SaaS • Membership",
+    url: "https://mentalitefocus.com",
+    image: mentaliteFocusImg,
+    description: "Communauté d'entrepreneurs. Networking, lives quotidiens, ressources premium.",
+    details: "Plateforme de membership pour entrepreneurs avec espace membre, paiements Stripe, 5 lives/semaine, communauté Discord +1000 membres. Design premium avec animations et cards interactives.",
+    year: "2026"
   },
   {
     title: "NOVA Creative Studio",
