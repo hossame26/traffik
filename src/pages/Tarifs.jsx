@@ -265,14 +265,6 @@ function BentoCard({ plan, index }) {
             </div>
           </div>
 
-          {/* Price */}
-          <div className="mb-3">
-            <div className="flex items-baseline gap-1">
-              <span className={`font-extrabold text-gray-900 dark:text-white ${isLarge ? 'text-3xl' : 'text-2xl'}`}>{plan.price}{typeof plan.price === 'number' || !isNaN(plan.price) ? '€' : ''}</span>
-              {plan.unit && <span className="text-gray-400 dark:text-gray-500 text-xs font-medium">{plan.unit}</span>}
-            </div>
-          </div>
-
           {/* Features */}
           <ul className={`mb-4 flex-1 ${isLarge ? 'space-y-2' : 'space-y-1.5'}`}>
             {(isLarge ? plan.features : plan.features.slice(0, 3)).map((feature, i) => (
