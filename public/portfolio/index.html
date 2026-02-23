@@ -299,6 +299,11 @@ section{
   width:100%;height:100%;border:none;
   pointer-events:none;
 }
+/* Touch-scroll blocker overlay for mobile */
+.iframe-touch-blocker{
+  display:none;position:absolute;inset:0;z-index:2;
+  background:transparent;touch-action:none;
+}
 
 /* SCALED IFRAME (for full-page sites like MentaliteFocus) */
 .browser-content.scaled-iframe iframe{
@@ -368,10 +373,13 @@ section{
   .project-info{order:2;opacity:1 !important;transform:none !important}
   .mockup-wrapper{order:1;opacity:1 !important;transform:none !important}
   .browser-content{height:280px}
-  /* On mobile: show screenshots instead of iframes for all scaled-iframe projects */
-  .browser-content.scaled-iframe{height:280px !important;position:relative}
-  .browser-content.scaled-iframe iframe{display:none !important}
-  .browser-content.scaled-iframe .mobile-fallback{display:block}
+  /* Scaled iframes on mobile: fixed height, cropped, no scroll */
+  .browser-content.scaled-iframe{height:280px !important;position:relative;overflow:hidden}
+  .browser-content.scaled-iframe iframe{touch-action:none}
+  .iframe-touch-blocker{display:block}
+  /* External sites that block iframes on mobile — screenshot fallback */
+  .browser-content.scaled-iframe[data-external] iframe{display:none !important}
+  .browser-content.scaled-iframe[data-external] .mobile-fallback{display:block}
   nav{padding:10px 20px;max-width:calc(100% - 32px);width:calc(100% - 32px)}
   .nav-links{display:none}
   .back-link{top:80px;left:24px;font-size:13px}
@@ -383,6 +391,7 @@ section{
 @media(max-width:600px){
   .browser-content{height:220px}
   .browser-content.scaled-iframe{height:220px !important}
+  .browser-content.scaled-iframe[data-external]{height:220px !important}
   .browser-bar{padding:6px 10px}
   .browser-dot{width:7px;height:7px}
   .browser-url{font-size:9px;padding:3px 8px}
@@ -468,6 +477,7 @@ section{
           <div class="browser-url"></div>
         </div>
         <div class="browser-content scaled-iframe">
+          <div class="iframe-touch-blocker"></div>
           <iframe src="nova/index.html" loading="lazy" title="Nova Studio"></iframe>
           <img class="mobile-fallback" src="img/nova-screen.jpg" alt="Nova Studio" loading="lazy">
         </div>
@@ -495,6 +505,7 @@ section{
           <div class="browser-url"></div>
         </div>
         <div class="browser-content scaled-iframe">
+          <div class="iframe-touch-blocker"></div>
           <iframe src="helix/index.html" loading="lazy" title="Helix Lab"></iframe>
           <img class="mobile-fallback" src="img/helix-screen.jpg" alt="Helix Lab" loading="lazy">
         </div>
@@ -525,6 +536,7 @@ section{
           <div class="browser-url"></div>
         </div>
         <div class="browser-content scaled-iframe" data-external>
+          <div class="iframe-touch-blocker"></div>
           <iframe src="https://mentalitefocus.com" loading="lazy" title="MentalitéFocus"></iframe>
           <img class="mobile-fallback" src="img/mentalite-screen.jpg" alt="MentalitéFocus" loading="lazy">
         </div>
@@ -614,12 +626,16 @@ projects.forEach(p=>obs.observe(p));
 
 /* ── Scale iframes to fit container ── */
 function scaleIframes(){
+  const isMobile=window.innerWidth<=1024;
   document.querySelectorAll('.browser-content.scaled-iframe').forEach(c=>{
     const iframe=c.querySelector('iframe');
-    if(!iframe)return;
+    if(!iframe||iframe.style.display==='none')return;
     const scale=c.offsetWidth/1440;
     iframe.style.transform=`scale(${scale})`;
-    c.style.height=Math.round(960*scale)+'px';
+    // On mobile: keep CSS fixed height (280/220px), don't override
+    if(!isMobile){
+      c.style.height=Math.round(960*scale)+'px';
+    }
   });
 }
 scaleIframes();
