@@ -81,7 +81,7 @@ export default function Contact() {
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#FAFAFA] dark:from-black via-transparent to-transparent opacity-50 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[200px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 blur-[80px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">

@@ -60,13 +60,11 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <Suspense fallback={<SectionLoader />}>
-        <Solutions />
-        <Ads />
-        <Projects />
-        <Testimonials />
-        <Contact />
-      </Suspense>
+      <Suspense fallback={<SectionLoader />}><Solutions /></Suspense>
+      <Suspense fallback={<SectionLoader />}><Ads /></Suspense>
+      <Suspense fallback={<SectionLoader />}><Projects /></Suspense>
+      <Suspense fallback={<SectionLoader />}><Testimonials /></Suspense>
+      <Suspense fallback={<SectionLoader />}><Contact /></Suspense>
     </>
   );
 }

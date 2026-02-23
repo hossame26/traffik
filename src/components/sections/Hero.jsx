@@ -10,12 +10,28 @@ function EclipseRing() {
   const canvasRef = useRef(null);
   const animRef = useRef(null);
   const isDarkRef = useRef(true);
+  const isVisibleRef = useRef(true);
+  const isPausedRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
     let w, h;
+
+    // Pause when tab is hidden
+    const onVisChange = () => {
+      isPausedRef.current = document.hidden;
+      if (!document.hidden && isVisibleRef.current && !animRef.current) animate();
+    };
+    document.addEventListener('visibilitychange', onVisChange);
+
+    // Pause when scrolled offscreen
+    const io = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+      if (entry.isIntersecting && !isPausedRef.current && !animRef.current) animate();
+    }, { threshold: 0 });
+    io.observe(canvas);
 
     const updateDark = () => {
       isDarkRef.current = document.documentElement.classList.contains('dark');
@@ -131,6 +147,11 @@ function EclipseRing() {
     let lastRadius = 0;
 
     const animate = () => {
+      // Stop loop if offscreen or tab hidden
+      if (!isVisibleRef.current || isPausedRef.current) {
+        animRef.current = null;
+        return;
+      }
       time++;
       const dark = isDarkRef.current;
       ctx.fillStyle = dark ? '#030308' : '#f0f2f8';
@@ -182,8 +203,11 @@ function EclipseRing() {
     animate();
     return () => {
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', onVisChange);
+      io.disconnect();
       obs.disconnect();
       if (animRef.current) cancelAnimationFrame(animRef.current);
+      animRef.current = null;
     };
   }, []);
 
@@ -323,8 +347,8 @@ function DesktopHero() {
           style={{ opacity: fogOpacity }}
           className="absolute inset-0 pointer-events-none"
         >
-          <div className="absolute -left-[25%] top-[15%] w-[65%] h-[65%] bg-[#0044CC]/[0.03] dark:bg-[#0044CC]/[0.04] blur-[140px] rounded-full" />
-          <div className="absolute -right-[25%] top-[20%] w-[55%] h-[55%] bg-[#4020FF]/[0.02] dark:bg-[#4020FF]/[0.03] blur-[120px] rounded-full" />
+          <div className="absolute -left-[25%] top-[15%] w-[65%] h-[65%] bg-[#0044CC]/[0.03] dark:bg-[#0044CC]/[0.04] blur-[80px] rounded-full" />
+          <div className="absolute -right-[25%] top-[20%] w-[55%] h-[55%] bg-[#4020FF]/[0.02] dark:bg-[#4020FF]/[0.03] blur-[80px] rounded-full" />
         </motion.div>
 
         <div className="absolute inset-0 bg-noise opacity-[0.02] dark:opacity-[0.03] pointer-events-none" />

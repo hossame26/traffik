@@ -226,8 +226,8 @@ export default function Growth() {
       className="relative py-16 lg:py-20 px-4 bg-[#F8F9FA] dark:bg-black overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary opacity-[0.03] blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-purple opacity-[0.03] blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary opacity-[0.03] blur-[80px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-purple opacity-[0.03] blur-[80px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
         {/* Left Column */}
