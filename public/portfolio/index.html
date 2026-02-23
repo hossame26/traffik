@@ -30,7 +30,8 @@
   --green:#25D366;
 }
 
-html{scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#1a1a1a transparent}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#1a1a1a transparent}
+@media(min-width:1025px){html{scroll-snap-type:y mandatory}}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:#1a1a1a;border-radius:3px}
@@ -352,18 +353,35 @@ section{
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  .project-inner{grid-template-columns:1fr;padding:80px 24px 40px;gap:24px}
-  .project-info{order:2}
-  .mockup-wrapper{order:1}
+  section{scroll-snap-align:none;min-height:auto}
+  .hero{min-height:100vh}
+  .project{padding:40px 0}
+  .project-inner{grid-template-columns:1fr;height:auto;padding:40px 20px;gap:24px}
+  .project-info{order:2;opacity:1 !important;transform:none !important}
+  .mockup-wrapper{order:1;opacity:1 !important;transform:none !important}
   .browser-content{height:360px}
-  nav{padding:10px 16px;max-width:100%;margin:0 16px}
+  .browser-content.scaled-iframe{height:auto !important}
+  nav{padding:10px 20px;max-width:calc(100% - 32px);width:calc(100% - 32px)}
   .nav-links{display:none}
   .back-link{top:80px;left:24px;font-size:13px}
+  .hero-scroll{display:none}
+  .hero-orb:nth-child(2){width:300px;height:300px}
+  .hero-orb:nth-child(3){width:250px;height:250px}
+  .hero-orb:nth-child(4){width:200px;height:200px}
 }
 @media(max-width:600px){
-  .browser-content{height:280px}
-  nav{top:12px;padding:8px 16px}
-  .hero-cta-row{flex-direction:column;align-items:center}
+  .browser-content{height:220px}
+  .browser-content.scaled-iframe{height:auto !important}
+  nav{top:10px;padding:8px 16px;max-width:calc(100% - 24px);width:calc(100% - 24px)}
+  .hero-cta-row{flex-direction:column;align-items:center;width:100%;padding:0 20px}
+  .btn-primary,.btn-ghost{width:100%;text-align:center}
+  .hero-title{letter-spacing:-2px}
+  .project-inner{padding:20px 16px;gap:20px}
+  .project-name{font-size:28px;letter-spacing:-1px}
+  .project-desc{font-size:13px}
+  .back-link{top:72px;left:16px;font-size:12px}
+  .cta{padding:60px 20px}
+  .cta-title{letter-spacing:-1.5px}
 }
 </style>
 </head>
@@ -567,17 +585,14 @@ section{
 
 <script>
 /* ── Scroll Observer ── */
-const counter=document.getElementById('currentIdx');
 const projects=document.querySelectorAll('.project');
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add('visible');
-      const idx=e.target.dataset.idx;
-      if(idx) counter.textContent=idx;
     }
   });
-},{threshold:.3});
+},{threshold:window.innerWidth<=1024?.1:.3});
 projects.forEach(p=>obs.observe(p));
 
 /* ── Scale iframes to fit container ── */
