@@ -61,6 +61,12 @@ export default function Navbar() {
 
     setIsMobileMenuOpen(false);
 
+    // Full page navigation (e.g. static portfolio page)
+    if (item.isFullNav) {
+      window.location.href = item.href;
+      return;
+    }
+
     // Skip warp animation on mobile — navigate instantly
     if (isMobileDevice) {
       if (item.isRoute) {
@@ -83,7 +89,10 @@ export default function Navbar() {
       setWarpPhase('flash');
 
       // Navigate during the flash
-      if (item.isRoute) {
+      if (item.isFullNav) {
+        window.location.href = item.href;
+        return;
+      } else if (item.isRoute) {
         navigate(item.href);
       } else {
         const hash = item.href.replace(/^\//, '');
@@ -104,7 +113,7 @@ export default function Navbar() {
   const navItems = [
     { label: 'SERVICES', href: '/tarifs', isRoute: true },
     { label: 'AUDIT', href: '/audit-site-web', isRoute: true },
-    { label: 'PORTFOLIO', href: '/portfolio', isRoute: true },
+    { label: 'PORTFOLIO', href: '/portfolio/', isFullNav: true },
     { label: 'BLOG', href: '/blog', isRoute: true },
     { label: 'CONTACT', href: '/contact', isRoute: true }
   ];

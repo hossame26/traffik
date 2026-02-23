@@ -30,7 +30,6 @@ const PolitiqueConfidentialite = lazy(() => import('./pages/PolitiqueConfidentia
 const CGV = lazy(() => import('./pages/CGV'));
 const APropos = lazy(() => import('./pages/APropos'));
 const Tarifs = lazy(() => import('./pages/Tarifs'));
-const Portfolio = lazy(() => import('./pages/Portfolio'));
 const FAQPage = lazy(() => import('./pages/FAQ'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
@@ -87,7 +86,6 @@ export default function App() {
             <Route path="/cgv" element={<CGV />} />
             <Route path="/a-propos" element={<APropos />} />
             <Route path="/tarifs" element={<Tarifs />} />
-            <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/creation-site-shopify" element={<Shopify />} />

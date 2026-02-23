@@ -374,12 +374,12 @@ export default function APropos() {
             >
               Tarifs & prestations <ArrowRight className="w-3 h-3" />
             </Link>
-            <Link
-              to="/portfolio"
+            <a
+              href="/portfolio/"
               className="text-[#0066FF] hover:underline inline-flex items-center gap-1"
             >
               Portfolio & réalisations <ArrowRight className="w-3 h-3" />
-            </Link>
+            </a>
             <Link
               to="/blog"
               className="text-[#0066FF] hover:underline inline-flex items-center gap-1"
