@@ -277,7 +277,7 @@ const faqData = [
 const plans = [
   {
     name: 'Audit Essentiel',
-    price: '100',
+    price: '500',
     icon: Search,
     description: 'Diagnostic rapide en 24h',
     preview: EssentielPreview,
@@ -285,7 +285,7 @@ const plans = [
   },
   {
     name: 'Audit + Plan',
-    price: '200',
+    price: '800',
     icon: BarChart3,
     description: 'Diagnostic complet + stratégie',
     popular: true,
@@ -294,7 +294,7 @@ const plans = [
   },
   {
     name: 'Audit + Implémentation',
-    price: '499',
+    price: '1 500',
     icon: TrendingUp,
     description: 'Diagnostic + corrections',
     preview: PremiumPreview,
@@ -313,7 +313,7 @@ export default function AuditSite() {
 
       <SEOHead
         title="Audit de Site Web Complet | SEO, Performance, Sécurité | Traffik Web"
-        description="Audit professionnel de votre site web : SEO, performance, sécurité et UX. Rapport détaillé en 24h avec plan d'action concret. À partir de 100 euros. Identifiez ce qui freine votre croissance."
+        description="Audit professionnel de votre site web : SEO, performance, sécurité et UX. Rapport détaillé en 24h avec plan d'action concret. À partir de 500 euros. Identifiez ce qui freine votre croissance."
         canonical="https://traffik-web.fr/audit-site-web"
         keywords="audit site web, audit seo, audit performance site, audit securite site web, analyse site web, test site web, audit ux, core web vitals, audit technique, audit site internet"
       />
