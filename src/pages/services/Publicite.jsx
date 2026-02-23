@@ -39,9 +39,36 @@ const GoogleLogo = () => (
 
 const TikTokLogo = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5">
-    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" fill="white"/>
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" fill="currentColor"/>
   </svg>
 );
+
+const SnapchatLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5">
+    <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.45.149.734.479.734.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03a1.821 1.821 0 01-.484-.075 4.782 4.782 0 00-1.066-.12c-.255 0-.524.015-.78.045-.375.044-.75.179-1.168.359-.869.405-1.639.795-2.774.795-.06 0-.12 0-.179-.015h-.09c-1.139 0-1.909-.39-2.779-.795-.42-.179-.794-.314-1.168-.359a6.918 6.918 0 00-.779-.045c-.375 0-.734.045-1.066.12a1.855 1.855 0 01-.484.075c-.284 0-.479-.134-.554-.405a4.247 4.247 0 01-.135-.554c-.044-.194-.104-.479-.164-.569-1.873-.284-2.906-.704-3.146-1.271a.564.564 0 01-.045-.225c-.015-.239.165-.465.42-.509 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.209-.645.119-.869-.194-.449-.884-.674-1.333-.809a3.73 3.73 0 01-.345-.12c-.823-.329-1.227-.72-1.212-1.168 0-.359.284-.689.734-.838.149-.06.329-.09.509-.09.12 0 .3.016.464.105.374.18.734.284 1.034.3.197 0 .326-.044.4-.089-.007-.165-.019-.33-.03-.51l-.003-.06c-.105-1.628-.23-3.654.3-4.847C7.859 1.069 11.216.793 12.206.793z" fill="#FFFC00"/>
+  </svg>
+);
+
+const PinterestLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5">
+    <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" fill="#E60023"/>
+  </svg>
+);
+
+const LinkedInLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5">
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0A66C2"/>
+  </svg>
+);
+
+const allPlatforms = [
+  { Logo: MetaLogo, label: 'Meta', bg: 'bg-[#1877F2]/10' },
+  { Logo: GoogleLogo, label: 'Google', bg: 'bg-gray-100 dark:bg-white/[0.06]' },
+  { Logo: TikTokLogo, label: 'TikTok', bg: 'bg-black dark:bg-white/[0.06]', textClass: 'text-black dark:text-white' },
+  { Logo: SnapchatLogo, label: 'Snapchat', bg: 'bg-[#FFFC00]/10' },
+  { Logo: PinterestLogo, label: 'Pinterest', bg: 'bg-[#E60023]/10' },
+  { Logo: LinkedInLogo, label: 'LinkedIn', bg: 'bg-[#0A66C2]/10' },
+];
 
 /* ─── Animated Previews ─── */
 
@@ -171,15 +198,16 @@ function ScalingPreview() {
 const plans = [
   {
     name: 'Starter',
-    description: '1 plateforme',
+    description: '1 plateforme au choix',
     price: '300',
     suffix: '€/mois',
     label: 'Sans engagement',
     icon: Target,
     preview: MetaAdsPreview,
     popular: false,
-    platforms: [MetaLogo],
+    nbPlatforms: 1,
     features: [
+      '1 plateforme au choix',
       'Configuration complète du compte',
       'Création des audiences',
       'Visuels & textes d\'annonces',
@@ -187,49 +215,49 @@ const plans = [
       'Optimisation hebdomadaire',
       'Rapport mensuel',
     ],
-    wa: 'Bonjour%2C%20je%20souhaite%20lancer%20des%20campagnes%20publicitaires%20(1%20plateforme).',
+    wa: 'Bonjour%2C%20je%20souhaite%20lancer%20des%20campagnes%20publicitaires.',
   },
   {
     name: 'Performance',
-    description: '2 plateformes',
+    description: '2 plateformes au choix',
     price: '500',
     suffix: '€/mois',
     label: 'Sans engagement',
     icon: BarChart3,
     preview: GoogleAdsPreview,
     popular: true,
-    platforms: [MetaLogo, GoogleLogo],
+    nbPlatforms: 2,
     features: [
+      '2 plateformes au choix',
       'Tout du Starter',
-      '2 plateformes gérées',
       'Retargeting avancé',
       'A/B testing continu',
       'Audiences Lookalike',
       'Rapport hebdomadaire',
       'Support prioritaire',
     ],
-    wa: 'Bonjour%2C%20je%20suis%20interesse%20par%20votre%20offre%20Performance%20(2%20plateformes).',
+    wa: 'Bonjour%2C%20je%20suis%20interesse%20par%20votre%20offre%20Performance.',
   },
   {
     name: 'Scale',
-    description: '3+ plateformes',
+    description: '3+ plateformes au choix',
     price: '900',
     suffix: '€/mois',
     label: 'Engagement 3 mois',
     icon: TrendingUp,
     preview: ScalingPreview,
     popular: false,
-    platforms: [MetaLogo, GoogleLogo, TikTokLogo],
+    nbPlatforms: 6,
     features: [
+      '3+ plateformes au choix',
       'Tout de Performance',
-      '3+ plateformes (TikTok, Snap...)',
       'Scaling budget intensif',
       'Créatives vidéo incluses',
       'Stratégie full-funnel',
       'Appel stratégique hebdo',
       'Support illimité',
     ],
-    wa: 'Bonjour%2C%20je%20suis%20interesse%20par%20votre%20offre%20Scale%20multi-plateforme.',
+    wa: 'Bonjour%2C%20je%20suis%20interesse%20par%20votre%20offre%20Scale.',
   },
 ];
 
@@ -243,8 +271,8 @@ const faqs = [
     answer: 'Premiers résultats dès la première semaine. Phase d\'optimisation réelle après 2 à 4 semaines. Après 1 à 2 mois, les campagnes atteignent leur rythme de croisière avec un coût par acquisition stable.'
   },
   {
-    question: 'Quelle plateforme choisir entre Facebook, Google et TikTok ?',
-    answer: 'Facebook/Instagram pour le e-commerce et la génération de leads. Google Ads quand vos clients recherchent activement vos produits (intention d\'achat forte). TikTok pour toucher les 18-35 ans avec des produits visuels. On vous conseille gratuitement.'
+    question: 'Quelle plateforme choisir pour mes campagnes ?',
+    answer: 'Meta (Facebook/Instagram) pour le e-commerce et la génération de leads. Google Ads quand vos clients recherchent activement vos produits. TikTok et Snapchat pour toucher les 18-35 ans. Pinterest pour les produits visuels et déco. LinkedIn pour le B2B. On vous conseille gratuitement.'
   },
   {
     question: 'Comment mesurez-vous le ROI de mes campagnes ?',
@@ -300,25 +328,21 @@ export default function Publicite() {
           </h1>
 
           <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mb-8">
-            Générez des clients et du chiffre d'affaires avec des campagnes publicitaires gérées de A à Z. Facebook, Google, TikTok.
+            Générez des clients et du chiffre d'affaires avec des campagnes publicitaires gérées de A à Z. Meta, Google, TikTok, Snapchat, Pinterest, LinkedIn.
           </p>
 
           {/* Platform logos row */}
-          <div className="flex items-center gap-4 mb-8">
-            {[
-              { Logo: MetaLogo, label: 'Meta', bg: 'bg-[#1877F2]/10' },
-              { Logo: GoogleLogo, label: 'Google', bg: 'bg-gray-100 dark:bg-white/[0.06]' },
-              { Logo: TikTokLogo, label: 'TikTok', bg: 'bg-black dark:bg-white/[0.06]' },
-            ].map((p, i) => (
+          <div className="flex flex-wrap items-center gap-3 mb-8">
+            {allPlatforms.map((p, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 + i * 0.1 }}
+                transition={{ delay: 0.3 + i * 0.08 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full ${p.bg} border border-gray-200 dark:border-white/10`}
               >
                 <p.Logo />
-                <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{p.label}</span>
+                <span className={`text-xs font-medium ${p.textClass || 'text-gray-700 dark:text-gray-300'}`}>{p.label}</span>
               </motion.div>
             ))}
           </div>
@@ -419,13 +443,34 @@ export default function Publicite() {
                       </div>
                     </div>
 
-                    {/* Platform logos */}
-                    <div className="flex items-center gap-2 mb-4">
-                      {plan.platforms.map((PlatLogo, i) => (
-                        <div key={i} className="w-7 h-7 rounded-lg bg-white/[0.06] dark:bg-white/[0.08] border border-gray-200 dark:border-white/10 flex items-center justify-center">
-                          <PlatLogo />
-                        </div>
-                      ))}
+                    {/* Platform logos — all 6, highlight nbPlatforms included */}
+                    <div className="flex items-center gap-1.5 mb-4">
+                      {allPlatforms.map((plat, i) => {
+                        const included = plan.nbPlatforms === 6 || i < plan.nbPlatforms;
+                        return (
+                          <div
+                            key={i}
+                            className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all ${
+                              included
+                                ? 'bg-white dark:bg-white/[0.12] border border-gray-200 dark:border-white/15 shadow-sm'
+                                : 'bg-gray-100/50 dark:bg-white/[0.03] border border-gray-100 dark:border-white/[0.04] opacity-30'
+                            }`}
+                            title={plat.label}
+                          >
+                            <plat.Logo />
+                          </div>
+                        );
+                      })}
+                      {plan.nbPlatforms < 6 && (
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500 ml-1">
+                          {plan.nbPlatforms} au choix
+                        </span>
+                      )}
+                      {plan.nbPlatforms === 6 && (
+                        <span className="text-[10px] text-[#0066FF] font-semibold ml-1">
+                          Toutes incluses
+                        </span>
+                      )}
                     </div>
 
                     <div className="mb-5">
@@ -550,7 +595,7 @@ export default function Publicite() {
               <Megaphone className="w-8 h-8 text-[#0066FF]" />
               <div>
                 <h3 className="text-xl font-bold text-white mb-1">Multi-plateforme, un seul interlocuteur</h3>
-                <p className="text-sm text-gray-400">Facebook, Instagram, Google, TikTok — toutes vos campagnes gérées de A à Z.</p>
+                <p className="text-sm text-gray-400">Meta, Google, TikTok, Snapchat, Pinterest, LinkedIn — toutes vos campagnes gérées de A à Z.</p>
               </div>
             </motion.div>
           </div>
