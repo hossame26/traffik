@@ -157,7 +157,7 @@ const webPlans = [
   },
   {
     id: 'wordpress', name: 'Site WordPress', category: 'Création Web',
-    price: '500', unit: '', icon: Globe,
+    price: '600', unit: '', icon: Globe,
     description: 'Site vitrine professionnel',
     features: ["Jusqu'à 5 pages optimisées", 'Design responsive mobile/tablette', 'SEO de base (meta, sitemap, robots)', 'Formulaire de contact intégré', 'Hébergement guide inclus'],
     popular: false, link: '/creation-site-wordpress',
@@ -165,7 +165,7 @@ const webPlans = [
   },
   {
     id: 'shopify', name: 'Boutique Shopify', category: 'Création Web',
-    price: '250', unit: '', icon: ShoppingCart,
+    price: 'Sur devis', unit: '', icon: ShoppingCart,
     description: 'E-commerce prêt à vendre',
     features: ['Configuration complète de la boutique', "Jusqu'à 20 produits intégrés", 'Paiement sécurisé (Stripe, PayPal)', 'Livraison & suivi configurés', 'Thème premium personnalisé'],
     popular: false, link: '/creation-site-shopify',
@@ -177,7 +177,7 @@ const webPlans = [
 const marketingPlans = [
   {
     id: 'seo', name: 'SEO & Référencement', category: 'Marketing',
-    price: '90', unit: '/mois', icon: Search,
+    price: '400', unit: '/mois', icon: Search,
     description: 'Première page Google — Audit technique, optimisation on/off-page, backlinks.',
     features: ['Audit SEO technique complet', 'Optimisation on-page & off-page', 'Création de contenu optimisé', 'Stratégie de backlinks', 'Suivi de positionnement mensuel'],
     popular: true, link: '/referencement-seo',
@@ -315,7 +315,7 @@ export default function Tarifs() {
     <div className="min-h-screen bg-white dark:bg-[#050505] transition-colors pt-28 pb-20">
       <SEOHead
         title="Tarifs Création Site Web | Prix Freelance Transparent | Traffik Web"
-        description="Découvrez nos tarifs transparents pour la création de site web : site vitrine WordPress dès 500€, boutique Shopify dès 250€, site sur mesure React dès 600€. Devis gratuit en 24h."
+        description="Découvrez nos tarifs transparents pour la création de site web : site vitrine WordPress dès 600€, boutique Shopify sur devis, site sur mesure React dès 600€. Devis gratuit en 24h."
         canonical="https://traffik-web.fr/tarifs"
         keywords="tarif création site web, prix site internet, devis site web, prix site vitrine, tarif boutique en ligne, cout site web freelance"
       />

@@ -14,7 +14,7 @@ const faqs = [
       },
       {
         question: "Combien coûte la création d'un site web ?",
-        answer: "Nos sites démarrent à partir de 250€ (Shopify Starter). Le prix dépend des fonctionnalités, du design et de la complexité. Contactez-nous sur WhatsApp pour un devis gratuit personnalisé."
+        answer: "Nos sites démarrent à partir de 600€. Le prix dépend des fonctionnalités, du design et de la complexité. Contactez-nous sur WhatsApp pour un devis gratuit personnalisé."
       },
       {
         question: "Quel est le délai de livraison ?",

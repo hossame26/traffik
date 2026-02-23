@@ -167,8 +167,8 @@ export default function WordPress() {
   return (
     <div className="min-h-screen bg-white dark:bg-[#050505] transition-colors pt-28 pb-20">
       <SEOHead
-        title="Création Site WordPress | Site Vitrine à partir de 500€ | Traffik Web"
-        description="Création de site WordPress professionnel à partir de 500€. Site vitrine, blog, e-commerce WooCommerce. Freelance WordPress en France, livré en 5 jours."
+        title="Création Site WordPress | Site Vitrine à partir de 600€ | Traffik Web"
+        description="Création de site WordPress professionnel à partir de 600€. Site vitrine, blog, e-commerce WooCommerce. Freelance WordPress en France, livré en 5 jours."
         canonical="https://traffik-web.fr/creation-site-wordpress"
         keywords="création site wordpress, site vitrine wordpress, wordpress freelance france, prix site wordpress, site wordpress professionnel"
       />
@@ -366,7 +366,7 @@ export default function WordPress() {
               <TrendingUp className="w-8 h-8 text-[#0066FF]" />
               <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">-70% vs agence</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Sites complets à partir de 500€. Qualité pro, prix freelance.</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Sites complets à partir de 600€. Qualité pro, prix freelance.</p>
               </div>
             </motion.div>
 

@@ -32,11 +32,11 @@ export const cities = [
 ];
 
 export const services = [
-  { slug: 'creation-site-web', name: 'Creation de Site Web', keyword: 'creation site internet', price: '250€', parentPath: '/' },
-  { slug: 'creation-site-shopify', name: 'Creation de Site Shopify', keyword: 'site shopify', price: '250€', parentPath: '/creation-site-shopify' },
-  { slug: 'creation-site-wordpress', name: 'Creation de Site WordPress', keyword: 'site wordpress', price: '500€', parentPath: '/creation-site-wordpress' },
+  { slug: 'creation-site-web', name: 'Creation de Site Web', keyword: 'creation site internet', price: '600€', parentPath: '/' },
+  { slug: 'creation-site-shopify', name: 'Creation de Site Shopify', keyword: 'site shopify', price: 'Sur devis', parentPath: '/creation-site-shopify' },
+  { slug: 'creation-site-wordpress', name: 'Creation de Site WordPress', keyword: 'site wordpress', price: '600€', parentPath: '/creation-site-wordpress' },
   { slug: 'developpement-react', name: 'Developpement React', keyword: 'developpeur react', price: '600€', parentPath: '/developpement-react-nextjs' },
-  { slug: 'referencement-seo', name: 'Referencement SEO', keyword: 'agence seo', price: '90€/mois', parentPath: '/referencement-seo' },
+  { slug: 'referencement-seo', name: 'Referencement SEO', keyword: 'agence seo', price: '400€/mois', parentPath: '/referencement-seo' },
 ];
 
 export function findCity(slug) {

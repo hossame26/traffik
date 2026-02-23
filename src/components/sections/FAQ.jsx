@@ -9,7 +9,7 @@ const faqs = [
   },
   {
     question: "Combien coûte la création d'un site web ?",
-    answer: "Nos sites web démarrent à partir de 250€. Le prix final dépend des fonctionnalités souhaitées, du design et de la complexité de votre projet. Chaque site est unique : contactez-nous directement sur WhatsApp pour discuter de votre projet et obtenir un devis personnalisé gratuit."
+    answer: "Nos sites web démarrent à partir de 600€. Le prix final dépend des fonctionnalités souhaitées, du design et de la complexité de votre projet. Chaque site est unique : contactez-nous directement sur WhatsApp pour discuter de votre projet et obtenir un devis personnalisé gratuit."
   },
   {
     question: "Quel est le délai de livraison ?",
